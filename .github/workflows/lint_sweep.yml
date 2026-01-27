@@ -23,64 +23,47 @@ jobs:
 
       - name: Install linters
         run: |
+          name: Lint Sweep
+
+          on:
+            push:
+              branches:
+                - chore/lint-sweep
+            pull_request:
+              branches:
+                - main
+
+          jobs:
+            lint:
+              name: Lint: flake8 + pylint
+              runs-on: ubuntu-24.04
+
+              steps:
+                - uses: actions/checkout@v4
+
+                - name: Setup Python
+                  uses: actions/setup-python@v4
+                  with:
+                    python-version: 3.11
+
+                - name: Install linters
+                  run: |
+                    python -m pip install --upgrade pip
+                    pip install flake8 pylint
+
+                - name: Run flake8
+                  run: |
+                    echo "Running flake8 on Python_Workflow"
+                    flake8 Combination_Automotive_Diesel_Facility_Project/Python_Workflow
+
+                - name: Run pylint
+                  run: |
+                    echo "Gathering Python files under Python_Workflow"
+                    files=$(git ls-files 'Combination_Automotive_Diesel_Facility_Project/Python_Workflow/**/*.py')
+                    if [ -z "$files" ]; then
+                      echo "No Python files found under Python_Workflow"
+                      exit 0
+                    fi
+                    echo "$files"
+                    pylint $files
           python -m pip install --upgrade pip
-          pip install flake8 pylint
-
-      - name: Run flake8
-        run: |
-          echo "Running flake8 on Python_Workflow"
-          flake8 Combination_Automotive_Diesel_Facility_Project/Python_Workflow
-
-      - name: Run pylint
-        run: |
-          echo "Gathering Python files under Python_Workflow"
-          files=$(git ls-files 'Combination_Automotive_Diesel_Facility_Project/Python_Workflow/**/*.py')
-          if [ -z "$files" ]; then
-            echo "No Python files found under Python_Workflow"
-            exit 0
-          fi
-          echo "$files"
-          pylint $files
-name: Lint Sweep
-
-on:
-  push:
-    branches:
-      - chore/lint-sweep
-  pull_request:
-    branches:
-      - main
-
-jobs:
-  lint:
-    name: Lint: flake8 + pylint
-    runs-on: ubuntu-24.04
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.11
-
-      - name: Install linters
-        run: |
-          python -m pip install --upgrade pip
-          pip install flake8 pylint
-
-      - name: Run flake8
-        run: |
-          echo "Running flake8 on Python_Workflow"
-          flake8 Combination_Automotive_Diesel_Facility_Project/Python_Workflow
-
-      - name: Run pylint
-        run: |
-          echo "Gathering Python files under Python_Workflow"
-          files=$(git ls-files 'Combination_Automotive_Diesel_Facility_Project/Python_Workflow/**/*.py')
-          if [ -z "$files" ]; then
-            echo "No Python files found under Python_Workflow"
-            exit 0
-          fi
-          echo "$files"
-          pylint $files
