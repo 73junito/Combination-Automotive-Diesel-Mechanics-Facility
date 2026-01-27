@@ -1,0 +1,28 @@
+name: CI - pytest
+
+on:
+  pull_request:
+  push:
+    branches: [enhance/auto_drawing_cli]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f Python_Workflow/requirements.txt ]; then pip install -r Python_Workflow/requirements.txt; fi
+          pip install pytest
+
+      - name: Run tests
+        run: |
+          pytest Combination_Automotive_Diesel_Facility_Project/Python_Workflow/tests -q
