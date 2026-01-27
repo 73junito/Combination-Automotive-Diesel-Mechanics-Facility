@@ -1,0 +1,61 @@
+name: Smoke test - append legend
+
+on:
+  push: {}
+  pull_request: {}
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install reportlab pypdf
+
+      - name: Prepare fixtures
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from reportlab.pdfgen import canvas
+          from reportlab.lib.pagesizes import letter
+
+          outdir = Path('Combination_Automotive_Diesel_Facility_Project') / 'Python_Workflow' / 'outputs'
+          outdir.mkdir(parents=True, exist_ok=True)
+          csv = outdir / 'equipment_bay_mapping_labeled.csv'
+          pdf = outdir / 'portfolio_combined.pdf'
+
+          with csv.open('w', encoding='utf-8') as f:
+              f.write('Category\n')
+              for i in range(1, 31):
+                  f.write(f'Category{i}\n')
+
+          c = canvas.Canvas(str(pdf), pagesize=letter)
+          c.drawString(100, 700, 'Test input PDF page 1')
+          c.showPage()
+          c.save()
+          print('fixtures written', csv, pdf)
+          PY
+
+      - name: Run append_legend_to_pdf script
+        run: |
+          python Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/append_legend_to_pdf.py
+
+      - name: Verify outputs
+        run: |
+          python - <<'PY'
+          from pypdf import PdfReader
+          p = PdfReader('Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/portfolio_combined.pdf')
+          l = PdfReader('Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/legend_page.pdf')
+          m = PdfReader('Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/portfolio_combined_with_legend.pdf')
+          assert len(l.pages) >= 1, 'legend PDF missing or empty'
+          assert len(m.pages) == len(p.pages) + len(l.pages), f'unexpected merged pages: {len(p.pages)}+{len(l.pages)} != {len(m.pages)}'
+          print('pages OK', len(p.pages), len(l.pages), len(m.pages))
+          PY
