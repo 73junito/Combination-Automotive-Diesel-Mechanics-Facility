@@ -22,25 +22,27 @@ def test_help_shows_strict(capsys):
     assert se.value.code == 0
 
 
-def test_missing_inputs_non_strict_warns_and_returns_ok(tmp_path, capsys):
+def test_missing_inputs_non_strict_warns_and_returns_ok(tmp_path, capsys, caplog):
     mod = load_module()
     # create a dummy dxf path that does not exist to simulate missing PDF and DXF
     pdf = str(tmp_path / "nope.pdf")
     dxf = str(tmp_path / "nope.dxf")
-    rc = mod.main([pdf, dxf])
+    with caplog.at_level("WARNING"):
+        rc = mod.main([pdf, dxf])
     captured = capsys.readouterr()
     assert rc == mod.EXIT_OK
-    assert "WARNING: PDF not found" in captured.err or "WARN: PDF not found" in captured.err
+    assert "PDF not found" in caplog.text
 
 
-def test_missing_inputs_strict_errors(tmp_path, capsys):
+def test_missing_inputs_strict_errors(tmp_path, capsys, caplog):
     mod = load_module()
     pdf = str(tmp_path / "nope.pdf")
     dxf = str(tmp_path / "nope.dxf")
-    rc = mod.main(["--strict", pdf, dxf])
+    with caplog.at_level("ERROR"):
+        rc = mod.main(["--strict", pdf, dxf])
     captured = capsys.readouterr()
     assert rc == mod.EXIT_INPUT
-    assert "ERROR: PDF not found" in captured.err
+    assert "PDF not found" in caplog.text
 
 
 def test_out_writes_json_when_dxf_exists(tmp_path):
