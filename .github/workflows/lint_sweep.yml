@@ -1,4 +1,4 @@
-name: Lint Sweep
+name: Lint Sweep (fixed)
 
 on:
   push:
