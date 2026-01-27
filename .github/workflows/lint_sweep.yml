@@ -2,19 +2,21 @@ name: Lint Sweep
 
 on:
   push:
-    branches: [chore/lint-sweep]
+    branches:
+      - chore/lint-sweep
 
 jobs:
   lint:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.11
+          python-version: '3.11'
 
       - name: Smoke step (verify workflow parses)
         run: |
