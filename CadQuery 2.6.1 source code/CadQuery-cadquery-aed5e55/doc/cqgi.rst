@@ -30,7 +30,7 @@ CQGI compliant containers provide an execution environment for scripts. The envi
 
  * the cadquery library is automatically imported as 'cq'.
  * the :py:meth:`cadquery.cqgi.ScriptCallback.show_object()` method is defined that should be used to export a shape to the execution environment
- * the :py:meth:`cadquery.cqgi.ScriptCallBack.debug()` method is defined, which can be used by scripts to debug model output during execution.
+ * the :py:meth:`cadquery.cqgi.ScriptCallback.debug()` method is defined, which can be used by scripts to debug model output during execution.
 
 Scripts must call show_object at least once. Invoking show_object more than once will send multiple objects to
 the container.  An error will occur if the script does not return an object using the show_object() method.

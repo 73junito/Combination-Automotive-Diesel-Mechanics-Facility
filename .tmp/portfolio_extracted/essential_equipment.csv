@@ -1,0 +1,5 @@
+Category,Item,Quantity,UnitCost,MaintenanceAnnual,ReplacementYears,TotalCost,AnnualMaintenanceTotal
+Lift,Two-post lift,10,2500.0,150.0,15,25000.0,1500.0
+Compressor,Air compressor (50 CFM),2,8000.0,300.0,20,16000.0,600.0
+Diagnostics,Scan tool (shop),4,1200.0,50.0,7,4800.0,200.0
+Welding,MIG welder,2,1200.0,75.0,12,2400.0,150.0
