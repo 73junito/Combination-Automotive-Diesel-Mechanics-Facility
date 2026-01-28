@@ -33,12 +33,11 @@ jobs:
 
       - name: Run pylint
         run: |
-              - name: Setup Python
-                uses: actions/setup-python@v4
-                with:
-                  python-version: '3.11'
+          echo "Gathering Python files under Python_Workflow"
+          files=$(git ls-files 'Combination_Automotive_Diesel_Facility_Project/Python_Workflow/**/*.py')
+          if [ -z "$files" ]; then
+            echo "No Python files found under Python_Workflow"
             exit 0
           fi
           echo "$files"
           pylint $files || true
-# (deduplicated) single valid workflow retained above
