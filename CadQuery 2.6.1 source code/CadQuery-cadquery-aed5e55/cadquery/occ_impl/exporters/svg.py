@@ -316,6 +316,5 @@ def exportSVG(shape, fileName: str, opts=None):
     """
 
     svg = getSVG(shape.val(), opts)
-    f = open(fileName, "w")
-    f.write(svg)
-    f.close()
+    with open(fileName, "w") as f:
+        f.write(svg)
