@@ -14,6 +14,7 @@
 import sys, os, re
 import os.path
 import importlib
+import importlib.metadata
 
 # print "working path is %s" % os.getcwd()
 # sys.path.append("../cadquery")
