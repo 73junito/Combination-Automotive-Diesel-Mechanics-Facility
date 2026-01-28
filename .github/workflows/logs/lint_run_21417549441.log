@@ -1,0 +1,193 @@
+test	Set up job	﻿2026-01-27T22:58:29.2902861Z Current runner version: '2.331.0'
+test	Set up job	2026-01-27T22:58:29.2938151Z ##[group]Runner Image Provisioner
+test	Set up job	2026-01-27T22:58:29.2939420Z Hosted Compute Agent
+test	Set up job	2026-01-27T22:58:29.2940193Z Version: 20260115.477
+test	Set up job	2026-01-27T22:58:29.2941073Z Commit: 4b342d620503cbe250a3154040964899ea7c9b00
+test	Set up job	2026-01-27T22:58:29.2942181Z Build Date: 2026-01-15T22:32:41Z
+test	Set up job	2026-01-27T22:58:29.2943229Z Worker ID: {258d2077-6e2e-4bcd-8e3e-9e95078aa425}
+test	Set up job	2026-01-27T22:58:29.2944220Z Azure Region: eastus2
+test	Set up job	2026-01-27T22:58:29.2945362Z ##[endgroup]
+test	Set up job	2026-01-27T22:58:29.2947358Z ##[group]Operating System
+test	Set up job	2026-01-27T22:58:29.2948171Z Ubuntu
+test	Set up job	2026-01-27T22:58:29.2949007Z 24.04.3
+test	Set up job	2026-01-27T22:58:29.2949771Z LTS
+test	Set up job	2026-01-27T22:58:29.2950504Z ##[endgroup]
+test	Set up job	2026-01-27T22:58:29.2951331Z ##[group]Runner Image
+test	Set up job	2026-01-27T22:58:29.2952165Z Image: ubuntu-24.04
+test	Set up job	2026-01-27T22:58:29.2952898Z Version: 20260119.4.1
+test	Set up job	2026-01-27T22:58:29.2954483Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260119.4/images/ubuntu/Ubuntu2404-Readme.md
+test	Set up job	2026-01-27T22:58:29.2957408Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260119.4
+test	Set up job	2026-01-27T22:58:29.2958884Z ##[endgroup]
+test	Set up job	2026-01-27T22:58:29.2960517Z ##[group]GITHUB_TOKEN Permissions
+test	Set up job	2026-01-27T22:58:29.2963026Z Contents: read
+test	Set up job	2026-01-27T22:58:29.2963791Z Metadata: read
+test	Set up job	2026-01-27T22:58:29.2964678Z Packages: read
+test	Set up job	2026-01-27T22:58:29.2965615Z ##[endgroup]
+test	Set up job	2026-01-27T22:58:29.2968761Z Secret source: Actions
+test	Set up job	2026-01-27T22:58:29.2970000Z Prepare workflow directory
+test	Set up job	2026-01-27T22:58:29.3410530Z Prepare all required actions
+test	Set up job	2026-01-27T22:58:29.3462805Z Getting action download info
+test	Set up job	2026-01-27T22:58:29.6674077Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+test	Set up job	2026-01-27T22:58:29.7855617Z Download action repository 'actions/setup-python@v4' (SHA:7f4fc3e22c37d6ff65e88745f38bd3157c663f7c)
+test	Set up job	2026-01-27T22:58:30.0118123Z Complete job name: test
+test	Checkout	﻿2026-01-27T22:58:30.0798561Z ##[group]Run actions/checkout@v4
+test	Checkout	2026-01-27T22:58:30.0799425Z with:
+test	Checkout	2026-01-27T22:58:30.0800107Z   repository: 73junito/Combination-Automotive-Diesel-Mechanics-Facility
+test	Checkout	2026-01-27T22:58:30.0801094Z   token: ***
+test	Checkout	2026-01-27T22:58:30.0801508Z   ssh-strict: true
+test	Checkout	2026-01-27T22:58:30.0801949Z   ssh-user: git
+test	Checkout	2026-01-27T22:58:30.0802383Z   persist-credentials: true
+test	Checkout	2026-01-27T22:58:30.0802864Z   clean: true
+test	Checkout	2026-01-27T22:58:30.0803293Z   sparse-checkout-cone-mode: true
+test	Checkout	2026-01-27T22:58:30.0803817Z   fetch-depth: 1
+test	Checkout	2026-01-27T22:58:30.0804246Z   fetch-tags: false
+test	Checkout	2026-01-27T22:58:30.0804680Z   show-progress: true
+test	Checkout	2026-01-27T22:58:30.0805318Z   lfs: false
+test	Checkout	2026-01-27T22:58:30.0805713Z   submodules: false
+test	Checkout	2026-01-27T22:58:30.0806152Z   set-safe-directory: true
+test	Checkout	2026-01-27T22:58:30.0806810Z ##[endgroup]
+test	Checkout	2026-01-27T22:58:30.1896265Z Syncing repository: 73junito/Combination-Automotive-Diesel-Mechanics-Facility
+test	Checkout	2026-01-27T22:58:30.1898492Z ##[group]Getting Git version info
+test	Checkout	2026-01-27T22:58:30.1899789Z Working directory is '/home/runner/work/Combination-Automotive-Diesel-Mechanics-Facility/Combination-Automotive-Diesel-Mechanics-Facility'
+test	Checkout	2026-01-27T22:58:30.1901509Z [command]/usr/bin/git version
+test	Checkout	2026-01-27T22:58:30.1948754Z git version 2.52.0
+test	Checkout	2026-01-27T22:58:30.1973335Z ##[endgroup]
+test	Checkout	2026-01-27T22:58:30.1988976Z Temporarily overriding HOME='/home/runner/work/_temp/f1a51935-9ccc-433b-918b-4aa5a2dcef3e' before making global git config changes
+test	Checkout	2026-01-27T22:58:30.1991638Z Adding repository directory to the temporary git global config as a safe directory
+test	Checkout	2026-01-27T22:58:30.1996676Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Combination-Automotive-Diesel-Mechanics-Facility/Combination-Automotive-Diesel-Mechanics-Facility
+test	Checkout	2026-01-27T22:58:30.2035639Z Deleting the contents of '/home/runner/work/Combination-Automotive-Diesel-Mechanics-Facility/Combination-Automotive-Diesel-Mechanics-Facility'
+test	Checkout	2026-01-27T22:58:30.2038799Z ##[group]Initializing the repository
+test	Checkout	2026-01-27T22:58:30.2044281Z [command]/usr/bin/git init /home/runner/work/Combination-Automotive-Diesel-Mechanics-Facility/Combination-Automotive-Diesel-Mechanics-Facility
+test	Checkout	2026-01-27T22:58:30.2110033Z hint: Using 'master' as the name for the initial branch. This default branch name
+test	Checkout	2026-01-27T22:58:30.2111783Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+test	Checkout	2026-01-27T22:58:30.2113333Z hint: to use in all of your new repositories, which will suppress this warning,
+test	Checkout	2026-01-27T22:58:30.2114416Z hint: call:
+test	Checkout	2026-01-27T22:58:30.2115195Z hint:
+test	Checkout	2026-01-27T22:58:30.2115726Z hint: 	git config --global init.defaultBranch <name>
+test	Checkout	2026-01-27T22:58:30.2116371Z hint:
+test	Checkout	2026-01-27T22:58:30.2116965Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+test	Checkout	2026-01-27T22:58:30.2118044Z hint: 'development'. The just-created branch can be renamed via this command:
+test	Checkout	2026-01-27T22:58:30.2119192Z hint:
+test	Checkout	2026-01-27T22:58:30.2119603Z hint: 	git branch -m <name>
+test	Checkout	2026-01-27T22:58:30.2120075Z hint:
+test	Checkout	2026-01-27T22:58:30.2120689Z hint: Disable this message with "git config set advice.defaultBranchName false"
+test	Checkout	2026-01-27T22:58:30.2122334Z Initialized empty Git repository in /home/runner/work/Combination-Automotive-Diesel-Mechanics-Facility/Combination-Automotive-Diesel-Mechanics-Facility/.git/
+test	Checkout	2026-01-27T22:58:30.2125564Z [command]/usr/bin/git remote add origin https://github.com/73junito/Combination-Automotive-Diesel-Mechanics-Facility
+test	Checkout	2026-01-27T22:58:30.2157925Z ##[endgroup]
+test	Checkout	2026-01-27T22:58:30.2158734Z ##[group]Disabling automatic garbage collection
+test	Checkout	2026-01-27T22:58:30.2161962Z [command]/usr/bin/git config --local gc.auto 0
+test	Checkout	2026-01-27T22:58:30.2191447Z ##[endgroup]
+test	Checkout	2026-01-27T22:58:30.2192185Z ##[group]Setting up auth
+test	Checkout	2026-01-27T22:58:30.2198032Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Checkout	2026-01-27T22:58:30.2228638Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Checkout	2026-01-27T22:58:30.2537221Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Checkout	2026-01-27T22:58:30.2570469Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Checkout	2026-01-27T22:58:30.2823028Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	Checkout	2026-01-27T22:58:30.2856858Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Checkout	2026-01-27T22:58:30.3112420Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	Checkout	2026-01-27T22:58:30.3149869Z ##[endgroup]
+test	Checkout	2026-01-27T22:58:30.3151118Z ##[group]Fetching the repository
+test	Checkout	2026-01-27T22:58:30.3159769Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +87f08fe876813884a3fbeb665822ef778d7e0db2:refs/remotes/pull/2/merge
+test	Checkout	2026-01-27T22:58:30.7385493Z From https://github.com/73junito/Combination-Automotive-Diesel-Mechanics-Facility
+test	Checkout	2026-01-27T22:58:30.7387659Z  * [new ref]         87f08fe876813884a3fbeb665822ef778d7e0db2 -> pull/2/merge
+test	Checkout	2026-01-27T22:58:30.7419594Z ##[endgroup]
+test	Checkout	2026-01-27T22:58:30.7421111Z ##[group]Determining the checkout info
+test	Checkout	2026-01-27T22:58:30.7422824Z ##[endgroup]
+test	Checkout	2026-01-27T22:58:30.7428091Z [command]/usr/bin/git sparse-checkout disable
+test	Checkout	2026-01-27T22:58:30.7470589Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+test	Checkout	2026-01-27T22:58:30.7499029Z ##[group]Checking out the ref
+test	Checkout	2026-01-27T22:58:30.7502977Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/2/merge
+test	Checkout	2026-01-27T22:58:30.7886340Z Note: switching to 'refs/remotes/pull/2/merge'.
+test	Checkout	2026-01-27T22:58:30.7887470Z 
+test	Checkout	2026-01-27T22:58:30.7888372Z You are in 'detached HEAD' state. You can look around, make experimental
+test	Checkout	2026-01-27T22:58:30.7890507Z changes and commit them, and you can discard any commits you make in this
+test	Checkout	2026-01-27T22:58:30.7892359Z state without impacting any branches by switching back to a branch.
+test	Checkout	2026-01-27T22:58:30.7893266Z 
+test	Checkout	2026-01-27T22:58:30.7893982Z If you want to create a new branch to retain commits you create, you may
+test	Checkout	2026-01-27T22:58:30.7895953Z do so (now or later) by using -c with the switch command. Example:
+test	Checkout	2026-01-27T22:58:30.7896816Z 
+test	Checkout	2026-01-27T22:58:30.7897164Z   git switch -c <new-branch-name>
+test	Checkout	2026-01-27T22:58:30.7897771Z 
+test	Checkout	2026-01-27T22:58:30.7898119Z Or undo this operation with:
+test	Checkout	2026-01-27T22:58:30.7898662Z 
+test	Checkout	2026-01-27T22:58:30.7898946Z   git switch -
+test	Checkout	2026-01-27T22:58:30.7899378Z 
+test	Checkout	2026-01-27T22:58:30.7900133Z Turn off this advice by setting config variable advice.detachedHead to false
+test	Checkout	2026-01-27T22:58:30.7901215Z 
+test	Checkout	2026-01-27T22:58:30.7902478Z HEAD is now at 87f08fe Merge 3d70e159a184e6fe6fad8bf7dd4f82122c0fb5bf into 5f53a69198c66fb2163e7ce6c3de139d166287ff
+test	Checkout	2026-01-27T22:58:30.7906716Z ##[endgroup]
+test	Checkout	2026-01-27T22:58:30.7934681Z [command]/usr/bin/git log -1 --format=%H
+test	Checkout	2026-01-27T22:58:30.7958697Z 87f08fe876813884a3fbeb665822ef778d7e0db2
+test	Set up Python	﻿2026-01-27T22:58:30.8274686Z ##[group]Run actions/setup-python@v4
+test	Set up Python	2026-01-27T22:58:30.8275980Z with:
+test	Set up Python	2026-01-27T22:58:30.8276779Z   python-version: 3.11
+test	Set up Python	2026-01-27T22:58:30.8277719Z   check-latest: false
+test	Set up Python	2026-01-27T22:58:30.8278873Z   token: ***
+test	Set up Python	2026-01-27T22:58:30.8279720Z   update-environment: true
+test	Set up Python	2026-01-27T22:58:30.8280762Z   allow-prereleases: false
+test	Set up Python	2026-01-27T22:58:30.8281740Z ##[endgroup]
+test	Set up Python	2026-01-27T22:58:30.9974253Z ##[group]Installed versions
+test	Set up Python	2026-01-27T22:58:31.0399117Z Successfully set up CPython (3.11.14)
+test	Set up Python	2026-01-27T22:58:31.0401279Z ##[endgroup]
+test	Install dependencies	﻿2026-01-27T22:58:31.0553365Z ##[group]Run python -m pip install --upgrade pip
+test	Install dependencies	2026-01-27T22:58:31.0555032Z [36;1mpython -m pip install --upgrade pip[0m
+test	Install dependencies	2026-01-27T22:58:31.0557137Z [36;1mif [ -f Python_Workflow/requirements.txt ]; then pip install -r Python_Workflow/requirements.txt; fi[0m
+test	Install dependencies	2026-01-27T22:58:31.0559149Z [36;1mpip install pytest[0m
+test	Install dependencies	2026-01-27T22:58:31.0711652Z shell: /usr/bin/bash -e {0}
+test	Install dependencies	2026-01-27T22:58:31.0712663Z env:
+test	Install dependencies	2026-01-27T22:58:31.0713631Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+test	Install dependencies	2026-01-27T22:58:31.0715540Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+test	Install dependencies	2026-01-27T22:58:31.0717246Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+test	Install dependencies	2026-01-27T22:58:31.0718783Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+test	Install dependencies	2026-01-27T22:58:31.0720337Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+test	Install dependencies	2026-01-27T22:58:31.0721888Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+test	Install dependencies	2026-01-27T22:58:31.0723189Z ##[endgroup]
+test	Install dependencies	2026-01-27T22:58:33.3918646Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages (25.3)
+test	Install dependencies	2026-01-27T22:58:34.5419413Z Collecting pytest
+test	Install dependencies	2026-01-27T22:58:34.6195419Z   Downloading pytest-9.0.2-py3-none-any.whl.metadata (7.6 kB)
+test	Install dependencies	2026-01-27T22:58:34.6365241Z Collecting iniconfig>=1.0.1 (from pytest)
+test	Install dependencies	2026-01-27T22:58:34.6451749Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+test	Install dependencies	2026-01-27T22:58:34.6650788Z Collecting packaging>=22 (from pytest)
+test	Install dependencies	2026-01-27T22:58:34.6729243Z   Downloading packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
+test	Install dependencies	2026-01-27T22:58:34.6887901Z Collecting pluggy<2,>=1.5 (from pytest)
+test	Install dependencies	2026-01-27T22:58:34.6968954Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+test	Install dependencies	2026-01-27T22:58:34.7214161Z Collecting pygments>=2.7.2 (from pytest)
+test	Install dependencies	2026-01-27T22:58:34.7332267Z   Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+test	Install dependencies	2026-01-27T22:58:34.7455338Z Downloading pytest-9.0.2-py3-none-any.whl (374 kB)
+test	Install dependencies	2026-01-27T22:58:34.7880354Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+test	Install dependencies	2026-01-27T22:58:34.7972345Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+test	Install dependencies	2026-01-27T22:58:34.8061236Z Downloading packaging-26.0-py3-none-any.whl (74 kB)
+test	Install dependencies	2026-01-27T22:58:34.8179671Z Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
+test	Install dependencies	2026-01-27T22:58:34.8782668Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 21.0 MB/s  0:00:00
+test	Install dependencies	2026-01-27T22:58:34.9082827Z Installing collected packages: pygments, pluggy, packaging, iniconfig, pytest
+test	Install dependencies	2026-01-27T22:58:35.8644538Z 
+test	Install dependencies	2026-01-27T22:58:35.8655050Z Successfully installed iniconfig-2.3.0 packaging-26.0 pluggy-1.6.0 pygments-2.19.2 pytest-9.0.2
+test	Run tests	﻿2026-01-27T22:58:35.9288191Z ##[group]Run pytest Combination_Automotive_Diesel_Facility_Project/Python_Workflow/tests -q
+test	Run tests	2026-01-27T22:58:35.9288894Z [36;1mpytest Combination_Automotive_Diesel_Facility_Project/Python_Workflow/tests -q[0m
+test	Run tests	2026-01-27T22:58:35.9325658Z shell: /usr/bin/bash -e {0}
+test	Run tests	2026-01-27T22:58:35.9325923Z env:
+test	Run tests	2026-01-27T22:58:35.9326193Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+test	Run tests	2026-01-27T22:58:35.9326620Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+test	Run tests	2026-01-27T22:58:35.9327021Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+test	Run tests	2026-01-27T22:58:35.9327385Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+test	Run tests	2026-01-27T22:58:35.9327753Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+test	Run tests	2026-01-27T22:58:35.9328152Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+test	Run tests	2026-01-27T22:58:35.9328462Z ##[endgroup]
+test	Run tests	2026-01-27T22:58:36.3382413Z ....                                                                     [100%]
+test	Run tests	2026-01-27T22:58:36.3383276Z 4 passed in 0.02s
+test	Post Set up Python	﻿2026-01-27T22:58:36.3661508Z Post job cleanup.
+test	Post Checkout	﻿2026-01-27T22:58:36.5322577Z Post job cleanup.
+test	Post Checkout	2026-01-27T22:58:36.6267646Z [command]/usr/bin/git version
+test	Post Checkout	2026-01-27T22:58:36.6310869Z git version 2.52.0
+test	Post Checkout	2026-01-27T22:58:36.6352571Z Temporarily overriding HOME='/home/runner/work/_temp/0b1a6247-e68e-415a-b4a6-dee0986afaa7' before making global git config changes
+test	Post Checkout	2026-01-27T22:58:36.6353847Z Adding repository directory to the temporary git global config as a safe directory
+test	Post Checkout	2026-01-27T22:58:36.6359464Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Combination-Automotive-Diesel-Mechanics-Facility/Combination-Automotive-Diesel-Mechanics-Facility
+test	Post Checkout	2026-01-27T22:58:36.6395746Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Post Checkout	2026-01-27T22:58:36.6429640Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Post Checkout	2026-01-27T22:58:36.6684178Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Post Checkout	2026-01-27T22:58:36.6709020Z http.https://github.com/.extraheader
+test	Post Checkout	2026-01-27T22:58:36.6725747Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+test	Post Checkout	2026-01-27T22:58:36.6762291Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Post Checkout	2026-01-27T22:58:36.7022554Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	Post Checkout	2026-01-27T22:58:36.7058648Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Complete job	﻿2026-01-27T22:58:36.7433289Z Cleaning up orphan processes

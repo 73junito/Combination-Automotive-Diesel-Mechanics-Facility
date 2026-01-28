@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-60 -60 120 120" width="200" height="200">
+  <title>PL_CompressedAir</title>
+  <g stroke="#000" stroke-width="2" fill="none">
+    <circle cx="0" cy="0" r="6" />
+    <path d="M-4 0 L4 0" stroke-width="2" />
+    <text x="0" y="3.5" font-size="6" text-anchor="middle" fill="#000">A</text>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+ezdxf
+pypdf
+pandas
+matplotlib
+reportlab
+openpyxl
+ruff
+# Optional: cadquery (if you want to import local CadQuery, add path via settings)
+# cadquery==2.6.1  # leave commented to prefer local source copy

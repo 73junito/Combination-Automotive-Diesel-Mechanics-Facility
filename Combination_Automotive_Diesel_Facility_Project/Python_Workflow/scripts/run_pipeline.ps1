@@ -1,0 +1,215 @@
+<#
+run_pipeline.ps1
+Wrapper to convert a DXF to SVG then optionally run Blender to render a centered, scaled PNG.
+
+Usage:
+  .\run_pipeline.ps1 -DxfPath "Drawings\CAD\layout.dxf"
+  .\run_pipeline.ps1 -DxfPath .\layout.dxf -OutputDir .\outputs -BlenderPath "C:\Program Files\Blender Foundation\Blender\blender.exe"
+
+Parameters:
+  -DxfPath    (string)  Path to input DXF (required)
+  -OutputDir  (string)  Output folder for SVG/PNG (default: scripts\outputs)
+  -InkscapePath (string) Optional path to Inkscape executable
+  -BlenderPath  (string) Optional path to Blender executable; if omitted, script will try PATH
+  -SkipBlender  Switch   Don't run Blender after conversion
+  -Scale       (double) Optional uniform scale passed to Blender script
+  -ResX        (int)    Render width (default: 3840)
+  -ResY        (int)    Render height (default: 2160)
+  -ApplyScale  Switch   Tell Blender script to apply scale before rendering
+    -AutoZip     Switch   After render, create a zip of outputs (uses zip_outputs.ps1)
+    -ZipName     (string) Name for the auto zip (default: visuals_bundle.zip)
+    -CollectUpdated Switch Copy recently-updated PDF/PNG into scripts outputs (collect_updated_files.ps1)
+    -CollectSinceMinutes (int) Look-back window in minutes for collection (default 1440)
+    -CollectZipName (string) Optional zip name to create when collecting
+    -CollectForce Switch   Overwrite existing collected files/zip when collecting
+#>
+
+param(
+    [Parameter(Mandatory=$true)][string]$DxfPath,
+    [string]$OutputDir = "./outputs",
+    [string]$InkscapePath,
+    [string]$BlenderPath,
+    [switch]$SkipBlender,
+    [double]$Scale,
+    [int]$ResX = 3840,
+    [int]$ResY = 2160,
+    [switch]$ApplyScale,
+    [switch]$AutoZip,
+    [string]$ZipName = "visuals_bundle.zip"
+    ,
+    [switch]$CollectUpdated,
+    [int]$CollectSinceMinutes = 1440,
+    [string]$CollectZipName = '',
+    [switch]$CollectForce
+)
+
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
+$converter = Join-Path $scriptDir 'convert_dxf_to_svg.ps1'
+$blenderScript = Join-Path $scriptDir 'blender_import_and_render.py'
+
+if (-not (Test-Path $converter)) {
+    Write-Error "Converter script not found: $converter"
+    exit 2
+}
+
+if (-not (Test-Path $blenderScript)) {
+    Write-Warning "Blender automation script not found: $blenderScript -- Blender step will be skipped unless you provide a different script path."
+}
+
+# Resolve DXF
+if (-not (Test-Path $DxfPath)) {
+    Write-Error "DXF not found: $DxfPath"
+    exit 3
+}
+$DxfFull = (Resolve-Path $DxfPath).Path
+
+# Ensure output dir exists
+$OutDirFull = Resolve-Path -LiteralPath $OutputDir -ErrorAction SilentlyContinue
+if (-not $OutDirFull) { New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null; $OutDirFull = Resolve-Path $OutputDir }
+$OutDirFull = $OutDirFull.Path
+
+# Derive names
+$base = [IO.Path]::GetFileNameWithoutExtension($DxfFull)
+$svgPath = Join-Path $OutDirFull "$base.svg"
+$pngPath = Join-Path $OutDirFull "$base.png"
+
+Write-Host "DXF -> SVG: `"$DxfFull`" → `"$svgPath`""
+
+# Run conversion
+$convArgs = @(
+    '-InputPath', $DxfFull,
+    '-OutputPath', $svgPath
+)
+if ($InkscapePath) { $convArgs += @('-InkscapePath', $InkscapePath) }
+
+try {
+    Write-Host "Running converter script via PowerShell executable..."
+    # Avoid passing the .ps1 directly to Start-Process (Windows will reject it as not a Win32 app).
+    # Invoke the script using the PowerShell executable with -File so the script runs under PowerShell.
+    $pwshExe = $null
+    # Prefer PowerShell 7 (pwsh) if installed, otherwise fall back to Windows PowerShell
+    $pwshCandidate = "$env:ProgramFiles\PowerShell\7\pwsh.exe"
+    if (Test-Path $pwshCandidate) { $pwshExe = $pwshCandidate } else { $pwshExe = 'powershell' }
+
+    $psArgs = @('-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $converter) + $convArgs
+    $proc = Start-Process -FilePath $pwshExe -ArgumentList $psArgs -NoNewWindow -Wait -PassThru
+    if ($proc.ExitCode -ne 0) {
+        Write-Error "Converter failed with exit code $($proc.ExitCode)"
+        exit $proc.ExitCode
+    }
+} catch {
+    Write-Error "Failed to start converter script: $_"
+    exit 4
+}
+
+if (-not (Test-Path $svgPath)) {
+    Write-Error "SVG not produced: $svgPath"
+    exit 5
+}
+Write-Host "SVG produced: $svgPath"
+
+if ($SkipBlender) { Write-Host "Skipping Blender step by request (-SkipBlender)."; exit 0 }
+
+# Find Blender
+$blenderExe = $null
+if ($BlenderPath) {
+    if (Test-Path $BlenderPath) { $blenderExe = (Resolve-Path $BlenderPath).Path }
+    else { Write-Warning "Provided BlenderPath not found: $BlenderPath" }
+}
+if (-not $blenderExe) {
+    $cmd = Get-Command blender -ErrorAction SilentlyContinue
+    if ($cmd) { $blenderExe = $cmd.Path }
+}
+if (-not $blenderExe) {
+    Write-Warning "Blender executable not found. To run the render step, install Blender or pass -BlenderPath."
+    Write-Host "You can manually run the Blender render using:`n  blender --background --python $blenderScript -- `"$svgPath`" `"$pngPath`" --res $ResX $ResY"
+    exit 0
+}
+
+# Build blender argument list
+$blenderArgs = @(
+    '--background',
+    '--python', "`"$blenderScript`"",
+    '--',
+    "`"$svgPath`"",
+    "`"$pngPath`"",
+    '--res', $ResX, $ResY
+)
+if ($PSBoundParameters.ContainsKey('Scale')) {
+    $blenderArgs += @('--scale', $Scale)
+}
+if ($ApplyScale) { $blenderArgs += '--apply-scale' }
+
+Write-Host "Running Blender: $blenderExe with arguments:`n  $($blenderArgs -join ' ')"
+try {
+    $proc = Start-Process -FilePath $blenderExe -ArgumentList $blenderArgs -NoNewWindow -Wait -PassThru
+    Write-Host "Blender exit code: $($proc.ExitCode)"
+    if ($proc.ExitCode -ne 0) { exit $proc.ExitCode }
+} catch {
+    Write-Error "Failed to run Blender: $_"
+    exit 6
+}
+
+if (Test-Path $pngPath) { Write-Host "Render complete: $pngPath" } else { Write-Warning "Render finished but PNG not found: $pngPath" }
+
+# AutoZip outputs if requested
+if ($AutoZip) {
+    $zipScript = Join-Path $scriptDir 'zip_outputs.ps1'
+    if (Test-Path $zipScript) {
+        Write-Host "AutoZip enabled — creating zip: $ZipName"
+        try {
+            & $zipScript -OutputDir $OutDirFull -ZipName $ZipName -Force
+            $zipFull = Join-Path $OutDirFull $ZipName
+            if (Test-Path $zipFull) { Write-Host "AutoZip created: $zipFull" } else { Write-Warning "AutoZip script finished but zip not found: $zipFull" }
+        } catch {
+            Write-Warning "AutoZip failed: $_"
+        }
+    } else {
+        Write-Warning "Zip script not found: $zipScript. Skipping AutoZip."
+    }
+}
+
+# Collect updated PDF/PNG into scripts outputs (optional)
+# Collection behavior:
+# - If -AutoZip is set, implicitly run the collect step and force overwrite; use -CollectZipName if provided else the AutoZip -ZipName.
+# - If -AutoZip is not set, only run collection when -CollectUpdated is explicitly provided.
+$collectScript = Join-Path $scriptDir 'collect_updated_files.ps1'
+if ($AutoZip) {
+    if (Test-Path $collectScript) {
+        Write-Host "AutoZip enabled — implicitly running collect script (since $CollectSinceMinutes minutes)" -ForegroundColor Cyan
+        $collectArgs = @(
+            '-SinceMinutes', $CollectSinceMinutes,
+            '-Force'
+        )
+        # prefer explicit CollectZipName, otherwise use the ZipName from AutoZip
+        if ($CollectZipName) { $collectArgs += @('-ZipName', $CollectZipName) }
+        elseif ($ZipName) { $collectArgs += @('-ZipName', $ZipName) }
+        try {
+            & $collectScript @collectArgs
+            Write-Host "Collect script finished (implicit via AutoZip)." -ForegroundColor Cyan
+        } catch {
+            Write-Warning "Collect script failed: $_"
+        }
+    } else {
+        Write-Warning "Collect script not found: $collectScript. Skipping implicit collection."
+    }
+} elseif ($CollectUpdated) {
+    if (Test-Path $collectScript) {
+        Write-Host "CollectUpdated enabled — running collect script (since $CollectSinceMinutes minutes)" -ForegroundColor Cyan
+        $collectArgs = @(
+            '-SinceMinutes', $CollectSinceMinutes
+        )
+        if ($CollectZipName) { $collectArgs += @('-ZipName', $CollectZipName) }
+        if ($CollectForce) { $collectArgs += '-Force' }
+        try {
+            & $collectScript @collectArgs
+            Write-Host "Collect script finished." -ForegroundColor Cyan
+        } catch {
+            Write-Warning "Collect script failed: $_"
+        }
+    } else {
+        Write-Warning "Collect script not found: $collectScript. Skipping collection step."
+    }
+}
+
+exit 0

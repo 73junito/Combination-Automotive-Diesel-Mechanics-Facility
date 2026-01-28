@@ -11,8 +11,8 @@ import os
 import csv
 
 try:
-    from reportlab.lib.pagesizes import letter
-    from reportlab.pdfgen import canvas
+    from reportlab.lib.pagesizes import letter  # type: ignore[reportMissingImports]
+    from reportlab.pdfgen import canvas  # type: ignore[reportMissingImports]
 except ImportError:
     REPORTLAB_AVAILABLE = False
 else:
@@ -20,10 +20,10 @@ else:
 
 try:
     # modern pypdf
-    from pypdf import PdfReader, PdfWriter
+    from pypdf import PdfReader, PdfWriter  # type: ignore[reportMissingImports]
 except ImportError:
     try:
-        from PyPDF2 import PdfReader, PdfWriter
+        from PyPDF2 import PdfReader, PdfWriter  # type: ignore[reportMissingImports]
     except ImportError:
         PdfReader = PdfWriter = None
 
@@ -51,6 +51,7 @@ COLOR_PALETTE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
 def load_categories(csv_path):
+    """Load categories from CSV at ``csv_path`` and return unique list."""
     cats = []
     if not os.path.exists(csv_path):
         return cats
@@ -64,6 +65,7 @@ def load_categories(csv_path):
 
 
 def build_color_map(categories):
+    """Return a mapping of category -> AutoCAD color index."""
     cmap = {}
     for i, cat in enumerate(categories):
         idx = COLOR_PALETTE[i % len(COLOR_PALETTE)]
@@ -72,6 +74,10 @@ def build_color_map(categories):
 
 
 def make_legend_pdf(legend_pdf_path, categories, color_map):
+    """Create a PDF file at ``legend_pdf_path`` listing ``categories``.
+
+    Uses ``color_map`` to draw color swatches.
+    """
     if not REPORTLAB_AVAILABLE:
         raise RuntimeError("reportlab not available")
     c = canvas.Canvas(legend_pdf_path, pagesize=letter)
@@ -101,6 +107,7 @@ def make_legend_pdf(legend_pdf_path, categories, color_map):
 
 
 def append_pdf(pdf_in, legend_pdf, pdf_out):
+    """Append pages from ``legend_pdf`` onto ``pdf_in`` and write ``pdf_out``."""
     if PdfReader is None or PdfWriter is None:
         raise RuntimeError("pypdf/PyPDF2 not available for merging")
     reader_main = PdfReader(pdf_in)
@@ -115,6 +122,7 @@ def append_pdf(pdf_in, legend_pdf, pdf_out):
 
 
 def main():
+    """Main entrypoint: generate legend and append it to portfolio PDF."""
     cats = load_categories(MAPPING_CSV)
     if not cats:
         print("No categories found in", MAPPING_CSV)

@@ -1,0 +1,1316 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 793.7007874015749 1122.5196850393702"
+   width="793.7007874015749"
+   height="1122.5196850393702"
+   version="1.1"
+   id="svg134"
+   sodipodi:docname="facility_layout_draft.dxf"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview134"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1" />
+  <desc
+     id="desc1">facility_layout_draft.dxf - scale = 1.000000, origin = (0.000000, 0.000000), method = manual</desc>
+  <defs
+     id="defs17">
+    <marker
+       id="DistanceX"
+       orient="auto"
+       refX="0.0"
+       refY="0.0"
+       style="overflow:visible">
+      <path
+         d="M 3,-3 L -3,3 M 0,-5 L  0,5"
+         style="stroke:#000000; stroke-width:0.5"
+         id="path1" />
+    </marker>
+    <pattern
+       id="Hatch"
+       patternUnits="userSpaceOnUse"
+       width="8"
+       height="8"
+       x="0"
+       y="0">
+      <path
+         d="M8 4 l-4,4"
+         stroke="#000000"
+         stroke-width="0.25"
+         linecap="square"
+         id="path2" />
+      <path
+         d="M6 2 l-4,4"
+         stroke="#000000"
+         stroke-width="0.25"
+         linecap="square"
+         id="path3" />
+      <path
+         d="M4 0 l-4,4"
+         stroke="#000000"
+         stroke-width="0.25"
+         linecap="square"
+         id="path4" />
+    </pattern>
+    <symbol
+       id="*Model_Space" />
+    <symbol
+       id="*Paper_Space" />
+    <symbol
+       id="BLK_E001">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path5" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text5"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan5">E001</tspan></text>
+    </symbol>
+    <symbol
+       id="BLK_E013">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path6" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text6"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan6">E013</tspan></text>
+    </symbol>
+    <symbol
+       id="BLK_E004">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path7" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text7"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan7">E004</tspan></text>
+    </symbol>
+    <symbol
+       id="BLK_E016">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path8" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text8"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan8">E016</tspan></text>
+    </symbol>
+    <symbol
+       id="BLK_E005">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path9" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text9"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan9">E005</tspan></text>
+    </symbol>
+    <symbol
+       id="BLK_E017">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path10" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text10"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan10">E017</tspan></text>
+    </symbol>
+    <symbol
+       id="BLK_E009">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path11" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text11"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan11">E009</tspan></text>
+    </symbol>
+    <symbol
+       id="BLK_E021">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path12" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text12"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan12">E021</tspan></text>
+    </symbol>
+    <symbol
+       id="BLK_E008">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path13" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text13"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan13">E008</tspan></text>
+    </symbol>
+    <symbol
+       id="BLK_E020">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path14" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text14"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan14">E020</tspan></text>
+    </symbol>
+    <symbol
+       id="BLK_E010">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path15" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text15"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan15">E010</tspan></text>
+    </symbol>
+    <symbol
+       id="BLK_E022">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path16" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text16"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan16">E022</tspan></text>
+    </symbol>
+    <symbol
+       id="BLK_E012">
+      <path
+         d="M -18.897638,1133.858268 L 18.897638,1133.858268 L 18.897638,1111.181102 L -18.897638,1111.181102 L -18.897638,1133.858268 L -18.897638,1133.858268 z"
+         style="fill:none;stroke:#000000"
+         id="path17" />
+      <text
+         x="0.000000"
+         y="1126.299213"
+         style="font-size: 11.339px; fill: #000000; font-family: Arial; text-anchor: start"
+         id="text17"><tspan
+           sodipodi:role="line"
+           dx="0.000000"
+           dy="0.000000"
+           id="tspan17">E012</tspan></text>
+    </symbol>
+  </defs>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="0"
+     id="g17" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Defpoints"
+     id="g18" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="WALLS"
+     id="g19">
+    <path
+       d="M 0.000000,1122.519685 L 755.905512,1122.519685 L 755.905512,668.976378 L 0.000000,668.976378 L 0.000000,1122.519685 L 0.000000,1122.519685 z"
+       style="fill:none;stroke:#000000"
+       id="path18" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="AUTO_BAYS"
+     id="g26">
+    <path
+       d="M 18.897638,1103.622047 L 102.047244,1103.622047 L 102.047244,952.440945 L 18.897638,952.440945 L 18.897638,1103.622047 L 18.897638,1103.622047 z"
+       style="fill:none;stroke:#000000"
+       id="path19" />
+    <path
+       d="M 109.606299,1103.622047 L 192.755906,1103.622047 L 192.755906,952.440945 L 109.606299,952.440945 L 109.606299,1103.622047 L 109.606299,1103.622047 z"
+       style="fill:none;stroke:#000000"
+       id="path20" />
+    <path
+       d="M 200.314961,1103.622047 L 283.464567,1103.622047 L 283.464567,952.440945 L 200.314961,952.440945 L 200.314961,1103.622047 L 200.314961,1103.622047 z"
+       style="fill:none;stroke:#000000"
+       id="path21" />
+    <path
+       d="M 291.023622,1103.622047 L 374.173228,1103.622047 L 374.173228,952.440945 L 291.023622,952.440945 L 291.023622,1103.622047 L 291.023622,1103.622047 z"
+       style="fill:none;stroke:#000000"
+       id="path22" />
+    <path
+       d="M 381.732283,1103.622047 L 464.881890,1103.622047 L 464.881890,952.440945 L 381.732283,952.440945 L 381.732283,1103.622047 L 381.732283,1103.622047 z"
+       style="fill:none;stroke:#000000"
+       id="path23" />
+    <path
+       d="M 472.440945,1103.622047 L 555.590551,1103.622047 L 555.590551,952.440945 L 472.440945,952.440945 L 472.440945,1103.622047 L 472.440945,1103.622047 z"
+       style="fill:none;stroke:#000000"
+       id="path24" />
+    <path
+       d="M 563.149606,1103.622047 L 646.299213,1103.622047 L 646.299213,952.440945 L 563.149606,952.440945 L 563.149606,1103.622047 L 563.149606,1103.622047 z"
+       style="fill:none;stroke:#000000"
+       id="path25" />
+    <path
+       d="M 653.858268,1103.622047 L 737.007874,1103.622047 L 737.007874,952.440945 L 653.858268,952.440945 L 653.858268,1103.622047 L 653.858268,1103.622047 z"
+       style="fill:none;stroke:#000000"
+       id="path26" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="DIESEL_BAYS"
+     id="g30">
+    <path
+       d="M 18.897638,914.645669 L 132.283465,914.645669 L 132.283465,687.874016 L 18.897638,687.874016 L 18.897638,914.645669 L 18.897638,914.645669 z"
+       style="fill:none;stroke:#000000"
+       id="path27" />
+    <path
+       d="M 147.401575,914.645669 L 260.787402,914.645669 L 260.787402,687.874016 L 147.401575,687.874016 L 147.401575,914.645669 L 147.401575,914.645669 z"
+       style="fill:none;stroke:#000000"
+       id="path28" />
+    <path
+       d="M 275.905512,914.645669 L 389.291339,914.645669 L 389.291339,687.874016 L 275.905512,687.874016 L 275.905512,914.645669 L 275.905512,914.645669 z"
+       style="fill:none;stroke:#000000"
+       id="path29" />
+    <path
+       d="M 404.409449,914.645669 L 517.795276,914.645669 L 517.795276,687.874016 L 404.409449,687.874016 L 404.409449,914.645669 L 404.409449,914.645669 z"
+       style="fill:none;stroke:#000000"
+       id="path30" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="EQUIPMENT"
+     id="g31">
+    <path
+       d="M 566.929134,1084.724409 L 604.724409,1084.724409 L 604.724409,1062.047244 L 566.929134,1062.047244 L 566.929134,1084.724409 L 566.929134,1084.724409 z"
+       style="fill:none;stroke:#000000"
+       id="path31" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="ELECTRICAL"
+     id="g32">
+    <text
+       x="75.590551"
+       y="782.362205"
+       style="font-size: 52.913px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text31"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan31">Panel LP-1 â 120/208V 3PH (East wall)</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="PLUMBING"
+     id="g33">
+    <text
+       x="75.590551"
+       y="1009.133858"
+       style="font-size: 52.913px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text32"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan32">Floor drain â trench drain (slope w)</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="AIR_GAS"
+     id="g34">
+    <text
+       x="75.590551"
+       y="1122.519685"
+       style="font-size: 52.913px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text33"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan33">Compressed air drop @ each bay â 100 PSI</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="HVAC"
+     id="g35">
+    <text
+       x="75.590551"
+       y="895.748031"
+       style="font-size: 52.913px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text34"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan34">Diesel exhaust hood â 1,500 CFM</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="SAFETY"
+     id="g36" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="TRAFFIC_FLOW"
+     id="g37" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="TEXT_LABELS"
+     id="g50">
+    <text
+       x="22.677165"
+       y="967.559055"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text37"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan37">AUTO_BAYS_1</tspan></text>
+    <text
+       x="113.385827"
+       y="967.559055"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text38"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan38">AUTO_BAYS_2</tspan></text>
+    <text
+       x="204.094488"
+       y="967.559055"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text39"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan39">AUTO_BAYS_3</tspan></text>
+    <text
+       x="294.803150"
+       y="967.559055"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text40"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan40">AUTO_BAYS_4</tspan></text>
+    <text
+       x="385.511811"
+       y="967.559055"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text41"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan41">AUTO_BAYS_5</tspan></text>
+    <text
+       x="476.220472"
+       y="967.559055"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text42"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan42">AUTO_BAYS_6</tspan></text>
+    <text
+       x="566.929134"
+       y="967.559055"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text43"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan43">AUTO_BAYS_7</tspan></text>
+    <text
+       x="657.637795"
+       y="967.559055"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text44"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan44">AUTO_BAYS_8</tspan></text>
+    <text
+       x="22.677165"
+       y="710.551181"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text45"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan45">DIESEL_BAYS_1</tspan></text>
+    <text
+       x="151.181102"
+       y="710.551181"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text46"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan46">DIESEL_BAYS_2</tspan></text>
+    <text
+       x="279.685039"
+       y="710.551181"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text47"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan47">DIESEL_BAYS_3</tspan></text>
+    <text
+       x="408.188976"
+       y="710.551181"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text48"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan48">DIESEL_BAYS_4</tspan></text>
+    <text
+       x="566.929134"
+       y="1088.503937"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text49"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan49">Tool Room</tspan></text>
+    <path
+       d="M 15.118110,650.834646 L -22.677165,764.220472 L 52.913386,764.220472 L 15.118110,650.834646"
+       style="fill:none;stroke:#000000"
+       id="path49" />
+    <text
+       x="-7.559055"
+       y="839.811024"
+       style="font-size: 75.591px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text50"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan50">N</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="EQUIP_LABELS"
+     id="g62">
+    <use
+       xlink:href="#BLK_E001"
+       style="stroke-width:0.500px"
+       transform="translate(48, -94.4882)"
+       id="use50" />
+    <use
+       xlink:href="#BLK_E013"
+       style="stroke-width:0.500px"
+       transform="translate(72.9449, -94.4882)"
+       id="use51" />
+    <use
+       xlink:href="#BLK_E004"
+       style="stroke-width:0.500px"
+       transform="translate(58.5827, -321.26)"
+       id="use52" />
+    <use
+       xlink:href="#BLK_E016"
+       style="stroke-width:0.500px"
+       transform="translate(92.5984, -321.26)"
+       id="use53" />
+    <use
+       xlink:href="#BLK_E005"
+       style="stroke-width:0.500px"
+       transform="translate(138.709, -94.4882)"
+       id="use54" />
+    <use
+       xlink:href="#BLK_E017"
+       style="stroke-width:0.500px"
+       transform="translate(163.654, -94.4882)"
+       id="use55" />
+    <use
+       xlink:href="#BLK_E009"
+       style="stroke-width:0.500px"
+       transform="translate(187.087, -321.26)"
+       id="use56" />
+    <use
+       xlink:href="#BLK_E021"
+       style="stroke-width:0.500px"
+       transform="translate(221.102, -321.26)"
+       id="use57" />
+    <use
+       xlink:href="#BLK_E008"
+       style="stroke-width:0.500px"
+       transform="translate(229.417, -94.4882)"
+       id="use58" />
+    <use
+       xlink:href="#BLK_E020"
+       style="stroke-width:0.500px"
+       transform="translate(254.362, -94.4882)"
+       id="use59" />
+    <use
+       xlink:href="#BLK_E010"
+       style="stroke-width:0.500px"
+       transform="translate(320.126, -94.4882)"
+       id="use60" />
+    <use
+       xlink:href="#BLK_E022"
+       style="stroke-width:0.500px"
+       transform="translate(345.071, -94.4882)"
+       id="use61" />
+    <use
+       xlink:href="#BLK_E012"
+       style="stroke-width:0.500px"
+       transform="translate(423.307, -94.4882)"
+       id="use62" />
+    <text
+       x="612.283465"
+       y="1062.047244"
+       style="font-size: 52.913px; fill: #FFFF00; font-family: Arial; text-anchor: start"
+       id="text62"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan62">Two-post lift â 2,500 lb</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="STRUCTURAL_ANNOT"
+     id="g86">
+    <text
+       x="83.149606"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text63"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan63">Slab: 8.0 in</tspan></text>
+    <text
+       x="83.149606"
+       y="1016.692913"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text64"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan64">W: 2550 lb</tspan></text>
+    <text
+       x="98.267717"
+       y="778.582677"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text65"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan65">Slab: 8.0 in</tspan></text>
+    <text
+       x="98.267717"
+       y="789.921260"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text66"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan66">W: 2550 lb</tspan></text>
+    <text
+       x="173.858268"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text67"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan67">Slab: 8.0 in</tspan></text>
+    <text
+       x="173.858268"
+       y="1016.692913"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text68"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan68">W: 2550 lb</tspan></text>
+    <text
+       x="226.771654"
+       y="778.582677"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text69"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan69">Slab: 8.0 in</tspan></text>
+    <text
+       x="226.771654"
+       y="789.921260"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text70"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan70">W: 2550 lb</tspan></text>
+    <text
+       x="264.566929"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text71"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan71">Slab: 8.0 in</tspan></text>
+    <text
+       x="264.566929"
+       y="1016.692913"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text72"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan72">W: 2800 lb</tspan></text>
+    <text
+       x="355.275591"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text73"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan73">Slab: 8.0 in</tspan></text>
+    <text
+       x="355.275591"
+       y="1016.692913"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text74"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan74">W: 2800 lb</tspan></text>
+    <text
+       x="355.275591"
+       y="778.582677"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text75"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan75">Slab: 8.0 in</tspan></text>
+    <text
+       x="355.275591"
+       y="789.921260"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text76"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan76">W: 2600 lb</tspan></text>
+    <text
+       x="445.984252"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text77"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan77">Slab: 8.0 in</tspan></text>
+    <text
+       x="445.984252"
+       y="1016.692913"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text78"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan78">W: 3300 lb</tspan></text>
+    <text
+       x="483.779528"
+       y="778.582677"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text79"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan79">Slab: 8.0 in</tspan></text>
+    <text
+       x="483.779528"
+       y="789.921260"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text80"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan80">W: 2700 lb</tspan></text>
+    <text
+       x="536.692913"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text81"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan81">Slab: 8.0 in</tspan></text>
+    <text
+       x="536.692913"
+       y="1016.692913"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text82"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan82">W: 2700 lb</tspan></text>
+    <text
+       x="627.401575"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text83"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan83">Slab: 8.0 in</tspan></text>
+    <text
+       x="627.401575"
+       y="1016.692913"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text84"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan84">W: 500 lb</tspan></text>
+    <text
+       x="718.110236"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text85"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan85">Slab: 8.0 in</tspan></text>
+    <text
+       x="718.110236"
+       y="1016.692913"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text86"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan86">W: 500 lb</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="MECH_ANNOT"
+     id="g98">
+    <text
+       x="37.795276"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text87"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan87">Lift area airflow: 500 CFM</tspan></text>
+    <text
+       x="52.913386"
+       y="778.582677"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text88"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan88">Diesel exhaust: 1500 CFM</tspan></text>
+    <text
+       x="128.503937"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text89"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan89">Lift area airflow: 500 CFM</tspan></text>
+    <text
+       x="181.417323"
+       y="778.582677"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text90"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan90">Diesel exhaust: 1500 CFM</tspan></text>
+    <text
+       x="219.212598"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text91"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan91">Lift area airflow: 500 CFM</tspan></text>
+    <text
+       x="309.921260"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text92"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan92">Lift area airflow: 500 CFM</tspan></text>
+    <text
+       x="309.921260"
+       y="778.582677"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text93"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan93">Diesel exhaust: 1500 CFM</tspan></text>
+    <text
+       x="400.629921"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text94"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan94">Lift area airflow: 500 CFM</tspan></text>
+    <text
+       x="438.425197"
+       y="778.582677"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text95"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan95">Diesel exhaust: 1500 CFM</tspan></text>
+    <text
+       x="491.338583"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text96"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan96">Lift area airflow: 500 CFM</tspan></text>
+    <text
+       x="582.047244"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text97"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan97">Lift area airflow: 500 CFM</tspan></text>
+    <text
+       x="672.755906"
+       y="1005.354331"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text98"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan98">Lift area airflow: 500 CFM</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="ELEC_SCHEMATIC"
+     id="g120">
+    <text
+       x="37.795276"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text99"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan99">Elec load: 1.5 kW (C_AUTO_BAYS_1)</tspan></text>
+    <text
+       x="37.795276"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text100"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan100">Elec load: 0.5 kW (C_AUTO_BAYS_1)</tspan></text>
+    <text
+       x="52.913386"
+       y="823.937008"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text101"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan101">Elec load: 1.5 kW (C_DIESEL_BAYS_1)</tspan></text>
+    <text
+       x="52.913386"
+       y="823.937008"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text102"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan102">Elec load: 0.5 kW (C_DIESEL_BAYS_1)</tspan></text>
+    <text
+       x="128.503937"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text103"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan103">Elec load: 1.5 kW (C_AUTO_BAYS_2)</tspan></text>
+    <text
+       x="128.503937"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text104"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan104">Elec load: 0.5 kW (C_AUTO_BAYS_2)</tspan></text>
+    <text
+       x="181.417323"
+       y="823.937008"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text105"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan105">Elec load: 1.5 kW (C_DIESEL_BAYS_2)</tspan></text>
+    <text
+       x="181.417323"
+       y="823.937008"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text106"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan106">Elec load: 0.5 kW (C_DIESEL_BAYS_2)</tspan></text>
+    <text
+       x="219.212598"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text107"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan107">Elec load: 1.5 kW (C_AUTO_BAYS_3)</tspan></text>
+    <text
+       x="219.212598"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text108"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan108">Elec load: 5.0 kW (C_AUTO_BAYS_3)</tspan></text>
+    <text
+       x="309.921260"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text109"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan109">Elec load: 1.5 kW (C_AUTO_BAYS_4)</tspan></text>
+    <text
+       x="309.921260"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text110"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan110">Elec load: 5.0 kW (C_AUTO_BAYS_4)</tspan></text>
+    <text
+       x="309.921260"
+       y="823.937008"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text111"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan111">Elec load: 1.5 kW (C_DIESEL_BAYS_3)</tspan></text>
+    <text
+       x="309.921260"
+       y="823.937008"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text112"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan112">Elec load: 3.5 kW (C_DIESEL_BAYS_3)</tspan></text>
+    <text
+       x="400.629921"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text113"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan113">Elec load: 1.5 kW (C_AUTO_BAYS_5)</tspan></text>
+    <text
+       x="400.629921"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text114"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan114">Elec load: 15.0 kW (C_AUTO_BAYS_5)</tspan></text>
+    <text
+       x="438.425197"
+       y="823.937008"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text115"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan115">Elec load: 1.5 kW (C_DIESEL_BAYS_4)</tspan></text>
+    <text
+       x="438.425197"
+       y="823.937008"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text116"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan116">Elec load: 2.0 kW (C_DIESEL_BAYS_4)</tspan></text>
+    <text
+       x="491.338583"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text117"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan117">Elec load: 1.5 kW (C_AUTO_BAYS_6)</tspan></text>
+    <text
+       x="491.338583"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text118"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan118">Elec load: 2.0 kW (C_AUTO_BAYS_6)</tspan></text>
+    <text
+       x="582.047244"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text119"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan119">Elec load: 7.5 kW (C_AUTO_BAYS_7)</tspan></text>
+    <text
+       x="672.755906"
+       y="1050.708661"
+       style="font-size: 9.449px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text120"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan120">Elec load: 7.5 kW (C_AUTO_BAYS_8)</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="FLOOR"
+     id="g121" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="DIMENSIONS"
+     id="g123">
+    <text
+       x="151.181102"
+       y="1140.661417"
+       style="font-size: 68.031px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text121"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan121">Overall width: 120'-0&quot;</tspan></text>
+    <text
+       x="151.181102"
+       y="1254.047244"
+       style="font-size: 68.031px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text122"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan122">Typical bay depth: 24'-0&quot;</tspan></text>
+    <text
+       x="151.181102"
+       y="1367.433071"
+       style="font-size: 68.031px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text123"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan123">Main aisle: 12'-0&quot;</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="TITLE_BLOCK"
+     id="g134">
+    <text
+       x="778.582677"
+       y="1158.803150"
+       style="font-size: 90.709px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text124"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan124">Project: Combination Automotive &amp; Diesel Facility</tspan></text>
+    <text
+       x="778.582677"
+       y="1272.188976"
+       style="font-size: 75.591px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text125"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan125">Author: Student Name</tspan></text>
+    <text
+       x="778.582677"
+       y="1366.677165"
+       style="font-size: 75.591px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text126"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan126">Sheet: A1 - Facility Layout</tspan></text>
+    <text
+       x="778.582677"
+       y="1461.165354"
+       style="font-size: 68.031px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text127"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan127">Date: 2026-01-26</tspan></text>
+    <text
+       x="778.582677"
+       y="1536.755906"
+       style="font-size: 68.031px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text128"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan128">Revision: Rev 0 - Issued for Review</tspan></text>
+    <text
+       x="778.582677"
+       y="1631.244094"
+       style="font-size: 68.031px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text129"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan129">Scale: 1/8&quot; = 1'-0&quot;</tspan></text>
+    <text
+       x="778.582677"
+       y="1763.527559"
+       style="font-size: 60.472px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text130"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan130">Legend:</tspan></text>
+    <text
+       x="778.582677"
+       y="1846.677165"
+       style="font-size: 45.354px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text131"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan131">Exhaust Hood â HVAC (HVAC)</tspan></text>
+    <text
+       x="778.582677"
+       y="1914.708661"
+       style="font-size: 45.354px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text132"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan132">Floor Drain â Plumbing (PLUMBING)</tspan></text>
+    <text
+       x="778.582677"
+       y="1982.740157"
+       style="font-size: 45.354px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text133"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan133">Air Drop â Air/Gas (AIR_GAS)</tspan></text>
+    <text
+       x="778.582677"
+       y="2050.771654"
+       style="font-size: 45.354px; fill: #000000; font-family: Arial; text-anchor: start"
+       id="text134"><tspan
+         sodipodi:role="line"
+         dx="0.000000"
+         dy="0.000000"
+         id="tspan134">Lift â Equipment (EQUIPMENT)</tspan></text>
+  </g>
+</svg>

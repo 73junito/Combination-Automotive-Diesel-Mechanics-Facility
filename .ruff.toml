@@ -1,0 +1,13 @@
+# Ruff configuration for the project
+# See: https://beta.ruff.rs/docs/config/
+
+line-length = 100
+# Use default rule selection; ignore a small set of legacy rules
+ignore = ["E203"]
+exclude = ["**/outputs/**", "**/.venv/**", "build", "dist"]
+# Fix style issues when running `ruff --fix` or via the VS Code extension
+fix = true
+
+# Per-file ignores (example)
+[per-file-ignores]
+"*_generated.py" = ["E501"]

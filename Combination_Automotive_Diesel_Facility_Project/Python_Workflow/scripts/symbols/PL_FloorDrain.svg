@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-60 -60 120 120" width="200" height="200">
+  <title>PL_FloorDrain</title>
+  <g stroke="#000" stroke-width="2" fill="none">
+    <circle cx="0" cy="0" r="10" />
+    <line x1="-8" y1="-8" x2="8" y2="8" />
+    <line x1="8" y1="-8" x2="-8" y2="8" />
+  </g>
+</svg>
