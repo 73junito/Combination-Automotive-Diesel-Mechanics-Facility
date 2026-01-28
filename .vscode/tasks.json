@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "lint: pylint (W0718,E0401)",
+      "type": "shell",
+      "command": "pylint",
+      "args": [
+        "--disable=all",
+        "--enable=W0718,E0401",
+        "."
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "always"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

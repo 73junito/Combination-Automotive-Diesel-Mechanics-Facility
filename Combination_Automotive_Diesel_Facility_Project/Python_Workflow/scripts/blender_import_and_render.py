@@ -21,7 +21,6 @@ import bpy
 import sys
 import os
 from mathutils import Vector
-import math
 
 # Parse args after --
 argv = sys.argv
@@ -92,7 +91,8 @@ except RuntimeError as e:
     sys.exit(3)
 
 # Collect imported objects (curves)
-imported = [obj for obj in bpy.context.scene.objects if obj.type in ("CURVE", "EMPTY", "MESH")]
+# prefer actual geometry types; SVG importer may create EMPTY parents
+imported = [obj for obj in bpy.context.scene.objects if obj.type in ("CURVE", "MESH")]
 if not imported:
     print("No objects imported from SVG.")
     sys.exit(4)
@@ -118,7 +118,11 @@ else:
 
 # Set name
 obj.name = "Engineering_Layout_Reference"
-obj.data.name = "Engineering_Layout_Reference"
+if hasattr(obj, "data") and obj.data is not None:
+    try:
+        obj.data.name = "Engineering_Layout_Reference"
+    except Exception as e:
+        print(f"Warning: failed to rename data-block for {obj.name}: {e}")
 
 # Set origin to geometry and move to world origin
 bpy.ops.object.origin_set(type="ORIGIN_GEOMETRY", center="BOUNDS")
@@ -181,7 +185,7 @@ bpy.context.scene.camera = cam_obj
 light_data = bpy.data.lights.new(name="KeyLight", type="SUN")
 light_obj = bpy.data.objects.new(name="KeyLight", object_data=light_data)
 light_obj.location = (0.0, -cam_distance, max_dim * 2.0)
-bpy.context.collection.objects.link(light_obj)
+bpy.context.scene.collection.objects.link(light_obj)
 
 # Adjust render settings
 bpy.context.scene.render.engine = (
