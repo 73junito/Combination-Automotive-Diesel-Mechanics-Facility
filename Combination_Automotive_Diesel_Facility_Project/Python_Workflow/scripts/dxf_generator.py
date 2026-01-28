@@ -63,6 +63,11 @@ def create_dxf_document(filename: str = "facility_layout.dxf") -> str:
     if ezdxf is None:
         raise RuntimeError("ezdxf is not installed. Install via pip install ezdxf")
 
+    # Guard: do not emit placeholder equipment when building for a release/CI.
+    # Set environment variable RELEASE_BUILD=1 to enable strict release mode.
+    def is_release_build() -> bool:
+        return os.getenv("RELEASE_BUILD") == "1" or os.getenv("CI") is not None
+
     doc = ezdxf.new("R2010")
     msp = doc.modelspace()
 
@@ -108,7 +113,15 @@ def create_dxf_document(filename: str = "facility_layout.dxf") -> str:
             layer="TEXT_LABELS",
         )
 
-    # Placeholder equipment
+    # TODO: replace placeholder equipment with real definitions
+    # In release builds (RELEASE_BUILD=1 or CI env var present) abort rather than
+    # emitting DXFs that contain placeholder equipment.
+    if is_release_build():
+        raise RuntimeError(
+            "Release build: placeholder equipment would be emitted; aborting DXF generation"
+        )
+
+    # Development/sample placeholder equipment (will not be created in release builds)
     add_rectangle(msp, 150, 10, 10, 6, layer="EQUIPMENT")
     add_text(msp, "Tool Room", 150, 9, layer="TEXT_LABELS")
 
