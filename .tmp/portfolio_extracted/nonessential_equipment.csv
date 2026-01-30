@@ -1,0 +1,4 @@
+Category,Item,Quantity,UnitCost,MaintenanceAnnual,ReplacementYears,TotalCost,AnnualMaintenanceTotal
+Advanced Diagnostics,Oscilloscope,1,3500.0,100.0,10,3500.0,100.0
+Simulator,Engine simulator,1,15000.0,500.0,10,15000.0,500.0
+OEM Tools,Brand-specific dealer kit,2,5000.0,200.0,8,10000.0,400.0

@@ -1,0 +1,23 @@
+BayName,EquipID,Item,Load_kW,CircuitID,Assumptions
+AUTO_BAYS_1,E001,Two-post lift,1.5,C_AUTO_BAYS_1,Placeholder load; verify
+AUTO_BAYS_1,E013,Scan tool (shop),0.5,C_AUTO_BAYS_1,Placeholder load; verify
+DIESEL_BAYS_1,E002,Two-post lift,1.5,C_DIESEL_BAYS_1,Placeholder load; verify
+DIESEL_BAYS_1,E014,Scan tool (shop),0.5,C_DIESEL_BAYS_1,Placeholder load; verify
+AUTO_BAYS_2,E003,Two-post lift,1.5,C_AUTO_BAYS_2,Placeholder load; verify
+AUTO_BAYS_2,E015,Scan tool (shop),0.5,C_AUTO_BAYS_2,Placeholder load; verify
+DIESEL_BAYS_2,E004,Two-post lift,1.5,C_DIESEL_BAYS_2,Placeholder load; verify
+DIESEL_BAYS_2,E016,Scan tool (shop),0.5,C_DIESEL_BAYS_2,Placeholder load; verify
+AUTO_BAYS_3,E005,Two-post lift,1.5,C_AUTO_BAYS_3,Placeholder load; verify
+AUTO_BAYS_3,E017,MIG welder,5.0,C_AUTO_BAYS_3,Placeholder load; verify
+AUTO_BAYS_4,E006,Two-post lift,1.5,C_AUTO_BAYS_4,Placeholder load; verify
+AUTO_BAYS_4,E018,MIG welder,5.0,C_AUTO_BAYS_4,Placeholder load; verify
+DIESEL_BAYS_3,E007,Two-post lift,1.5,C_DIESEL_BAYS_3,Placeholder load; verify
+DIESEL_BAYS_3,E019,Oscilloscope,3.5,C_DIESEL_BAYS_3,Placeholder load; verify
+AUTO_BAYS_5,E008,Two-post lift,1.5,C_AUTO_BAYS_5,Placeholder load; verify
+AUTO_BAYS_5,E020,Engine simulator,15.0,C_AUTO_BAYS_5,Placeholder load; verify
+DIESEL_BAYS_4,E009,Two-post lift,1.5,C_DIESEL_BAYS_4,Placeholder load; verify
+DIESEL_BAYS_4,E021,Brand-specific dealer kit,2.0,C_DIESEL_BAYS_4,Placeholder load; verify
+AUTO_BAYS_6,E010,Two-post lift,1.5,C_AUTO_BAYS_6,Placeholder load; verify
+AUTO_BAYS_6,E022,Brand-specific dealer kit,2.0,C_AUTO_BAYS_6,Placeholder load; verify
+AUTO_BAYS_7,E011,Air compressor (50 CFM),7.5,C_AUTO_BAYS_7,Placeholder load; verify
+AUTO_BAYS_8,E012,Air compressor (50 CFM),7.5,C_AUTO_BAYS_8,Placeholder load; verify
