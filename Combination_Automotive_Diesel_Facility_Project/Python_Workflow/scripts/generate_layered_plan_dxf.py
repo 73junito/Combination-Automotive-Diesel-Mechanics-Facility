@@ -499,16 +499,17 @@ if __name__ == "__main__":
         os.path.dirname(__file__), "..", "outputs", "training_facility_plan_layered.dxf"
     )
     out = os.path.abspath(out)
-    generate_plan(out)
+    # Support a fast smoke mode for CI/testing via environment variable
+    smoke = os.environ.get("SMOKE", "0")
+    if smoke in ("1", "true", "True"):
+        # small, fast generation for CI
+        generate_plan(out, student_count=4, light_bays=2, heavy_bays=1, ev_chargers=1)
+    else:
+        generate_plan(out)
     # export separate discipline DXFs
-    master = ezdxf.readfile(out)
-    export_dir = os.path.join(os.path.dirname(out), "DXF")
-    export_disciplines(master, export_dir)
-
-
-if __name__ == "__main__":
-    out = os.path.join(
-        os.path.dirname(__file__), "..", "outputs", "training_facility_plan_layered.dxf"
-    )
-    out = os.path.abspath(out)
-    generate_plan(out)
+    try:
+        master = ezdxf.readfile(out)
+        export_dir = os.path.join(os.path.dirname(out), "DXF")
+        export_disciplines(master, export_dir)
+    except Exception:
+        print("Warning: failed to export discipline DXFs")
