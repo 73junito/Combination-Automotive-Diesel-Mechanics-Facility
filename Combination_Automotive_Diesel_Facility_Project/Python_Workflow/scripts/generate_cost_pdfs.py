@@ -24,14 +24,22 @@ SRC = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "outputs"))
 os.makedirs(OUT, exist_ok=True)
 
 FILES = [
-    ("essential_equipment.csv", "essential_equipment.xlsx", "Essential_Equipment_Cost_List.pdf"),
+    (
+        "essential_equipment.csv",
+        "essential_equipment.xlsx",
+        "Essential_Equipment_Cost_List.pdf",
+    ),
     (
         "nonessential_equipment.csv",
         "nonessential_equipment.xlsx",
         "Nonessential_Equipment_Cost_List.pdf",
     ),
     ("furniture.csv", "equipment_lists.xlsx", "Furniture_List_with_Cost.pdf"),
-    ("maintenance.csv", "maintenance_and_replacement.csv", "Maintenance_and_Replacement_Costs.pdf"),
+    (
+        "maintenance.csv",
+        "maintenance_and_replacement.csv",
+        "Maintenance_and_Replacement_Costs.pdf",
+    ),
     ("totals.csv", "total_costs.xlsx", "Total_Facility_Cost_Estimate.pdf"),
 ]
 
@@ -119,16 +127,22 @@ def build_table_rows(rows):
 
 def make_pdf(title, table_rows, subtotal, out_path):
     try:
-        from reportlab.lib.pagesizes import letter
-        from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
         from reportlab.lib import colors
+        from reportlab.lib.pagesizes import letter
         from reportlab.lib.styles import getSampleStyleSheet
+        from reportlab.platypus import (Paragraph, SimpleDocTemplate, Spacer,
+                                        Table, TableStyle)
     except ImportError as e:
         print("Missing ReportLab. Install reportlab in your Python environment.")
         raise
 
     doc = SimpleDocTemplate(
-        out_path, pagesize=letter, rightMargin=36, leftMargin=36, topMargin=36, bottomMargin=36
+        out_path,
+        pagesize=letter,
+        rightMargin=36,
+        leftMargin=36,
+        topMargin=36,
+        bottomMargin=36,
     )
     styles = getSampleStyleSheet()
     elems = []
@@ -157,8 +171,8 @@ def make_pdf(title, table_rows, subtotal, out_path):
 def make_placeholder(title, out_path, note=None):
     try:
         from reportlab.lib.pagesizes import letter
-        from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
         from reportlab.lib.styles import getSampleStyleSheet
+        from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
     except ImportError:
         print("Missing ReportLab. Install reportlab in your Python environment.")
         raise
@@ -183,7 +197,9 @@ def main():
         outpath = os.path.join(OUT, outname)
         if not kind:
             make_placeholder(
-                outname.replace(".pdf", ""), outpath, note=f"Expected {csvn} or {xlsn} in {SRC}."
+                outname.replace(".pdf", ""),
+                outpath,
+                note=f"Expected {csvn} or {xlsn} in {SRC}.",
             )
             print(f"Placeholder created for {outname}")
             continue

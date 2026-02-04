@@ -7,11 +7,12 @@ Tries to use `pypdf` or `PyPDF2` for merging. Uses `reportlab` to build
 the legend page.
 """
 
-import os
 import csv
+import os
 
 try:
-    from reportlab.lib.pagesizes import letter  # type: ignore[reportMissingImports]
+    from reportlab.lib.pagesizes import \
+        letter  # type: ignore[reportMissingImports]
     from reportlab.pdfgen import canvas  # type: ignore[reportMissingImports]
 except ImportError:
     REPORTLAB_AVAILABLE = False
@@ -20,10 +21,12 @@ else:
 
 try:
     # modern pypdf
-    from pypdf import PdfReader, PdfWriter  # type: ignore[reportMissingImports]
+    from pypdf import (PdfReader,  # type: ignore[reportMissingImports]
+                       PdfWriter)
 except ImportError:
     try:
-        from PyPDF2 import PdfReader, PdfWriter  # type: ignore[reportMissingImports]
+        from PyPDF2 import (PdfReader,  # type: ignore[reportMissingImports]
+                            PdfWriter)
     except ImportError:
         PdfReader = PdfWriter = None
 

@@ -146,7 +146,9 @@ def main():
     # save new dxf
     doc.saveas(DXF_OUT)
     # write updated mapping
-    write_updated_mapping(df, os.path.join(OUT, "equipment_bay_mapping_labeled.csv"), MAPPING_XLSX)
+    write_updated_mapping(
+        df, os.path.join(OUT, "equipment_bay_mapping_labeled.csv"), MAPPING_XLSX
+    )
     print("Wrote labeled DXF:", DXF_OUT)
     print("Wrote labeled mapping CSV/XLSX")
 

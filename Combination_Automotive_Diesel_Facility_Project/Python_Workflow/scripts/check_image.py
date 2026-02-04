@@ -1,6 +1,7 @@
-from PIL import Image
-from pathlib import Path
 import sys
+from pathlib import Path
+
+from PIL import Image
 
 p = (
     Path(sys.argv[1])

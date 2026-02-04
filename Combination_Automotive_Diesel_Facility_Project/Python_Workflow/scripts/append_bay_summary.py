@@ -7,6 +7,7 @@ Append per-bay cost summary to portfolio_equipment_by_bay.xlsx
 """
 
 import os
+
 import pandas as pd
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", ".."))

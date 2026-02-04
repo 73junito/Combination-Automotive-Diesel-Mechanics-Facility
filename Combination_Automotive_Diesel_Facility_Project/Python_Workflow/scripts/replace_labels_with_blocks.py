@@ -5,8 +5,8 @@ Replace TEXT/MTEXT labels on EQUIP_LABELS with block references.
 - Saves output as `facility_layout_blocks.dxf` in the `outputs` folder.
 """
 
-import os
 import csv
+import os
 
 try:
     import ezdxf

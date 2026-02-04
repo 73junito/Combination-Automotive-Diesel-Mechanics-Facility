@@ -1,6 +1,7 @@
 import os
-import ezdxf
 from collections import Counter
+
+import ezdxf
 
 
 def analyze_dxf(path):

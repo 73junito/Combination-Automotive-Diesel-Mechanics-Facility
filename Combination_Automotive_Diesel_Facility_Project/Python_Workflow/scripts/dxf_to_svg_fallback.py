@@ -15,8 +15,9 @@ from pathlib import Path
 
 try:
     import ezdxf
-    from ezdxf.entities import Line, LWPolyline, Polyline, Circle, Arc, Text, MText
     import matplotlib.pyplot as plt
+    from ezdxf.entities import (Arc, Circle, Line, LWPolyline, MText, Polyline,
+                                Text)
     from matplotlib.collections import LineCollection
 except ImportError as e:
     print("Missing dependency: ensure 'ezdxf' and 'matplotlib' are installed.")
@@ -131,7 +132,9 @@ def render(dxf_path: Path, out_svg: Path, out_png: Path = None, dpi=300):
     fig.savefig(str(out_svg), format="svg", bbox_inches="tight", pad_inches=0)
     if out_png:
         print(f"Saving PNG: {out_png}")
-        fig.savefig(str(out_png), format="png", dpi=dpi, bbox_inches="tight", pad_inches=0)
+        fig.savefig(
+            str(out_png), format="png", dpi=dpi, bbox_inches="tight", pad_inches=0
+        )
     plt.close(fig)
 
 

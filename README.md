@@ -1,4 +1,7 @@
-﻿# Combination-Automotive-Diesel-Mechanics-Facility
+﻿# CI: Preflight & Package
+[![Preflight & Package](https://github.com/73junito/Combination-Automotive-Diesel-Mechanics-Facility/actions/workflows/preflight_package.yml/badge.svg)](https://github.com/73junito/Combination-Automotive-Diesel-Mechanics-Facility/actions/workflows/preflight_package.yml)
+
+# Combination-Automotive-Diesel-Mechanics-Facility
 
 ## Release Artifacts (Drawings Package)
 

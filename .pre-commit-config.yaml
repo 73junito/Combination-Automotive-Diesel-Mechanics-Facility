@@ -1,0 +1,19 @@
+exclude: |
+  (?x)(
+    ^outputs/|
+    ^\.vs/|
+    ^\.tmp/|
+    ^CadQuery\ 2\.6\.1\ source\ code/|
+    __pycache__|
+    \.pyc$
+  )
+
+repos:
+  - repo: https://github.com/psf/black
+    rev: 26.1.0
+    hooks:
+      - id: black
+  - repo: https://github.com/PyCQA/isort
+    rev: 6.1.0
+    hooks:
+      - id: isort

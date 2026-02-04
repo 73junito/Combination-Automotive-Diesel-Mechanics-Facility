@@ -17,9 +17,10 @@ Notes:
   'Engineering_Layout_Reference', and adds a small text note.
 """
 
-import bpy
-import sys
 import os
+import sys
+
+import bpy
 from mathutils import Vector
 
 # Parse args after --
@@ -61,7 +62,16 @@ while i < len(argv):
 
 print("Input SVG:", input_svg)
 print("Output PNG:", output_png)
-print("Scale arg:", scale_arg, "Resolution:", res_x, "x", res_y, "Apply scale:", apply_scale)
+print(
+    "Scale arg:",
+    scale_arg,
+    "Resolution:",
+    res_x,
+    "x",
+    res_y,
+    "Apply scale:",
+    apply_scale,
+)
 
 # Enable SVG importer addon if available
 try:

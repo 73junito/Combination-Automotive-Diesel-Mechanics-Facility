@@ -7,9 +7,10 @@ Map equipment items from equipment CSVs to DXF bay locations.
 - Writes `equipment_bay_mapping.csv` and `equipment_bay_mapping.xlsx` to outputs
 """
 
+import csv
 import os
 from collections import namedtuple
-import csv
+
 import pandas as pd
 
 try:
@@ -42,10 +43,17 @@ def collect_bays():
         # check lightweight polylines (LWPOLYLINE) and polyline types
         etype = e.dxftype()
         layer = getattr(e.dxf, "layer", "")
-        if etype in ("LWPOLYLINE", "POLYLINE") and layer in ("AUTO_BAYS", "DIESEL_BAYS"):
+        if etype in ("LWPOLYLINE", "POLYLINE") and layer in (
+            "AUTO_BAYS",
+            "DIESEL_BAYS",
+        ):
             # get points (works for lwpolyline and polyline)
             try:
-                pts = list(e.get_points()) if hasattr(e, "get_points") else list(e.points())
+                pts = (
+                    list(e.get_points())
+                    if hasattr(e, "get_points")
+                    else list(e.points())
+                )
             except AttributeError:
                 # fallback: try to read vertices
                 pts = [tuple(v) for v in e.vertices()]
@@ -55,7 +63,14 @@ def collect_bays():
             name = getattr(e.dxf, "layer", "") + "_" + f"{len(bays) + 1}"
             bays.append(
                 Bay(
-                    layer=layer, name=name, minx=minx, miny=miny, maxx=maxx, maxy=maxy, cx=cx, cy=cy
+                    layer=layer,
+                    name=name,
+                    minx=minx,
+                    miny=miny,
+                    maxx=maxx,
+                    maxy=maxy,
+                    cx=cx,
+                    cy=cy,
                 )
             )
     # sort bays left-to-right by cx, then bottom-to-top

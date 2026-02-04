@@ -10,6 +10,7 @@ Run with workspace venv python.
 
 import os
 from datetime import date
+
 import pandas as pd
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", ".."))
@@ -108,7 +109,9 @@ def main():
 
     ess_csv = export_csv(ess_df, "essential_equipment.csv")
     non_csv = export_csv(non_df, "nonessential_equipment.csv")
-    xlsx = export_excel({"Essential": ess_df, "NonEssential": non_df}, "equipment_lists.xlsx")
+    xlsx = export_excel(
+        {"Essential": ess_df, "NonEssential": non_df}, "equipment_lists.xlsx"
+    )
 
     summary = {
         "essential_csv": ess_csv,

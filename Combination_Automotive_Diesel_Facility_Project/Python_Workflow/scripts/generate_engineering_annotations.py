@@ -9,8 +9,8 @@ Add engineering-ready annotation layers and export CSV/XLSX tables.
 Notes: uses conservative placeholder assumptions; each CSV contains an `Assumption` column for engineer review.
 """
 
-import os
 import csv
+import os
 from collections import defaultdict
 
 try:
@@ -104,15 +104,28 @@ def write_csv_mech(path, bay_mech):
         w.writerow(["BayName", "ServiceType", "Value", "Units", "Assumptions"])
         for b, mech in bay_mech.items():
             for svc in mech:
-                w.writerow([b, svc["type"], svc["value"], svc["units"], svc["assumption"]])
+                w.writerow(
+                    [b, svc["type"], svc["value"], svc["units"], svc["assumption"]]
+                )
 
 
 def write_csv_elec(path, elec_rows):
     with open(path, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
-        w.writerow(["BayName", "EquipID", "Item", "Load_kW", "CircuitID", "Assumptions"])
+        w.writerow(
+            ["BayName", "EquipID", "Item", "Load_kW", "CircuitID", "Assumptions"]
+        )
         for r in elec_rows:
-            w.writerow([r["bay"], r["equip"], r["item"], r["load_kw"], r["circuit"], r["assump"]])
+            w.writerow(
+                [
+                    r["bay"],
+                    r["equip"],
+                    r["item"],
+                    r["load_kw"],
+                    r["circuit"],
+                    r["assump"],
+                ]
+            )
 
 
 def annotate_dxf(dxf_in, dxf_out, bay_summaries, bay_mech, elec_rows):
@@ -131,7 +144,9 @@ def annotate_dxf(dxf_in, dxf_out, bay_summaries, bay_mech, elec_rows):
         t = f"Slab: {s['slab_in']} in\nW: {int(s['total_weight'])} lb"
         # use simple TEXT lines (multiple lines separated)
         for i, line in enumerate(t.split("\n")):
-            tx = msp.add_text(line, dxfattribs={"height": 2.5, "layer": "STRUCTURAL_ANNOT"})
+            tx = msp.add_text(
+                line, dxfattribs={"height": 2.5, "layer": "STRUCTURAL_ANNOT"}
+            )
             try:
                 tx.set_pos((x, y - i * 3), align="LEFT")
             except AttributeError:
@@ -197,7 +212,12 @@ def main():
                     "assump": "Placeholder load; verify",
                 }
             )
-        bay_summaries[bay] = {"cx": cx, "cy": cy, "slab_in": slab_in, "total_weight": total_weight}
+        bay_summaries[bay] = {
+            "cx": cx,
+            "cy": cy,
+            "slab_in": slab_in,
+            "total_weight": total_weight,
+        }
         # mechanical services: infer from bay name prefix
         mech_list = []
         if bay.upper().startswith("DIESEL"):

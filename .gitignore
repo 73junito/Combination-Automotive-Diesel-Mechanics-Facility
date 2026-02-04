@@ -1,21 +1,48 @@
-﻿# Ignore generated outputs and large binary artifacts
-# Generated outputs (do not commit)
-**/outputs/
-**/outputs/**
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
 
-# Common generated CAD/preview artifacts (belt + suspenders)
-*.dxf
-*.step
-*.stp
-*.svg
-*.png
-*.pdf
-*.zip
-
-# Python virtualenvs
+# Virtual environments
 .venv/
 
-# Editor / OS files
+# VS / IDE
+.vs/
+.vscode/*.log
+
+# Jupyter
+.jupyter/
+.ipynb_checkpoints/
+
+# Temp / generated
+.tmp/
+outputs/
+Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/
+*.pdf
+*.png
+*.svg
+*.dxf
+*.glb
+*.blend
+*.zip
+*.xlsx
+*.xls
+
+# Logs
+*.log
+
+# Bytecode / caches
+*.pyc
+
+# Editor metadata
+*.suo
+*.user
+*.workspace
+
+# Vendor / external source
+CadQuery 2.6.1 source code/
+
+# OS
 .DS_Store
 Thumbs.db
-/.vs/

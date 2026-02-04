@@ -1,13 +1,16 @@
 import importlib.util
-from pathlib import Path
 import json
+from pathlib import Path
+
 import pytest
 
 
 def load_module():
     tests_dir = Path(__file__).resolve().parent
     module_path = tests_dir.parent / "scripts" / "auto_drawing_check.py"
-    spec = importlib.util.spec_from_file_location("auto_drawing_check", str(module_path))
+    spec = importlib.util.spec_from_file_location(
+        "auto_drawing_check", str(module_path)
+    )
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod

@@ -70,7 +70,9 @@ def main():
 
     # draw structural polylines (WALLS, AUTO_BAYS, DIESEL_BAYS) for context
     layers_for_structure = ["WALLS", "AUTO_BAYS", "DIESEL_BAYS"]
-    struct_entities = [e for e in msp if getattr(e.dxf, "layer", "") in layers_for_structure]
+    struct_entities = [
+        e for e in msp if getattr(e.dxf, "layer", "") in layers_for_structure
+    ]
     draw_polylines(ax, struct_entities)
 
     # draw all polylines as faint background
@@ -84,7 +86,9 @@ def main():
 
     # draw block inserts from EQUIP_LABELS
     inserts = [
-        e for e in msp if e.dxftype() == "INSERT" and getattr(e.dxf, "layer", "") == "EQUIP_LABELS"
+        e
+        for e in msp
+        if e.dxftype() == "INSERT" and getattr(e.dxf, "layer", "") == "EQUIP_LABELS"
     ]
     for ins in inserts:
         x, y, z = ins.dxf.insert

@@ -1,11 +1,12 @@
-import sys
-import re
 import argparse
 import logging
+import re
+import sys
 from pathlib import Path
 
 try:
     from pypdf import PdfReader
+
     PYPDF_AVAILABLE = True
 except ImportError:
     PdfReader = None
@@ -56,7 +57,9 @@ EQUIP_KEYWORDS = {
 
 def extract_pdf_text(pdf_path: Path) -> str:
     if not PYPDF_AVAILABLE:
-        raise RuntimeError("pypdf (install with: pip install pypdf) is required to extract PDF text")
+        raise RuntimeError(
+            "pypdf (install with: pip install pypdf) is required to extract PDF text"
+        )
     reader = PdfReader(str(pdf_path))
     text = []
     for p in reader.pages[:6]:
@@ -128,14 +131,23 @@ def main(argv=None):
     parser.add_argument("pdf", help="Path to portfolio PDF")
     parser.add_argument("dxf", help="Path to layout DXF")
     parser.add_argument("--out", "-o", help="Write JSON result to file")
-    parser.add_argument("--format", choices=["json"], default="json", help="Output format (default: json)")
+    parser.add_argument(
+        "--format",
+        choices=["json"],
+        default="json",
+        help="Output format (default: json)",
+    )
     parser.add_argument(
         "--log-level",
         choices=["DEBUG", "INFO", "WARN", "ERROR"],
         default="WARN",
         help="Logging level for informational output (default: WARN)",
     )
-    parser.add_argument("--strict", action="store_true", help="Treat missing input files as errors (exit with EXIT_INPUT)")
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Treat missing input files as errors (exit with EXIT_INPUT)",
+    )
     args = parser.parse_args(argv)
 
     # Configure logging to stderr; keep JSON on stdout
@@ -171,7 +183,9 @@ def main(argv=None):
     if out["pdf_exists"]:
         # If pypdf isn't available, surface a clear exit code for missing dependency.
         if not PYPDF_AVAILABLE:
-            logger.error("pypdf is required to extract PDF text. Install with: pip install pypdf")
+            logger.error(
+                "pypdf is required to extract PDF text. Install with: pip install pypdf"
+            )
             return EXIT_DEP_MISSING
         # Extraction can fail due to file I/O or PDF read errors
         try:

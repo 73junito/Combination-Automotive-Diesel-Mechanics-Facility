@@ -4,8 +4,9 @@ Saves chart image to outputs/totalcost_per_bay.png and appends sheet 'Cost Chart
 """
 
 import os
-import pandas as pd
+
 import matplotlib.pyplot as plt
+import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.drawing.image import Image as XLImage
 
@@ -23,7 +24,9 @@ def main():
         raise RuntimeError("Bay Summary sheet not found in portfolio Excel")
     summary = xls.parse("Bay Summary")
     # ensure numeric
-    summary["TotalCost"] = pd.to_numeric(summary["TotalCost"], errors="coerce").fillna(0.0)
+    summary["TotalCost"] = pd.to_numeric(summary["TotalCost"], errors="coerce").fillna(
+        0.0
+    )
     # sort by TotalCost desc
     summary = summary.sort_values("TotalCost", ascending=False)
     # create bar chart

@@ -8,9 +8,9 @@ Scaffold DXF generator for Combination Automotive / Diesel Facility
 This is a scaffold: extend functions and data as needed.
 """
 
+import os
 from dataclasses import dataclass
 from typing import List
-import os
 
 # Optional import; ezdxf used to write DXF files. Install via requirements.txt
 try:
@@ -130,7 +130,9 @@ def create_dxf_document(filename: str = "facility_layout.dxf") -> str:
     return out_path
 
 
-def add_rectangle(msp, x: float, y: float, w: float, h: float, layer: str = "0", lw: float = 0.2):
+def add_rectangle(
+    msp, x: float, y: float, w: float, h: float, layer: str = "0", lw: float = 0.2
+):
     """Add a rectangle as a lightweight polyline on `layer`."""
     points = [(x, y), (x + w, y), (x + w, y + h), (x, y + h), (x, y)]
     msp.add_lwpolyline(points, dxfattribs={"layer": layer, "closed": True})
@@ -155,7 +157,11 @@ def generate_bays(
     x = start_x
     y = start_y
     for i in range(count):
-        bays.append(Bay(x=x, y=y, width=bay_w, depth=bay_d, layer=layer, name=f"{layer}_{i + 1}"))
+        bays.append(
+            Bay(
+                x=x, y=y, width=bay_w, depth=bay_d, layer=layer, name=f"{layer}_{i + 1}"
+            )
+        )
         x += bay_w + spacing
     return bays
 

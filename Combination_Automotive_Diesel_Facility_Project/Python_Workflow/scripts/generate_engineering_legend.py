@@ -13,14 +13,14 @@ Writes:
  - outputs/portfolio_final.pdf (portfolio_combined_with_legend.pdf + legend)
 """
 
-import os
 import csv
+import os
 
 try:
-    from reportlab.lib.pagesizes import letter
     from reportlab.lib import colors
-    from reportlab.pdfgen import canvas
+    from reportlab.lib.pagesizes import letter
     from reportlab.lib.units import inch
+    from reportlab.pdfgen import canvas
 except ImportError:
     REPORTLAB_AVAILABLE = False
 else:

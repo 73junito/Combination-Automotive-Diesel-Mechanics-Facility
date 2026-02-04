@@ -6,6 +6,7 @@ Produce a portfolio-ready CSV combining bay geometry, assigned items, and costs.
 """
 
 import os
+
 import pandas as pd
 
 try:
@@ -31,7 +32,10 @@ def collect_bays_from_dxf(path):
     for e in msp:
         etype = e.dxftype()
         layer = getattr(e.dxf, "layer", "")
-        if etype in ("LWPOLYLINE", "POLYLINE") and layer in ("AUTO_BAYS", "DIESEL_BAYS"):
+        if etype in ("LWPOLYLINE", "POLYLINE") and layer in (
+            "AUTO_BAYS",
+            "DIESEL_BAYS",
+        ):
             try:
                 pts = (
                     list(e.get_points())
@@ -103,7 +107,9 @@ def build_portfolio():
     # if BayName missing in mapping, attempt to set using BayLayer sequence
     if "BayName" not in mapping.columns or mapping["BayName"].isnull().all():
         mapping["BayName"] = (
-            mapping["BayLayer"] + "_" + (mapping.groupby("BayLayer").cumcount() + 1).astype(str)
+            mapping["BayLayer"]
+            + "_"
+            + (mapping.groupby("BayLayer").cumcount() + 1).astype(str)
         )
 
     # collect bay centroids from DXF for geometry reference
@@ -151,8 +157,16 @@ def build_portfolio():
                 "EquipID": row.get("EquipID", ""),
                 "BayLayer": bay_layer,
                 "BayName": bay_name,
-                "BayCX": row.get("BayCX", "") if "BayCX" in row else (bay["BayCX"] if bay else ""),
-                "BayCY": row.get("BayCY", "") if "BayCY" in row else (bay["BayCY"] if bay else ""),
+                "BayCX": (
+                    row.get("BayCX", "")
+                    if "BayCX" in row
+                    else (bay["BayCX"] if bay else "")
+                ),
+                "BayCY": (
+                    row.get("BayCY", "")
+                    if "BayCY" in row
+                    else (bay["BayCY"] if bay else "")
+                ),
                 "BayWidth": bay["BayWidth"] if bay else "",
                 "BayHeight": bay["BayHeight"] if bay else "",
                 "Item": row.get("Item", ""),

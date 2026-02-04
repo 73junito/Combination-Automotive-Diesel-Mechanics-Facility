@@ -4,8 +4,8 @@ Color-code EQUIP_LABELS in DXF based on Category from equipment_bay_mapping_labe
 - Saves new DXF as facility_layout_colored.dxf
 """
 
-import os
 import csv
+import os
 
 try:
     import ezdxf

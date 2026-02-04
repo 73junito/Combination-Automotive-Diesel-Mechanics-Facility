@@ -7,8 +7,9 @@ Usage: run from repo root with the project's virtualenv active.
 Dependencies: ezdxf, matplotlib
 """
 
-import os
 import math
+import os
+
 import ezdxf
 import matplotlib.pyplot as plt
 

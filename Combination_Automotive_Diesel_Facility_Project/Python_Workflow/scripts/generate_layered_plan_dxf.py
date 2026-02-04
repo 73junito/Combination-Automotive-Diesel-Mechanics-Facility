@@ -1,7 +1,7 @@
 import os
 from math import ceil
-import ezdxf
 
+import ezdxf
 
 """
 Simple layered DXF plan generator for the training facility.

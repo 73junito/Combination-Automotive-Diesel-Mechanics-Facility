@@ -5,11 +5,12 @@ Export combined portfolio to a single PDF:
 - Uses reportlab for PDF, matplotlib for drawing thumbnail and table image
 """
 
-import os
 import io
-from PIL import Image
+import os
+
 import matplotlib.pyplot as plt
 import pandas as pd
+from PIL import Image
 
 try:
     import ezdxf
@@ -17,8 +18,9 @@ except ImportError:
     ezdxf = None
 
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image as RLImage
 from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import Image as RLImage
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", ".."))
 OUT = os.path.join(ROOT, "Python_Workflow", "outputs")
@@ -40,7 +42,10 @@ def make_thumbnail(dxf_path, mapping_csv, out_png):
     for e in msp:
         etype = e.dxftype()
         layer = getattr(e.dxf, "layer", "")
-        if etype in ("LWPOLYLINE", "POLYLINE") and layer in ("AUTO_BAYS", "DIESEL_BAYS"):
+        if etype in ("LWPOLYLINE", "POLYLINE") and layer in (
+            "AUTO_BAYS",
+            "DIESEL_BAYS",
+        ):
             try:
                 pts = (
                     list(e.get_points())
@@ -52,7 +57,9 @@ def make_thumbnail(dxf_path, mapping_csv, out_png):
             xs = [p[0] for p in pts]
             ys = [p[1] for p in pts]
             minx, miny, maxx, maxy = min(xs), min(ys), max(xs), max(ys)
-            rects.append({"layer": layer, "minx": minx, "miny": miny, "maxx": maxx, "maxy": maxy})
+            rects.append(
+                {"layer": layer, "minx": minx, "miny": miny, "maxx": maxx, "maxy": maxy}
+            )
     if not rects:
         raise RuntimeError("No bay rectangles found in DXF")
     # compute extents
@@ -100,7 +107,9 @@ def build_pdf(thumbnail, excel_path, chart_path, pdf_out):
     styles = getSampleStyleSheet()
     doc = SimpleDocTemplate(pdf_out, pagesize=letter)
     story = []
-    title = Paragraph("Combination Automotive & Diesel Facility Portfolio", styles["Title"])
+    title = Paragraph(
+        "Combination Automotive & Diesel Facility Portfolio", styles["Title"]
+    )
     story.append(title)
     story.append(Spacer(1, 12))
     # thumbnail

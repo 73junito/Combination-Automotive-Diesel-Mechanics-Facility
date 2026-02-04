@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-60 -60 120 120" width="200" height="200">
-  <title>PL_FloorSink</title>
-  <g stroke="#000" stroke-width="2" fill="none">
-    <rect x="-14" y="-10" width="28" height="20" rx="2"/>
-    <circle cx="0" cy="0" r="4" />
-  </g>
-</svg>
