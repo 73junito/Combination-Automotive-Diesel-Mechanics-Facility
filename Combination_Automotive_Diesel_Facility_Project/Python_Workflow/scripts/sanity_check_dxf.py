@@ -7,8 +7,8 @@ import ezdxf
 def analyze_dxf(path):
     try:
         doc = ezdxf.readfile(path)
-    except Exception as e:
-        return {"file": path, "error": str(e)}
+    except Exception as exc:
+        return {"file": path, "error": str(exc)}
     entities = Counter()
     layer_set = set()
     total = 0

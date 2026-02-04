@@ -7,13 +7,18 @@ Export combined portfolio to a single PDF:
 
 import io
 import os
+from typing import Any, Optional
 
 import matplotlib.pyplot as plt
 import pandas as pd
 from PIL import Image
 
+# annotate ezdxf so mypy understands conditional import
+ezdxf: Optional[Any] = None
 try:
-    import ezdxf
+    import ezdxf as _ezdxf
+
+    ezdxf = _ezdxf
 except ImportError:
     ezdxf = None
 

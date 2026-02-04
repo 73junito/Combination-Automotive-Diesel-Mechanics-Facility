@@ -19,7 +19,7 @@ try:
     from ezdxf.entities import (Arc, Circle, Line, LWPolyline, MText, Polyline,
                                 Text)
     from matplotlib.collections import LineCollection
-except ImportError as e:
+except ImportError:
     print("Missing dependency: ensure 'ezdxf' and 'matplotlib' are installed.")
     raise
 
@@ -87,7 +87,10 @@ def bounding_box(lines):
     return (min(xs), min(ys), max(xs), max(ys))
 
 
-def render(dxf_path: Path, out_svg: Path, out_png: Path = None, dpi=300):
+from typing import Optional
+
+
+def render(dxf_path: Path, out_svg: Path, out_png: Optional[Path] = None, dpi=300):
     doc = ezdxf.readfile(str(dxf_path))
     msp = doc.modelspace()
 

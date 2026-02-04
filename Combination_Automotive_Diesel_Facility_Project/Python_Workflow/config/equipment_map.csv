@@ -1,0 +1,14 @@
+block_name,model,z_offset_mm,rotation_deg
+BLK_E001,bay,0,0
+BLK_E013,workbench,0,0
+BLK_E004,two_post_lift,0,0
+BLK_E016,bay,0,0
+BLK_E005,workbench,0,0
+BLK_E017,two_post_lift,0,0
+BLK_E009,bay,0,0
+BLK_E021,workbench,0,0
+BLK_E008,two_post_lift,0,0
+BLK_E020,bay,0,0
+BLK_E010,workbench,0,0
+BLK_E022,two_post_lift,0,0
+BLK_E012,bay,0,0

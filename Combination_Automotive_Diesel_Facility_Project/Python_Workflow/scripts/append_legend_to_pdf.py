@@ -9,6 +9,7 @@ the legend page.
 
 import csv
 import os
+from typing import Any, Optional
 
 try:
     from reportlab.lib.pagesizes import \
@@ -19,14 +20,25 @@ except ImportError:
 else:
     REPORTLAB_AVAILABLE = True
 
+# annotate pypdf/PyPDF2 reader/writer types for mypy
+PdfReader: Optional[Any] = None
+PdfWriter: Optional[Any] = None
 try:
     # modern pypdf
-    from pypdf import (PdfReader,  # type: ignore[reportMissingImports]
-                       PdfWriter)
+    from pypdf import \
+        PdfReader as _PdfReader  # type: ignore[reportMissingImports]
+    from pypdf import PdfWriter as _PdfWriter
+
+    PdfReader = _PdfReader
+    PdfWriter = _PdfWriter
 except ImportError:
     try:
-        from PyPDF2 import (PdfReader,  # type: ignore[reportMissingImports]
-                            PdfWriter)
+        from PyPDF2 import \
+            PdfReader as _PdfReader2  # type: ignore[reportMissingImports]
+        from PyPDF2 import PdfWriter as _PdfWriter2
+
+        PdfReader = _PdfReader2
+        PdfWriter = _PdfWriter2
     except ImportError:
         PdfReader = PdfWriter = None
 

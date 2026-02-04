@@ -132,7 +132,7 @@ def make_pdf(title, table_rows, subtotal, out_path):
         from reportlab.lib.styles import getSampleStyleSheet
         from reportlab.platypus import (Paragraph, SimpleDocTemplate, Spacer,
                                         Table, TableStyle)
-    except ImportError as e:
+    except ImportError:
         print("Missing ReportLab. Install reportlab in your Python environment.")
         raise
 

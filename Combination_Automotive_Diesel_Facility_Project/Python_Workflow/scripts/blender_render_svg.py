@@ -14,6 +14,7 @@ Notes:
   positions an orthographic camera to fit the drawing, sets white background, and renders.
 """
 
+# type: ignore
 import os
 import sys
 
@@ -24,7 +25,7 @@ try:
     import bpy
     import mathutils
     from mathutils import Vector
-except ImportError as e:
+except ImportError:
     print("This script requires Blender (run with blender --background --python)")
     raise
 
@@ -168,7 +169,6 @@ cam_data.ortho_scale = max_dim * (1.0 + margin)
 cam.location = (center.x, center.y, center.z + max_dim * 2.0)
 # Point camera downwards
 cam.rotation_euler = (0.0, 0.0, 0.0)
-cam.rotation_euler[0] = 0.0
 # rotate to top-down: point -Z
 cam.rotation_mode = "XYZ"
 cam.rotation_euler = (math.radians(90.0), 0.0, 0.0)

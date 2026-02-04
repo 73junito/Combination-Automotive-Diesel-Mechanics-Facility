@@ -17,11 +17,12 @@ Note: This is a best-effort draft for review; coordinates are approximated.
 
 import sys
 from pathlib import Path
+from typing import Any
 
 try:
     import ezdxf
     from ezdxf.entities import LWPolyline
-except ImportError as e:
+except ImportError:
     print("ERROR: ezdxf is required. Install in venv:")
     print("  .\\.venv\\Scripts\\python.exe -m pip install ezdxf")
     raise
@@ -29,7 +30,13 @@ except ImportError as e:
 # Common set of exceptions that can arise when reading/parsing DXF entities.
 # ezdxf exposes DXF-specific exceptions on some versions; include them
 # when present to avoid referencing names that might not exist.
-dxf_exceptions = (AttributeError, TypeError, ValueError, IndexError, UnicodeDecodeError)
+dxf_exceptions: tuple = (
+    AttributeError,
+    TypeError,
+    ValueError,
+    IndexError,
+    UnicodeDecodeError,
+)
 if hasattr(ezdxf, "DXFStructureError"):
     dxf_exceptions = dxf_exceptions + (ezdxf.DXFStructureError,)
 if hasattr(ezdxf, "DXFValueError"):
@@ -45,7 +52,7 @@ if not INPUT_DXF.exists():
 
 print("Loading", INPUT_DXF)
 doc = ezdxf.readfile(str(INPUT_DXF))
-ms = doc.modelspace()
+ms: Any = doc.modelspace()
 
 
 # Ensure layers exist
@@ -91,7 +98,14 @@ for e in list(ms):
                 else:
                     # fallback: try vertices
                     for v in e.vertices():
-                        points.append((float(v.dxf.x), float(v.dxf.y)))
+                        vv = v  # type: Any
+                        try:
+                            points.append((float(vv.dxf.x), float(vv.dxf.y)))
+                        except Exception:
+                            try:
+                                points.append((float(vv[0]), float(vv[1])))
+                            except Exception:
+                                pass
             except dxf_exceptions:
                 # skip malformed/partial entities
                 pass

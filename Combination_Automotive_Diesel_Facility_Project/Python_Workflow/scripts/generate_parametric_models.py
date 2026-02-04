@@ -12,6 +12,7 @@ Run in a Python environment with CadQuery available.
 import argparse
 import sys
 from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
 
 try:
     import cadquery as cq
@@ -27,7 +28,9 @@ from models.lift import make_two_post_lift
 from models.workbench import make_workbench
 
 
-def export_model(obj, out_dir: Path, name: str, fmt: str = "STEP"):
+def export_model(
+    obj: Any, out_dir: Path, name: str, fmt: str = "STEP"
+) -> Optional[str]:
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir.joinpath(f"{name}.{fmt.lower()}")
     try:
@@ -39,18 +42,18 @@ def export_model(obj, out_dir: Path, name: str, fmt: str = "STEP"):
         return None
 
 
-def make_models(export_stl: bool = False):
+def make_models(export_stl: bool = False) -> Dict[str, List[str]]:
     root = Path(__file__).parent.parent
     out_step = root.joinpath("outputs", "models")
     out_stl = root.joinpath("outputs", "models", "stl") if export_stl else None
 
-    models = [
+    models: List[Tuple[Any, str]] = [
         (make_bay(), "bay"),
         (make_workbench(), "workbench"),
         (make_two_post_lift(), "two_post_lift"),
     ]
 
-    results = {"step": [], "stl": []}
+    results: Dict[str, List[str]] = {"step": [], "stl": []}
 
     for obj, name in models:
         s = export_model(obj, out_step, name, "STEP")

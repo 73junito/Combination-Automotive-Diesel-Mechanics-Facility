@@ -6,9 +6,14 @@ Color-code EQUIP_LABELS in DXF based on Category from equipment_bay_mapping_labe
 
 import csv
 import os
+from typing import Any, Optional
 
+# annotate module variable so mypy knows this may be None when ezdxf
+ezdxf: Optional[Any] = None
 try:
-    import ezdxf
+    import ezdxf as _ezdxf
+
+    ezdxf = _ezdxf
 except ImportError:
     ezdxf = None
 

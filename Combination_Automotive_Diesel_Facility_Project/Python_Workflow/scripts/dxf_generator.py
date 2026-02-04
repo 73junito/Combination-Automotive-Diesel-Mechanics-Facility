@@ -1,20 +1,13 @@
-"""
-Scaffold DXF generator for Combination Automotive / Diesel Facility
-- Layer definitions
-- Simple parametric bay placement
-- Equipment placeholders
-- Exports a DXF to ../outputs
-
-This is a scaffold: extend functions and data as needed.
-"""
-
 import os
 from dataclasses import dataclass
-from typing import List
+from typing import Any, List, Optional
 
-# Optional import; ezdxf used to write DXF files. Install via requirements.txt
+# annotate module variable so mypy knows this may be None when ezdxf
+ezdxf: Optional[Any] = None
 try:
-    import ezdxf
+    import ezdxf as _ezdxf
+
+    ezdxf = _ezdxf
 except ImportError:
     ezdxf = None
 

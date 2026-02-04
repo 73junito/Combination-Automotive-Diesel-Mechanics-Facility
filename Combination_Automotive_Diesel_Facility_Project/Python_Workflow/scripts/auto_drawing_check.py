@@ -3,21 +3,27 @@ import logging
 import re
 import sys
 from pathlib import Path
+from typing import Any, Optional, cast
 
+# annotate pypdf types for mypy
+PdfReader: Optional[Any] = None
+PdfReadError: Optional[Any] = None
+PYPDF_AVAILABLE = False
 try:
-    from pypdf import PdfReader
+    from pypdf import PdfReader as _PdfReader
 
+    PdfReader = _PdfReader
     PYPDF_AVAILABLE = True
 except ImportError:
     PdfReader = None
     PYPDF_AVAILABLE = False
-    # Defer friendly error handling to runtime so script can still show usage
 
 # Try to import a specific PDF read error class if pypdf is available
-PdfReadError = None
 if PYPDF_AVAILABLE:
     try:
-        from pypdf.errors import PdfReadError
+        from pypdf.errors import PdfReadError as _PdfReadError
+
+        PdfReadError = _PdfReadError
     except ImportError:
         PdfReadError = None
 
@@ -60,7 +66,9 @@ def extract_pdf_text(pdf_path: Path) -> str:
         raise RuntimeError(
             "pypdf (install with: pip install pypdf) is required to extract PDF text"
         )
-    reader = PdfReader(str(pdf_path))
+    # PdfReader is Optional[Any] at module scope; narrow for mypy before calling
+    Reader = cast(Any, PdfReader)
+    reader = Reader(str(pdf_path))
     text = []
     for p in reader.pages[:6]:
         try:

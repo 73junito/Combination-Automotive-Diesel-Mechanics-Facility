@@ -15,6 +15,7 @@ Writes:
 
 import csv
 import os
+from typing import Any, Optional
 
 try:
     from reportlab.lib import colors
@@ -26,8 +27,15 @@ except ImportError:
 else:
     REPORTLAB_AVAILABLE = True
 
+# annotate PDF reader/writer types for mypy
+PdfReader: Optional[Any] = None
+PdfWriter: Optional[Any] = None
 try:
-    from pypdf import PdfReader, PdfWriter
+    from pypdf import PdfReader as _PdfReader
+    from pypdf import PdfWriter as _PdfWriter
+
+    PdfReader = _PdfReader
+    PdfWriter = _PdfWriter
 except ImportError:
     PdfReader = PdfWriter = None
 

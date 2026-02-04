@@ -4,9 +4,14 @@ Saves `facility_layout_thumbnail.png` to the outputs folder.
 """
 
 import os
+from typing import Any, Optional
 
+# annotate ezdxf so mypy sees it may be None
+ezdxf: Optional[Any] = None
 try:
-    import ezdxf
+    import ezdxf as _ezdxf
+
+    ezdxf = _ezdxf
     import matplotlib.pyplot as plt
     from matplotlib.patches import Rectangle
 except ImportError:
