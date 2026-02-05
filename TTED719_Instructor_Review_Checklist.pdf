@@ -13,7 +13,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
 endobj
 5 0 obj
-<< /Length 972 >>
+<< /Length 1447 >>
 stream
 BT
 /F1 10 Tf
@@ -22,18 +22,26 @@ BT
 50 729 Td (TTED719 Instructor Review Checklist \(one page\)) Tj
 /F1 10 Tf
 50 703 Td (Use this checklist while reviewing student deliverables derived from this repository.) Tj
-/F1 11 Tf
-50 684 Td (• [ ] Facility planning aligned to TTED 719 outcomes \(floorplan, flow, bay layout\)) Tj
-50 672 Td (• [ ] Safety, equipment placement, and instructional flow addressed \(inspection-ready PDFs\)) Tj
-50 660 Td (• [ ] Cost, procurement, and compliance artifacts present \(cost summary, spreadsheets\)) Tj
-50 648 Td (• [ ] CAD + documentation integration demonstrated \(DXF, PDF, automation scripts\)) Tj
-50 636 Td (• [ ] Evidence provided exceeds minimum course examples \(reproducible workflows, CI, typed code\)) Tj
+50 676 Td (Notes) Tj
+50 657 Td (```markdown) Tj
+50 646 Td (**Instructor Review Checklist \(TTED 719\)**) Tj
+50 635 Td (This checklist supports rapid scoring of deliverables against TTED 719 outcomes. Mark each item as Present/Not Present based on submitted documentation and artifacts.) Tj
+/F1 16 Tf
+50 616 Td (TTED719 Instructor Review Checklist \(one page\)) Tj
 /F1 10 Tf
-50 616 Td (Notes) Tj
+50 590 Td (Use this checklist while reviewing student deliverables derived from this repository.) Tj
 /F1 11 Tf
-50 605 Td (• Suggested quick check: run `Python_Workflow/scripts` and confirm regenerated PDFs match the checklist items.) Tj
+50 571 Td (• [ ] Facility planning aligned to TTED 719 outcomes \(floorplan, flow, bay layout\)) Tj
+50 559 Td (• [ ] Safety, equipment placement, and instructional flow addressed \(inspection-ready PDFs\)) Tj
+50 547 Td (• [ ] Cost, procurement, and compliance artifacts present \(cost summary, spreadsheets\)) Tj
+50 535 Td (• [ ] CAD + documentation integration demonstrated \(DXF, PDF, automation scripts\)) Tj
+50 523 Td (• [ ] Evidence provided exceeds minimum course examples \(reproducible workflows, CI, typed code\)) Tj
 /F1 10 Tf
-50 585 Td (```) Tj
+50 503 Td (Notes) Tj
+/F1 11 Tf
+50 492 Td (• Suggested quick check: run `Python_Workflow/scripts` and confirm regenerated PDFs match the checklist items.) Tj
+/F1 10 Tf
+50 472 Td (```) Tj
 ET
 endstream
 endobj
@@ -48,5 +56,5 @@ xref
 trailer
 << /Size 6 /Root 1 0 R >>
 startxref
-1366
+1842
 %%EOF
