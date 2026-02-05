@@ -1,0 +1,68 @@
+%PDF-1.4
+%����
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 3171 >>
+stream
+BT
+/F1 16 Tf
+50 740 Td (TTED 719 — Repo to Learning-Outcomes Mapping \(one-page\)) Tj
+/F1 10 Tf
+50 713 Td (Purpose) Tj
+/F1 11 Tf
+50 701 Td (• Show how this repository maps to and extends the TTED 719 course materials \(facilities, safety, lighting, cost analysis, instructional planning\).) Tj
+/F1 10 Tf
+50 680 Td (Summary \(one line\)) Tj
+/F1 11 Tf
+50 668 Td (• This repository not only contains the TTED 719 example artifacts \(plans, safety docs, lighting and cost spreadsheets\), it operationalizes them with CAD assets, reproducible scripts, and instructional workflows that support teaching, assessment, and facility planning.) Tj
+/F1 10 Tf
+50 647 Td (Mapping: TTED 719 Topics → Repository Artifacts) Tj
+/F1 11 Tf
+50 635 Td (• Facilities & Layouts: Sample floorplans and CAD drawings in `Drawings/CAD` and DXF assets; scripts in `Python_Workflow/scripts` \(assemble, generate legend, append PDF\) automate layout generation and export for instructor/student use.) Tj
+50 622 Td (• Safety & Compliance: `Documentation/` and TTED 719 PDFs supply guidance; repo includes scripts that produce consolidated PDFs and inspection-ready reports, enabling rapid safety-review iterations.) Tj
+50 609 Td (• Lighting & Environmental Design: TTED files \(lighting PDFs, footcandle charts\) are present under `Python_Workflow/TTED 719`; the repo’s extractor and PDF tools make it easy to extract, compare, and include these recommendations in generated facility documents.) Tj
+50 596 Td (• Equipment & Costing: Spreadsheets in `TTED 719` match the repository’s equipment and cost lists; Python scripts generate planning-level PDFs from CSV/XLSX, providing traceable cost calculations and printable outputs.) Tj
+50 583 Td (• Instructional Planning & Syllabi: Course syllabus and presentation files are present; the repo adds automation to convert input CSV/XLSX into instructor-facing handouts and slides.) Tj
+/F1 10 Tf
+50 562 Td (Added Value \(where this repo exceeds TTED 719\)) Tj
+/F1 11 Tf
+50 550 Td (• Executable workflows: Scripts turn static artifacts into repeatable deliverables \(DXF, PDF, cost reports\).) Tj
+50 537 Td (• Traceability & Reproducibility: Typed Python, CI checks, and documented run steps ensure educators can reproduce outputs reliably.) Tj
+50 524 Td (• Teaching Opportunity: The codebase itself is an instructional resource—students can learn CAD automation, data-driven planning, and dev-ops practices integrated into facility design.) Tj
+/F1 10 Tf
+50 503 Td (How instructors can use this repo \(quick ideas\)) Tj
+/F1 11 Tf
+50 491 Td (• Re-run `Python_Workflow/scripts` to regenerate PDFs and drawings when adjusting equipment lists or layout decisions.) Tj
+50 478 Td (• Use `TTED719_mapping.md` \(this file\) as a one-page justification in course proposals, portfolios, or accreditation materials.) Tj
+50 465 Td (• Run the `tted719_extract.py` extractor to create an instructor-facing index of all example files for quicker review.) Tj
+/F1 10 Tf
+50 444 Td (Next steps \(optional\)) Tj
+/F1 11 Tf
+50 432 Td (• Produce a slide or printable handout version of this mapping \(PDF\) — say "yes" to generate it.) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000218 00000 n 
+0000000344 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+3566
+%%EOF
