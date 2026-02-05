@@ -6,15 +6,16 @@ to support a reviewer-eye quality check.
 
 import os
 import re
+from typing import Any
 
 import ezdxf
 
 
-def analyze(path):
+def analyze(path: str) -> dict[str, Any]:
     doc = ezdxf.readfile(path)
-    layers = set()
-    type_counts = {}
-    texts = []
+    layers: set[str] = set()
+    type_counts: dict[str, int] = {}
+    texts: list[str] = []
     for e in doc.modelspace():
         layers.add(e.dxf.layer)
         t = e.dxftype()

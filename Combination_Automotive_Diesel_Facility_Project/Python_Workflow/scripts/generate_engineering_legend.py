@@ -68,7 +68,7 @@ LAYER_COLORS = {
 
 
 def read_categories(path):
-    cats = []
+    cats: list[str] = []
     if not os.path.exists(path):
         return cats
     with open(path, newline="", encoding="utf-8") as fh:
@@ -81,7 +81,7 @@ def read_categories(path):
 
 
 def read_struct(path):
-    rows = []
+    rows: list[dict[str, Any]] = []
     if not os.path.exists(path):
         return rows
     with open(path, newline="", encoding="utf-8") as fh:
@@ -92,7 +92,7 @@ def read_struct(path):
 
 
 def read_mech(path):
-    rows = []
+    rows: list[dict[str, Any]] = []
     if not os.path.exists(path):
         return rows
     with open(path, newline="", encoding="utf-8") as fh:
@@ -103,7 +103,7 @@ def read_mech(path):
 
 
 def read_elec(path):
-    rows = []
+    rows: list[dict[str, Any]] = []
     if not os.path.exists(path):
         return rows
     with open(path, newline="", encoding="utf-8") as fh:

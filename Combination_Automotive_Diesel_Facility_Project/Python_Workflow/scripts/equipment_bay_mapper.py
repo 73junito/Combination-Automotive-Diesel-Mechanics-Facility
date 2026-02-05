@@ -11,7 +11,7 @@ import csv
 import os
 from collections import namedtuple
 from types import ModuleType
-from typing import Any, Optional, TypedDict, cast, List
+from typing import Any, List, Optional, TypedDict, cast
 
 import pandas as pd
 
@@ -54,7 +54,7 @@ def collect_bays():
         raise RuntimeError("ezdxf not installed")
     doc = ezdxf.readfile(DXF_PATH)
     msp = doc.modelspace()
-    bays = []
+    bays: List[Bay] = []
     for e in msp:
         # check lightweight polylines (LWPOLYLINE) and polyline types
         etype = e.dxftype()
@@ -95,7 +95,7 @@ def collect_bays():
     # find text labels near each bay
     for i, b in enumerate(bays):
         # search for TEXT or MTEXT within bay bbox
-        labels = []
+        labels: List[str] = []
         for e in msp.query("TEXT MTEXT"):
             lx = e.dxf.insert[0] if hasattr(e.dxf, "insert") else None
             ly = e.dxf.insert[1] if hasattr(e.dxf, "insert") else None
@@ -119,7 +119,9 @@ def expand_equipment(csv_path: str) -> List[MappingRow]:
     return rows
 
 
-def assign_units_to_bays(bays: list[Bay], equipment_units: list[MappingRow]) -> list[dict[str, Any]]:
+def assign_units_to_bays(
+    bays: list[Bay], equipment_units: list[MappingRow]
+) -> list[dict[str, Any]]:
     assignments = []
     if not bays:
         raise RuntimeError("No bays found in DXF")

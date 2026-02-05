@@ -67,7 +67,7 @@ COLOR_PALETTE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 def load_categories(csv_path):
     """Load categories from CSV at ``csv_path`` and return unique list."""
-    cats = []
+    cats: list[str] = []
     if not os.path.exists(csv_path):
         return cats
     with open(csv_path, newline="", encoding="utf-8") as fh:
@@ -81,7 +81,7 @@ def load_categories(csv_path):
 
 def build_color_map(categories):
     """Return a mapping of category -> AutoCAD color index."""
-    cmap = {}
+    cmap: dict[str, int] = {}
     for i, cat in enumerate(categories):
         idx = COLOR_PALETTE[i % len(COLOR_PALETTE)]
         cmap[cat] = idx

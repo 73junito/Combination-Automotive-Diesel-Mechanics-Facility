@@ -166,7 +166,7 @@ def main(argv=None):
     pdf_path = Path(args.pdf)
     dxf_path = Path(args.dxf)
 
-    out = {}
+    out: dict[str, Any] = {}
     out["pdf_exists"] = pdf_path.exists()
     out["dxf_exists"] = dxf_path.exists()
 
@@ -198,10 +198,8 @@ def main(argv=None):
         # Extraction can fail due to file I/O or PDF read errors
         try:
             text = extract_pdf_text(pdf_path)
-        except PdfReadError as e:
-            logger.error("failed reading PDF (PdfReadError): %s", e)
-            return EXIT_VALIDATION
-        except OSError as e:
+        except Exception as e:
+            # Could be PdfReadError, OSError, or other parsing error; log and treat as validation failure
             logger.error("failed extracting PDF text: %s", e)
             return EXIT_VALIDATION
         out["pdf_text_snippet"] = text[:1200]

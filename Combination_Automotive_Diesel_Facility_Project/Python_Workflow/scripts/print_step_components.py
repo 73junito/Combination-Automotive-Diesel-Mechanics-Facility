@@ -16,7 +16,7 @@ STEP = os.path.join(
 )
 
 
-def main(path=STEP):
+def main(path: str = STEP) -> int:
     if not os.path.exists(path):
         print("STEP not found:", path)
         return 2
@@ -32,11 +32,17 @@ def main(path=STEP):
             print("Failed to import STEP:", e)
             return 3
 
-    print(f"Found {len(objs) if objs is not None else 0} objects in assembly")
+    # if there are no objects, exit early to avoid iterating over None
+    if not objs:
+        print("No objects found in assembly")
+        return 0
+
+    print(f"Found {len(objs)} objects in assembly")
     for i, obj in enumerate(objs):
         name = getattr(obj, "name", None)
         meta = getattr(obj, "metadata", None)
         print(i, name, meta)
+    return 0
 
 
 if __name__ == "__main__":

@@ -23,7 +23,7 @@ import os
 import runpy
 import sys
 from types import ModuleType
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any, Optional, cast
 
 # module-level placeholders so mypy understands conditional imports
 ezdxf: Optional[ModuleType] = None
@@ -287,13 +287,21 @@ def main(
     # Try STEP CAF export first (preferred) so product names are preserved
     if STEPCAFControl_Writer is not None:
         try:
+            # cast OCP symbols to Any locally so mypy won't complain about union|None
+            XCAFApp = cast(Any, XCAFApp_Application)
+            TDocStd = cast(Any, TDocStd_Document)
+            TCollectionAscii = cast(Any, TCollection_AsciiString)
+            XCAFShapeTool = cast(Any, XCAFDoc_DocumentTool_ShapeTool)
+            TDataStd = cast(Any, TDataStd_Name)
+            TCollectionExtended = cast(Any, TCollection_ExtendedString)
+            WriterCls = cast(Any, STEPCAFControl_Writer)
 
-            def export_step_caf(parts_list, target_path):
-                app = XCAFApp_Application.GetApplication()
-                doc = TDocStd_Document(TCollection_AsciiString("python"))
+            def export_step_caf(parts_list: list[Any], target_path: str) -> None:
+                app = XCAFApp.GetApplication()
+                doc = TDocStd(TCollectionAscii("python"))
                 # Create a new XDE document (MDTV-Standard style)
-                app.NewDocument(TCollection_AsciiString("MDTV-Standard"), doc)
-                shape_tool = XCAFDoc_DocumentTool_ShapeTool(doc.Main())
+                app.NewDocument(TCollectionAscii("MDTV-Standard"), doc)
+                shape_tool = XCAFShapeTool(doc.Main())
                 labels = []
                 for idx, (blk, model_key, p, use_rot, z) in enumerate(parts_list):
                     try:
@@ -303,17 +311,15 @@ def main(
                     lab = shape_tool.AddShape(shp)
                     # set the product/name
                     try:
-                        TDataStd_Name.Set(
-                            lab, TCollection_ExtendedString(f"{model_key}_{blk}")
-                        )
+                        TDataStd.Set(lab, TCollectionExtended(f"{model_key}_{blk}"))
                     except Exception:
                         pass
                     labels.append(lab)
                 # initialize writer and transfer document
-                writer = STEPCAFControl_Writer()
+                writer = WriterCls()
                 try:
                     # Transfer XDE document to STEP writer
-                    ok = writer.Transfer(doc, STEPCAFControl_Writer.Mode())
+                    ok = writer.Transfer(doc, WriterCls.Mode())
                 except Exception:
                     try:
                         ok = writer.Transfer(doc)

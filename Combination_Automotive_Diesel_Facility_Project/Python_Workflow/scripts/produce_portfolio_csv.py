@@ -7,7 +7,7 @@ Produce a portfolio-ready CSV combining bay geometry, assigned items, and costs.
 
 import os
 from types import ModuleType
-from typing import Any, Optional, TypedDict, cast, List
+from typing import Any, List, Optional, TypedDict, cast
 
 import pandas as pd
 

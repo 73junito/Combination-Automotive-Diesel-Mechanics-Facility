@@ -33,9 +33,9 @@ TEXT_HEIGHT = 3.0
 COLOR_PALETTE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
-def load_mapping(path):
-    mapping = {}
-    categories = []
+def load_mapping(path: str) -> tuple[dict[str, str], list[str]]:
+    mapping: dict[str, str] = {}
+    categories: list[str] = []
     if not os.path.exists(path):
         return mapping, categories
     with open(path, newline="", encoding="utf-8") as fh:

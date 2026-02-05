@@ -9,7 +9,7 @@ Write equipment labels into DXF based on equipment_bay_mapping.csv.
 import os
 from collections import defaultdict
 from types import ModuleType
-from typing import Any, Optional, TypedDict, cast, List
+from typing import Any, List, Optional, TypedDict, cast
 
 # annotate module variable so mypy knows this may be None when ezdxf
 ezdxf: Optional[ModuleType] = None
@@ -59,7 +59,7 @@ def bbox_from_points(points):
 
 def collect_bays_from_dxf(doc):
     msp = doc.modelspace()
-    bays = []
+    bays: List["Bay"] = []
     for e in msp:
         etype = e.dxftype()
         layer = getattr(e.dxf, "layer", "")
@@ -110,7 +110,12 @@ def write_updated_mapping(df, csv_out, xlsx_out):
         df.to_excel(writer, sheet_name="Mapping", index=False)
 
 
-def place_labels(doc, bays, mapping_df, text_layer="TEXT_LABELS"):
+def place_labels(
+    doc: Any,
+    bays: List["Bay"],
+    mapping_df: "pd.DataFrame",
+    text_layer: str = "TEXT_LABELS",
+) -> Any:
     msp = doc.modelspace()
     # ensure label layer exists with chosen color
     if LABEL_LAYER not in doc.layers:
@@ -154,7 +159,9 @@ def main():
     # add EquipID if missing
     if "EquipID" not in df.columns:
         df["EquipID"] = [f"E{str(i + 1).zfill(3)}" for i in range(len(df))]
-    # open dxf
+    # open dxf (ezdxf module is annotated as Optional[ModuleType] above)
+    assert ezdxf is not None, "ezdxf module is required but not available"
+    # now safe to call into ezdxf
     doc = ezdxf.readfile(DXF_IN)
     bays = collect_bays_from_dxf(doc)
     # place labels

@@ -1,6 +1,7 @@
 import os
 import struct
 from pathlib import Path
+from typing import Any
 
 MODELS = ["bay", "workbench", "two_post_lift"]
 ROOT = Path(__file__).resolve().parent.parent
@@ -96,7 +97,7 @@ def parse_stl_bbox(path):
 
 
 def main():
-    rows = []
+    rows: list[dict[str, Any]] = []
     for name in MODELS:
         step_path = OUT_STEP / f"{name}.step"
         stl_path = OUT_STL / f"{name}.stl"
