@@ -10,8 +10,8 @@ Map equipment items from equipment CSVs to DXF bay locations.
 import csv
 import os
 from collections import namedtuple
-from typing import Any, Optional
 from types import ModuleType
+from typing import Any, Optional
 
 import pandas as pd
 
