@@ -35,3 +35,15 @@ Folder contents verified as complete for submission. All required facility plans
 * Canonical CAD sources: `training_facility_plan_layered.dxf` (2D), `outputs/auto_diesel_facility.blend` (3D)
 
 All listed artifacts are present, non-empty, and reproducible via documented scripts in `README.md`.
+
+**Discipline DXFs are exported “views” filtered from the master coordination drawing (`training_facility_plan_layered_mep.dxf`). The master DXF is authoritative (architecture + equipment + MEP layers + labels); discipline-only DXFs are provided for instruction/inspection convenience and include per-file audits (`*.audit.txt`).**
+
+Audit summaries (written files included):
+
+* `disciplines/arch_only.dxf` (+ audit)
+* `disciplines/elec_only.dxf` (+ audit)
+* `disciplines/mech_only.dxf` (+ audit)
+* `disciplines/plumb_only.dxf` (+ audit)
+* `disciplines/fire_only.dxf` (+ audit)
+* `disciplines/equip_only.dxf` (+ audit)
+* Master: `training_facility_plan_layered_mep.dxf` (+ audit)
