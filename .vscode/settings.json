@@ -39,7 +39,7 @@
   },
   "python.sortImports.path": "${workspaceFolder}/.venv/Scripts/isort.exe",
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": "explicit"
   },
   "python.formatting.blackArgs": [
     "--line-length",

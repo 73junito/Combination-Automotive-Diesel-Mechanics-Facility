@@ -22,18 +22,20 @@ import math
 import os
 import runpy
 import sys
-from typing import Any, Optional
+from types import ModuleType
+from typing import TYPE_CHECKING, Any, Optional
 
 # module-level placeholders so mypy understands conditional imports
-ezdxf: Optional[Any] = None
-cq: Optional[Any] = None
-STEPCAFControl_Writer: Optional[Any] = None
-TDocStd_Document: Optional[Any] = None
-XCAFApp_Application: Optional[Any] = None
-TCollection_AsciiString: Optional[Any] = None
-XCAFDoc_DocumentTool_ShapeTool: Optional[Any] = None
-TDataStd_Name: Optional[Any] = None
-TCollection_ExtendedString: Optional[Any] = None
+ezdxf: Optional[ModuleType] = None
+cq: Optional[ModuleType] = None
+# OCP / pythonocc types are classes from binary packages; use object for narrowness
+STEPCAFControl_Writer: Optional[object] = None
+TDocStd_Document: Optional[object] = None
+XCAFApp_Application: Optional[object] = None
+TCollection_AsciiString: Optional[object] = None
+XCAFDoc_DocumentTool_ShapeTool: Optional[object] = None
+TDataStd_Name: Optional[object] = None
+TCollection_ExtendedString: Optional[object] = None
 
 try:
     import ezdxf as _ezdxf

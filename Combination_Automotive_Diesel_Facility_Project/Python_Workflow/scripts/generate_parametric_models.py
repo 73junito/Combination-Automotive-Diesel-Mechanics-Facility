@@ -12,7 +12,11 @@ Run in a Python environment with CadQuery available.
 import argparse
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from types import ModuleType
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple
+
+if TYPE_CHECKING:
+    import cadquery as cq
 
 try:
     import cadquery as cq
@@ -29,7 +33,7 @@ from models.workbench import make_workbench
 
 
 def export_model(
-    obj: Any, out_dir: Path, name: str, fmt: str = "STEP"
+    obj: "cq.Workplane", out_dir: Path, name: str, fmt: str = "STEP"
 ) -> Optional[str]:
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir.joinpath(f"{name}.{fmt.lower()}")
@@ -47,7 +51,7 @@ def make_models(export_stl: bool = False) -> Dict[str, List[str]]:
     out_step = root.joinpath("outputs", "models")
     out_stl = root.joinpath("outputs", "models", "stl") if export_stl else None
 
-    models: List[Tuple[Any, str]] = [
+    models: List[Tuple["cq.Workplane", str]] = [
         (make_bay(), "bay"),
         (make_workbench(), "workbench"),
         (make_two_post_lift(), "two_post_lift"),

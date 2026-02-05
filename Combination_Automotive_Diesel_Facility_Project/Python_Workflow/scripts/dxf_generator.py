@@ -1,9 +1,10 @@
 import os
 from dataclasses import dataclass
-from typing import Any, List, Optional
+from types import ModuleType
+from typing import TYPE_CHECKING, Any, List, Optional
 
 # annotate module variable so mypy knows this may be None when ezdxf
-ezdxf: Optional[Any] = None
+ezdxf: Optional[ModuleType] = None
 try:
     import ezdxf as _ezdxf
 
