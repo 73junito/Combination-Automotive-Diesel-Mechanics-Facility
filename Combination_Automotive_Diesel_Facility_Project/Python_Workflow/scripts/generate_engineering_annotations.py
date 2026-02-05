@@ -12,9 +12,11 @@ Notes: uses conservative placeholder assumptions; each CSV contains an `Assumpti
 import csv
 import os
 from typing import Any, Optional
+from types import ModuleType
+from collections import defaultdict
 
 # annotate module variable so mypy knows this may be None when ezdxf
-ezdxf: Optional[Any] = None
+ezdxf: Optional[ModuleType] = None
 try:
     import ezdxf as _ezdxf
 
@@ -58,8 +60,8 @@ MECH_AIRFLOW = {
 DEFAULT_SLAB_IN = 8.0
 
 
-def read_mapping(path):
-    rows = []
+def read_mapping(path: str) -> list[dict[str, str]]:
+    rows: list[dict[str, str]] = []
     if not os.path.exists(path):
         return rows
     with open(path, newline="", encoding="utf-8") as fh:
@@ -69,14 +71,14 @@ def read_mapping(path):
     return rows
 
 
-def group_by_bay(rows):
-    bybay = defaultdict(list)
+def group_by_bay(rows: list[dict[str, str]]) -> dict[str, list[dict[str, str]]]:
+    bybay: defaultdict = defaultdict(list)
     for r in rows:
         bybay[r["BayName"]].append(r)
     return bybay
 
 
-def write_csv_structural(path, bay_summaries):
+def write_csv_structural(path: str, bay_summaries: dict[str, dict[str, Any]]) -> None:
     with open(path, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(
@@ -102,7 +104,7 @@ def write_csv_structural(path, bay_summaries):
             )
 
 
-def write_csv_mech(path, bay_mech):
+def write_csv_mech(path: str, bay_mech: dict[str, list[dict[str, Any]]]) -> None:
     with open(path, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(["BayName", "ServiceType", "Value", "Units", "Assumptions"])
@@ -113,7 +115,7 @@ def write_csv_mech(path, bay_mech):
                 )
 
 
-def write_csv_elec(path, elec_rows):
+def write_csv_elec(path: str, elec_rows: list[dict[str, Any]]) -> None:
     with open(path, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(
@@ -132,7 +134,13 @@ def write_csv_elec(path, elec_rows):
             )
 
 
-def annotate_dxf(dxf_in, dxf_out, bay_summaries, bay_mech, elec_rows):
+def annotate_dxf(
+    dxf_in: str,
+    dxf_out: str,
+    bay_summaries: dict[str, dict[str, Any]],
+    bay_mech: dict[str, list[dict[str, Any]]],
+    elec_rows: list[dict[str, Any]],
+) -> None:
     if ezdxf is None:
         print("ezdxf not available; skipping DXF annotation")
         return
@@ -183,7 +191,7 @@ def annotate_dxf(dxf_in, dxf_out, bay_summaries, bay_mech, elec_rows):
     print("Wrote annotated DXF:", dxf_out)
 
 
-def main():
+def main() -> None:
     rows = read_mapping(MAPPING_CSV)
     if not rows:
         print("No mapping rows found at", MAPPING_CSV)

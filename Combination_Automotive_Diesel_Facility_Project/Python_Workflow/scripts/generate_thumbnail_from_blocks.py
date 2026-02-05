@@ -5,9 +5,10 @@ Saves `facility_layout_thumbnail.png` to the outputs folder.
 
 import os
 from typing import Any, Optional
+from types import ModuleType
 
 # annotate ezdxf so mypy sees it may be None
-ezdxf: Optional[Any] = None
+ezdxf: Optional[ModuleType] = None
 try:
     import ezdxf as _ezdxf
 
@@ -39,7 +40,7 @@ ACAD_COLOR_RGB = {
 }
 
 
-def draw_polylines(ax, entities):
+def draw_polylines(ax: Any, entities: Any) -> None:
     for e in entities:
         t = e.dxftype()
         try:
@@ -61,7 +62,7 @@ def draw_polylines(ax, entities):
             continue
 
 
-def main():
+def main() -> None:
     if ezdxf is None:
         print("ezdxf or matplotlib not installed")
         return

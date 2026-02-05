@@ -8,13 +8,14 @@ Export combined portfolio to a single PDF:
 import io
 import os
 from typing import Any, Optional
+from types import ModuleType
 
 import matplotlib.pyplot as plt
 import pandas as pd
 from PIL import Image
 
 # annotate ezdxf so mypy understands conditional import
-ezdxf: Optional[Any] = None
+ezdxf: Optional[ModuleType] = None
 try:
     import ezdxf as _ezdxf
 
@@ -37,7 +38,7 @@ PDF_OUT = os.path.join(OUT, "portfolio_combined.pdf")
 MAPPING_CSV = os.path.join(OUT, "equipment_bay_mapping_labeled.csv")
 
 
-def make_thumbnail(dxf_path, mapping_csv, out_png):
+def make_thumbnail(dxf_path: str, mapping_csv: str, out_png: str) -> str:
     if ezdxf is None:
         raise RuntimeError("ezdxf is required to read DXF")
     doc = ezdxf.readfile(dxf_path)
@@ -108,7 +109,7 @@ def make_thumbnail(dxf_path, mapping_csv, out_png):
     return out_png
 
 
-def build_pdf(thumbnail, excel_path, chart_path, pdf_out):
+def build_pdf(thumbnail: str, excel_path: str, chart_path: str, pdf_out: str) -> str:
     styles = getSampleStyleSheet()
     doc = SimpleDocTemplate(pdf_out, pagesize=letter)
     story = []
@@ -156,7 +157,7 @@ def build_pdf(thumbnail, excel_path, chart_path, pdf_out):
     return pdf_out
 
 
-def main():
+def main() -> None:
     thumb = make_thumbnail(DXF_LABELED, MAPPING_CSV, THUMB_PNG)
     pdf = build_pdf(thumb, PORTFOLIO_XLSX, CHART_PNG, PDF_OUT)
     print("Wrote PDF:", pdf)
