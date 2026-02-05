@@ -1,0 +1,52 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 972 >>
+stream
+BT
+/F1 10 Tf
+50 740 Td (```markdown) Tj
+/F1 16 Tf
+50 729 Td (TTED719 Instructor Review Checklist \(one page\)) Tj
+/F1 10 Tf
+50 703 Td (Use this checklist while reviewing student deliverables derived from this repository.) Tj
+/F1 11 Tf
+50 684 Td (‚Ä¢ [ ] Facility planning aligned to TTED 719 outcomes \(floorplan, flow, bay layout\)) Tj
+50 672 Td (‚Ä¢ [ ] Safety, equipment placement, and instructional flow addressed \(inspection-ready PDFs\)) Tj
+50 660 Td (‚Ä¢ [ ] Cost, procurement, and compliance artifacts present \(cost summary, spreadsheets\)) Tj
+50 648 Td (‚Ä¢ [ ] CAD + documentation integration demonstrated \(DXF, PDF, automation scripts\)) Tj
+50 636 Td (‚Ä¢ [ ] Evidence provided exceeds minimum course examples \(reproducible workflows, CI, typed code\)) Tj
+/F1 10 Tf
+50 616 Td (Notes) Tj
+/F1 11 Tf
+50 605 Td (‚Ä¢ Suggested quick check: run `Python_Workflow/scripts` and confirm regenerated PDFs match the checklist items.) Tj
+/F1 10 Tf
+50 585 Td (```) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000218 00000 n 
+0000000344 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1366
+%%EOF
