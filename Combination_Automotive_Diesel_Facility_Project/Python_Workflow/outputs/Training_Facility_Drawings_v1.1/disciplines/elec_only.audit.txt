@@ -1,0 +1,14 @@
+DXF Audit Report
+========================================
+
+Entities by type:
+  LWPOLYLINE: 23
+  TEXT: 100
+
+Entities by layer:
+  E-DATA: 1
+  E-EMERG: 2
+  E-PANEL: 1
+  E-POWER-3PH: 6
+  E-POWER-OUT: 13
+  ROOM-LABEL: 100

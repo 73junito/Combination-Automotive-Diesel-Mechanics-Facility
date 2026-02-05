@@ -1,0 +1,10 @@
+DXF Audit Report
+========================================
+
+Entities by type:
+  LWPOLYLINE: 16
+  TEXT: 100
+
+Entities by layer:
+  M-EXHAUST: 16
+  ROOM-LABEL: 100

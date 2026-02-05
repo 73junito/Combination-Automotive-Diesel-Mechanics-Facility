@@ -1,0 +1,8 @@
+DXF Audit Report
+========================================
+
+Entities by type:
+  TEXT: 100
+
+Entities by layer:
+  ROOM-LABEL: 100

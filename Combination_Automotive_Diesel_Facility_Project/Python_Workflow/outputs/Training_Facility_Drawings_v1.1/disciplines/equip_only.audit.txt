@@ -1,0 +1,17 @@
+DXF Audit Report
+========================================
+
+Entities by type:
+  LWPOLYLINE: 35
+  TEXT: 100
+
+Entities by layer:
+  EQ-ALIGN: 1
+  EQ-BATT: 1
+  EQ-CHARGE: 2
+  EQ-COMP: 1
+  EQ-FLAM: 1
+  EQ-LIFT: 16
+  EQ-TOOLBOX: 12
+  EQ-WASH: 1
+  ROOM-LABEL: 100
