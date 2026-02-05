@@ -4,8 +4,8 @@ Saves `facility_layout_thumbnail.png` to the outputs folder.
 """
 
 import os
-from typing import Any, Optional
 from types import ModuleType
+from typing import Any, Optional
 
 # annotate ezdxf so mypy sees it may be None
 ezdxf: Optional[ModuleType] = None

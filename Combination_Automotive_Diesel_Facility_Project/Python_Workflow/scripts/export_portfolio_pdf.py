@@ -7,8 +7,8 @@ Export combined portfolio to a single PDF:
 
 import io
 import os
-from typing import Any, Optional
 from types import ModuleType
+from typing import Any, Optional
 
 import matplotlib.pyplot as plt
 import pandas as pd

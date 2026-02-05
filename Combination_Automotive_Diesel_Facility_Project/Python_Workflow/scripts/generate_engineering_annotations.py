@@ -11,9 +11,9 @@ Notes: uses conservative placeholder assumptions; each CSV contains an `Assumpti
 
 import csv
 import os
-from typing import Any, Optional
-from types import ModuleType
 from collections import defaultdict
+from types import ModuleType
+from typing import Any, Optional
 
 # annotate module variable so mypy knows this may be None when ezdxf
 ezdxf: Optional[ModuleType] = None

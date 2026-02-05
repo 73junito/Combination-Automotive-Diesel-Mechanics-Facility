@@ -7,11 +7,12 @@ Produce a portfolio-ready CSV combining bay geometry, assigned items, and costs.
 
 import os
 from typing import Any, Optional
+from types import ModuleType
 
 import pandas as pd
 
 # annotate module variable so mypy knows this may be None when ezdxf
-ezdxf: Optional[Any] = None
+ezdxf: Optional[ModuleType] = None
 try:
     import ezdxf as _ezdxf
 

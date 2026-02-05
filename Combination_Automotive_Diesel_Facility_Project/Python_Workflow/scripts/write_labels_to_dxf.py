@@ -9,9 +9,10 @@ Write equipment labels into DXF based on equipment_bay_mapping.csv.
 import os
 from collections import defaultdict
 from typing import Any, Optional
+from types import ModuleType
 
 # annotate module variable so mypy knows this may be None when ezdxf
-ezdxf: Optional[Any] = None
+ezdxf: Optional[ModuleType] = None
 try:
     import ezdxf as _ezdxf
 
