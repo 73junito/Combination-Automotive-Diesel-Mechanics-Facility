@@ -9,7 +9,7 @@ Write equipment labels into DXF based on equipment_bay_mapping.csv.
 import os
 from collections import defaultdict
 from types import ModuleType
-from typing import Any, Optional
+from typing import Any, Optional, TypedDict, cast, List
 
 # annotate module variable so mypy knows this may be None when ezdxf
 ezdxf: Optional[ModuleType] = None
@@ -90,9 +90,18 @@ def collect_bays_from_dxf(doc):
     return bays
 
 
-def read_mapping(csv_path):
+def read_mapping(csv_path: str) -> "pd.DataFrame":
     df = pd.read_csv(csv_path)
     return df
+
+
+class MappingRow(TypedDict, total=False):
+    BayName: str
+    BayCX: str
+    BayCY: str
+    EquipID: str
+    Item: str
+    Category: str
 
 
 def write_updated_mapping(df, csv_out, xlsx_out):
@@ -111,9 +120,10 @@ def place_labels(doc, bays, mapping_df, text_layer="TEXT_LABELS"):
             # older ezdxf/dxf versions might require different creation; ignore if fails
             pass
     # group mapping by BayName
-    groups = defaultdict(list)
+    groups: dict[str, list[MappingRow]] = defaultdict(list)
     for _, row in mapping_df.iterrows():
-        groups[row["BayName"]].append(row)
+        rowd = cast(MappingRow, row.to_dict())
+        groups[rowd.get("BayName", "")].append(rowd)
     # for each bay, compute positions across width
     for b in bays:
         items = groups.get(b.name, [])
@@ -131,7 +141,7 @@ def place_labels(doc, bays, mapping_df, text_layer="TEXT_LABELS"):
             positions.append((x, y))
         # add text for each item
         for item, row in zip(items, positions):
-            label = f"{item['EquipID']} {item['Item']}"
+            label = f"{item.get('EquipID', '')} {item.get('Item', '')}"
             # write label on dedicated equipment label layer for clarity
             txt = msp.add_text(label, dxfattribs={"layer": LABEL_LAYER, "height": 2.5})
             txt.dxf.insert = row

@@ -7,7 +7,7 @@ Produce a portfolio-ready CSV combining bay geometry, assigned items, and costs.
 
 import os
 from types import ModuleType
-from typing import Any, Optional
+from typing import Any, Optional, TypedDict, cast, List
 
 import pandas as pd
 
@@ -71,6 +71,17 @@ def collect_bays_from_dxf(path):
     return bays
 
 
+class MappingRow(TypedDict, total=False):
+    BayLayer: str
+    BayName: str
+    BayCX: str
+    BayCY: str
+    EquipID: str
+    Item: str
+    Category: str
+    UnitCost: Any
+
+
 def load_mapping():
     csv_path = MAPPING_CSV_A if os.path.exists(MAPPING_CSV_A) else MAPPING_CSV_B
     if not os.path.exists(csv_path):
@@ -128,8 +139,9 @@ def build_portfolio():
 
     rows = []
     for _, row in mapping.iterrows():
-        bay_layer = row.get("BayLayer")
-        bay_name = row.get("BayName")
+        rowd = cast(MappingRow, row.to_dict())
+        bay_layer = rowd.get("BayLayer")
+        bay_name = rowd.get("BayName")
         # attempt to find bay by name; fall back to nearest cx
         bay = None
         # try exact match by BayName against mapping of bays from earlier scripts
@@ -141,7 +153,7 @@ def build_portfolio():
                 break
         # fallback match by layer and nearest center x
         try:
-            cx = float(row.get("BayCX", 0))
+            cx = float(rowd.get("BayCX", 0) or 0)
             key = (bay_layer, round(cx, 1))
             bay = bay_lookup.get(key)
         except (TypeError, ValueError):
@@ -153,30 +165,22 @@ def build_portfolio():
                     bay = b
                     break
         # assemble portfolio row
-        unit_cost = row.get("UnitCost")
+        unit_cost = rowd.get("UnitCost")
         if pd.isna(unit_cost) or unit_cost == "" or unit_cost is None:
             # try lookup by item name
             item = row.get("Item", "")
             unit_cost = costs_key.get(item, "")
         rows.append(
             {
-                "EquipID": row.get("EquipID", ""),
+                "EquipID": rowd.get("EquipID", ""),
                 "BayLayer": bay_layer,
                 "BayName": bay_name,
-                "BayCX": (
-                    row.get("BayCX", "")
-                    if "BayCX" in row
-                    else (bay["BayCX"] if bay else "")
-                ),
-                "BayCY": (
-                    row.get("BayCY", "")
-                    if "BayCY" in row
-                    else (bay["BayCY"] if bay else "")
-                ),
+                "BayCX": rowd.get("BayCX", (bay["BayCX"] if bay else "")),
+                "BayCY": rowd.get("BayCY", (bay["BayCY"] if bay else "")),
                 "BayWidth": bay["BayWidth"] if bay else "",
                 "BayHeight": bay["BayHeight"] if bay else "",
-                "Item": row.get("Item", ""),
-                "Category": row.get("Category", ""),
+                "Item": rowd.get("Item", ""),
+                "Category": rowd.get("Category", ""),
                 "UnitCost": unit_cost,
             }
         )

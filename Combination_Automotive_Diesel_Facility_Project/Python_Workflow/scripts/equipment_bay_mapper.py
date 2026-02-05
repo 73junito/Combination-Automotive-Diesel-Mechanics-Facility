@@ -11,7 +11,7 @@ import csv
 import os
 from collections import namedtuple
 from types import ModuleType
-from typing import Any, Optional
+from typing import Any, Optional, TypedDict, cast, List
 
 import pandas as pd
 
@@ -31,6 +31,16 @@ ESS_CSV = os.path.join(OUT, "essential_equipment.csv")
 NON_CSV = os.path.join(OUT, "nonessential_equipment.csv")
 
 Bay = namedtuple("Bay", ["layer", "name", "minx", "miny", "maxx", "maxy", "cx", "cy"])
+
+
+class MappingRow(TypedDict, total=False):
+    BayLayer: str
+    BayName: str
+    BayCX: str
+    BayCY: str
+    EquipID: str
+    Item: str
+    Category: str
 
 
 def bbox_from_points(points):
@@ -98,18 +108,18 @@ def collect_bays():
     return bays
 
 
-def expand_equipment(csv_path):
-    rows = []
+def expand_equipment(csv_path: str) -> List[MappingRow]:
+    rows: List[MappingRow] = []
     with open(csv_path, newline="", encoding="utf-8") as fh:
         reader = csv.DictReader(fh)
         for r in reader:
             qty = int(float(r.get("Quantity", 1)))
             for i in range(qty):
-                rows.append(r.copy())
+                rows.append(cast(MappingRow, r.copy()))
     return rows
 
 
-def assign_units_to_bays(bays, equipment_units):
+def assign_units_to_bays(bays: list[Bay], equipment_units: list[MappingRow]) -> list[dict[str, Any]]:
     assignments = []
     if not bays:
         raise RuntimeError("No bays found in DXF")
@@ -121,9 +131,9 @@ def assign_units_to_bays(bays, equipment_units):
             "BayName": bay.name,
             "BayCX": bay.cx,
             "BayCY": bay.cy,
-            "Item": unit.get("Item", ""),
-            "Category": unit.get("Category", ""),
-            "UnitCost": unit.get("UnitCost", ""),
+            "Item": unit.get("Item", "") if isinstance(unit, dict) else "",
+            "Category": unit.get("Category", "") if isinstance(unit, dict) else "",
+            "UnitCost": unit.get("UnitCost", "") if isinstance(unit, dict) else "",
         }
         assignments.append(out)
     return assignments

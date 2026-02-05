@@ -13,7 +13,7 @@ import csv
 import os
 from collections import defaultdict
 from types import ModuleType
-from typing import Any, Optional, List, Dict, TypedDict, cast
+from typing import Any, Dict, List, Optional, TypedDict, cast
 
 
 class MappingRow(TypedDict, total=False):
@@ -38,6 +38,7 @@ class MechService(TypedDict, total=False):
     value: float
     units: str
     assumption: str
+
 
 # annotate module variable so mypy knows this may be None when ezdxf
 ezdxf: Optional[ModuleType] = None
