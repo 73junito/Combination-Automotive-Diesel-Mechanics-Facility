@@ -17,6 +17,7 @@
     }
   },
   "terminal.integrated.defaultProfile.windows": "Developer PowerShell (vswhere)",
+  "terminal.integrated.shellIntegration.enabled": true,
   "python.analysis.autoFormatStrings": true,
   "python.analysis.autoImportCompletions": true,
   "editor.defaultFormatter": "10nates.ollama-autocoder",
