@@ -13,6 +13,11 @@ Parameters:
   -Force       Overwrite existing zip
 #>
 
+# Safety guard: refuse to run in prod kube context when scripts are destructive
+if ($env:KUBE_CONTEXT -match 'prod') {
+    throw 'Refusing to run in prod context'
+}
+
 param(
     [string]$OutputDir = "./outputs",
     [string]$ZipName = "visuals_bundle.zip",

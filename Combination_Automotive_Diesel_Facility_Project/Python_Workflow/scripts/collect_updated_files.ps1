@@ -1,3 +1,7 @@
+if ($env:KUBE_CONTEXT -match 'prod') {
+    throw 'Refusing to run in prod context'
+}
+
 param(
     [string]$SourceDir = "..\..\Python_Workflow\outputs",
     [string]$TargetDir = ".\outputs",

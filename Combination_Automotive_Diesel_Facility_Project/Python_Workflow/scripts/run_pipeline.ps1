@@ -24,6 +24,11 @@ Parameters:
     -CollectForce Switch   Overwrite existing collected files/zip when collecting
 #>
 
+# Safety guard: refuse to run in prod kube context when scripts are destructive
+if ($env:KUBE_CONTEXT -match 'prod') {
+    throw 'Refusing to run in prod context'
+}
+
 param(
     [Parameter(Mandatory=$true)][string]$DxfPath,
     [string]$OutputDir = "./outputs",
