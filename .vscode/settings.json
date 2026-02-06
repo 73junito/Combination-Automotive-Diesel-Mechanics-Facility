@@ -44,5 +44,38 @@
   "python.formatting.blackArgs": [
     "--line-length",
     "88"
-  ]
+  ],
+  "autoApprove": {
+    "git add": true,
+    "git status": true,
+    "git rev-parse": true,
+    "kubectl get": true,
+    "kubectl logs": true,
+    "python": true,
+    "npx": true,
+    "pnpm": true,
+    "npm run build": true,
+    "git push origin main": {
+      "approve": false
+    },
+    "/^kubectl delete .*$/": {
+      "approve": false
+    },
+    "/^git push origin (feature|fix|chore|ci|k8s)\\/.*$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^git push origin --tags$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^kubectl delete .* -n (dev|staging)$/": {
+      "approve": true,
+      "matchCommandLine": true
+    },
+    "/^kubectl delete .* --namespace=(dev|staging)$/": {
+      "approve": true,
+      "matchCommandLine": true
+    }
+  }
 }
