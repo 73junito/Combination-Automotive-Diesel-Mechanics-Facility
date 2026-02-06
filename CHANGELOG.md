@@ -14,3 +14,7 @@ Highlights:
 - Unit tests and CI: added pytest tests for CLI behavior and a GitHub Actions workflow to run tests on PRs and pushes.
 
 Full details: see the merged PR `enhance/auto_drawing_cli` which contains the implementation and tests.
+
+### Unreleased
+
+- Scoped workspace autoApprove improvements: allow release/* branch pushes, -n=dev shortcuts, and prod PowerShell guards
