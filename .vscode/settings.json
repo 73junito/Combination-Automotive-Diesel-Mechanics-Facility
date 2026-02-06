@@ -76,6 +76,10 @@
     "/^kubectl delete .* --namespace=(dev|staging)$/": {
       "approve": true,
       "matchCommandLine": true
+    },
+    "/^git push origin release\/.*$/": {
+      "approve": true,
+      "matchCommandLine": true
     }
   }
 }

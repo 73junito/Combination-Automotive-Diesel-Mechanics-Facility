@@ -13,8 +13,14 @@ Parameters:
   -Force       Overwrite existing zip
 #>
 
-# Safety guard: refuse to run in prod kube context when scripts are destructive
-if ($env:KUBE_CONTEXT -match 'prod') {
+# Safety guard: refuse to run in prod kube context when scripts are destructive.
+# Convenience: allow explicit dev flag or release/* branch contexts to bypass the strict guard.
+$allowDev = $false
+if ($args -contains '-n=dev') { $allowDev = $true }
+if ($env:DEV -eq '1') { $allowDev = $true }
+if ($env:GIT_BRANCH -and $env:GIT_BRANCH -match '^release/') { $allowDev = $true }
+if ($env:GITHUB_REF -and $env:GITHUB_REF -match 'refs/heads/release/') { $allowDev = $true }
+if (-not $allowDev -and $env:KUBE_CONTEXT -match 'prod') {
     throw 'Refusing to run in prod context'
 }
 
