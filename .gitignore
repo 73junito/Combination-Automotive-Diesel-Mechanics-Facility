@@ -1,21 +1,40 @@
-﻿# Ignore generated outputs and large binary artifacts
-# Generated outputs (do not commit)
-**/outputs/
-**/outputs/**
+# Visual Studio IDE state files
+.vs/
 
-# Common generated CAD/preview artifacts (belt + suspenders)
-*.dxf
-*.step
-*.stp
-*.svg
-*.png
-*.pdf
-*.zip
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Python virtualenvs
-.venv/
+# Virtual environments
+venv/
+ENV/
+env/
 
-# Editor / OS files
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
 .DS_Store
 Thumbs.db
-/.vs/
