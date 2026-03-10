@@ -20,8 +20,11 @@ __pycache__/
 .tmp/
 outputs/
 Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/
+# Keep generated previews out of the repo (CI will produce previews)
+Drawings/Previews/
 *.pdf
-*.png
+# PNGs may be useful in the repo, but exclude generated previews folder above
+# *.png
 *.svg
 *.dxf
 *.glb
