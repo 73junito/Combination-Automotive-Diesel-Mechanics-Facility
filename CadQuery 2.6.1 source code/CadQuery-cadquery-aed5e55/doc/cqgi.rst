@@ -73,7 +73,7 @@ run code like this::
 
 The :py:meth:`cadquery.cqgi.parse()` method returns a :py:class:`cadquery.cqgi.CQModel` object.
 
-The `metadata`p property of the object contains a `cadquery.cqgi.ScriptMetaData` object, which can be used to discover the
+The `metadata` property of the object contains a `cadquery.cqgi.ScriptMetaData` object which can be used to discover the
 user parameters available. This is useful if the execution environment would like to present a GUI to allow the user to change the 
 model parameters.  Typically, after collecting new values, the environment will supply them in the build() method.
 
