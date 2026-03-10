@@ -1,0 +1,58 @@
+{
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": "Draft Release Cleanup Summary"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Retention:* keep 3 per PR \u00b7 delete drafts older than 14 days"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "This cleanup keeps the repository tidy and prevents clutter from automated PR runs. See <https://github.com/73junito/Combination-Automotive-Diesel-Mechanics-Facility/blob/chore/types-mypy-py311/Combination_Automotive_Diesel_Facility_Project/Python_Workflow/README.md|Cleanup docs> for details."
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*Summary:* 2 draft releases deleted"
+      }
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "<https://github.com/example/repo/releases/tag/mep-loadmap-pr-101-run-1|PR #101 \u2013 run 1> \u2013 Draft preview for PR #101 (created 2026-03-10T05:34:27.092356Z)\nAssets: <https://github.com/example/repo/releases/tag/mep-loadmap-pr-101-run-1/assets/1|asset-1.png> \u00b7 <https://github.com/example/repo/releases/tag/mep-loadmap-pr-101-run-1/assets/2|asset-2.png> \u00b7 <https://github.com/example/repo/releases/tag/mep-loadmap-pr-101-run-1/assets/3|asset-3.png>"
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "<https://github.com/example/repo/releases/tag/mep-loadmap-pr-102-run-2|PR #102 \u2013 run 2> \u2013 Draft preview for PR #102 (created 2026-03-10T05:34:27.092356Z)\nAssets: <https://github.com/example/repo/releases/tag/mep-loadmap-pr-102-run-2/assets/1|asset-1.png> \u00b7 <https://github.com/example/repo/releases/tag/mep-loadmap-pr-102-run-2/assets/2|asset-2.png> \u00b7 <https://github.com/example/repo/releases/tag/mep-loadmap-pr-102-run-2/assets/3|asset-3.png>"
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "mrkdwn",
+          "text": "Repository: 73junito/Combination-Automotive-Diesel-Mechanics-Facility \u2022 Workflow: cleanup-draft-releases \u2022 Run: TEST-LOCAL"
+        }
+      ]
+    }
+  ]
+}
