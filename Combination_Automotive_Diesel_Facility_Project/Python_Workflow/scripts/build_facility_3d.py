@@ -24,12 +24,12 @@ def add_box(name, x, y, z, sx, sy, sz, mat=None):
 # ---------- Materials ----------
 def make_mat(name, color):
     mat = bpy.data.materials.new(name=name)
-    # Use Principled BSDF if available
-    if mat.node_tree:
-        bsdf = mat.node_tree.nodes.get("Principled BSDF")
-        if bsdf:
-            bsdf.inputs["Base Color"].default_value = (*color, 1.0)
+    mat.use_nodes = True  # ensure node tree is active in headless/background mode
+    bsdf = mat.node_tree.nodes.get("Principled BSDF")
+    if bsdf:
+        bsdf.inputs["Base Color"].default_value = (*color, 1.0)
     else:
+        mat.use_nodes = False
         mat.diffuse_color = (*color, 1.0)
     return mat
 
