@@ -53,9 +53,12 @@ jobs:
                 // delete if older than minAgeDays OR beyond keepPerPr
                 if (i >= keepPerPr || ageDays > minAgeDays) {
                   core.info(`Deleting release ${rel.name||rel.tag_name} (${rel.id}) for PR ${pr}`);
-                  // capture URL before deletion
+                  // capture URL and format link text as PR number + run before deletion
                   const htmlUrl = rel.html_url || `https://github.com/${context.repo.owner}/${context.repo.repo}/releases/tag/${encodeURIComponent(rel.tag_name)}`;
-                  deletedReleases.push(`<${htmlUrl}|${rel.tag_name}>${rel.name ? ' – ' + rel.name : ''} (created ${rel.created_at})`);
+                  const runMatch = rel.tag_name.match(/^mep-loadmap-pr-(\d+)-run-(\d+)/);
+                  const runNum = runMatch ? runMatch[2] : '';
+                  const linkText = runMatch ? `PR #${pr} – run ${runNum}` : rel.tag_name;
+                  deletedReleases.push(`<${htmlUrl}|${linkText}>${rel.name ? ' – ' + rel.name : ''} (created ${rel.created_at})`);
                   await github.rest.repos.deleteRelease({ owner: context.repo.owner, repo: context.repo.repo, release_id: rel.id });
                   deleted += 1;
                 }
