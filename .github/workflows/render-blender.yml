@@ -1,0 +1,37 @@
+name: Render Blender Model
+
+on:
+  push:
+    branches:
+      - main
+      - chore/types-mypy-py311
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  render:
+    name: Render facility model with Blender
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Blender
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y blender
+
+      - name: Prepare output directory
+        run: |
+          mkdir -p Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/renders
+
+      - name: Run Blender (headless render)
+        run: |
+          blender --version
+          blender --background --python Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/build_facility_3d.py --render-output Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/renders/frame_ --render-frame 1
+
+      - name: Upload rendered image
+        uses: actions/upload-artifact@v4
+        with:
+          name: blender-render
+          path: Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/renders/
