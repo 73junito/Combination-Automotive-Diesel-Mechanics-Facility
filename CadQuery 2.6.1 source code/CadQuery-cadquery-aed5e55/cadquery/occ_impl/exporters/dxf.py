@@ -191,7 +191,7 @@ class DxfDocument:
                 )
                 self.msp.add_entity(entity)  # type: ignore[arg-type]
             else:
-                _, entity_attributes = self._dxf_spline(edge, plane)
+                _, entity_attributes = self._dxf_spline(edge)
                 entity = ezdxf.math.BSpline(**entity_attributes)  # type: ignore[assignment]
                 self.msp.add_spline(
                     dxfattribs=general_attributes
@@ -319,11 +319,10 @@ class DxfDocument:
         )
 
     @classmethod
-    def _dxf_spline(cls, edge: Edge, plane: Plane) -> DxfEntityAttributes:
+    def _dxf_spline(cls, edge: Edge) -> DxfEntityAttributes:
         """Convert a Spline to ezdxf.math.BSpline parameters.
 
         :param edge: CadQuery Edge to be converted to a DXF spline
-        :param plane: CadQuery Plane
 
         :return: dictionary of ezdxf.math.BSpline parameters
         """
