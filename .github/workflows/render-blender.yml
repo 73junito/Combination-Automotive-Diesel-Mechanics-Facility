@@ -11,6 +11,8 @@ on:
 jobs:
   render:
     name: Render facility model with Blender
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
