@@ -37,21 +37,6 @@ jobs:
         run: |
           python Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/generate_plan_pngs.py
 
-      - name: Copy thumbnails to outputs/thumbs
-        run: |
-          mkdir -p Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/thumbs
-          cp Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/*.thumb.png \
-             Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/thumbs/
-
-      - name: Commit thumbnails to repository
-        if: github.event_name == 'push'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/thumbs/
-          git diff --staged --quiet || git commit -m "ci: update plan thumbnails [skip ci]"
-          git push
-
       - name: Upload full PNGs
         uses: actions/upload-artifact@v4
         with:
@@ -62,4 +47,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: facility-plan-thumbs
-          path: Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/thumbs/*.thumb.png
+          path: Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/*.thumb.png

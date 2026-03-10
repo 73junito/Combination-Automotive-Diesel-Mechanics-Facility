@@ -33,7 +33,7 @@ jobs:
         run: |
           cd Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/renders
           # create mp4
-          ffmpeg -y -framerate 24 -i frame_%04d.png -c:v libx264 -pix_fmt yuv420p turntable.mp4
+          ffmpeg -y -framerate 24 -start_number 0 -i frame_%04d.png -c:v libx264 -pix_fmt yuv420p turntable.mp4
           # create smaller gif
           ffmpeg -y -i turntable.mp4 -vf "fps=15,scale=640:-1:flags=lanczos" -loop 0 turntable.gif
 
