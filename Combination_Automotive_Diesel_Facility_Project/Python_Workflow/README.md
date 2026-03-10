@@ -142,6 +142,12 @@ blender --python Combination_Automotive_Diesel_Facility_Project/Python_Workflow/
 
 # Headless (background) render-only run
 blender --background --python Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/build_facility_3d.py --render-output //renders/frame_ -noaudio --render-frame 1
+
+# Export GLTF/FBX (headless, used by CI via --export flag)
+blender --background --python Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/build_facility_3d.py -- --export --output-dir /tmp/renders
+
+# Render a turntable animation (headless, used by CI via --turntable flag)
+blender --background --python Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/build_facility_3d.py -- --turntable --frames 120 --res-x 1280 --res-y 720 --output-dir /tmp/renders
 ```
 
-The script creates a simple, parameterized building shell, service bays, parking, and basic materials. Use Blender to refine materials, add interiors, or export to FBX/GLTF/USD as needed.
+The script creates a simple, parameterized building shell, service bays, parking, and basic materials. It supports `--export` (GLTF/FBX output) and `--turntable` (360° animated render) CLI flags that are used automatically via CI. Use Blender to refine materials or add interiors as needed.
