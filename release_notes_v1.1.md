@@ -1,4 +1,4 @@
-﻿**Summary**
+**Summary**
 Schematic, coordination-level drawing package for a combined automotive & diesel training facility sized for 24 students (light-duty primary, heavy-duty secondary, EV integrated). This set is intended for planning, facilities review, and early MEP coordination (not construction/engineered documents).
 
 **Package contents**
