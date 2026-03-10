@@ -1,0 +1,21 @@
+﻿# Ignore generated outputs and large binary artifacts
+# Generated outputs (do not commit)
+**/outputs/
+**/outputs/**
+
+# Common generated CAD/preview artifacts (belt + suspenders)
+*.dxf
+*.step
+*.stp
+*.svg
+*.png
+*.pdf
+*.zip
+
+# Python virtualenvs
+.venv/
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+/.vs/
