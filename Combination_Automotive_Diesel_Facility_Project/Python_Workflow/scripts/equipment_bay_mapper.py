@@ -7,13 +7,20 @@ Map equipment items from equipment CSVs to DXF bay locations.
 - Writes `equipment_bay_mapping.csv` and `equipment_bay_mapping.xlsx` to outputs
 """
 
+import csv
 import os
 from collections import namedtuple
-import csv
+from types import ModuleType
+from typing import Any, List, Optional, TypedDict, cast
+
 import pandas as pd
 
+# annotate module variable so mypy knows this may be None when ezdxf
+ezdxf: Optional[ModuleType] = None
 try:
-    import ezdxf
+    import ezdxf as _ezdxf
+
+    ezdxf = _ezdxf
 except ImportError:
     ezdxf = None
 
@@ -24,6 +31,16 @@ ESS_CSV = os.path.join(OUT, "essential_equipment.csv")
 NON_CSV = os.path.join(OUT, "nonessential_equipment.csv")
 
 Bay = namedtuple("Bay", ["layer", "name", "minx", "miny", "maxx", "maxy", "cx", "cy"])
+
+
+class MappingRow(TypedDict, total=False):
+    BayLayer: str
+    BayName: str
+    BayCX: str
+    BayCY: str
+    EquipID: str
+    Item: str
+    Category: str
 
 
 def bbox_from_points(points):
@@ -37,15 +54,22 @@ def collect_bays():
         raise RuntimeError("ezdxf not installed")
     doc = ezdxf.readfile(DXF_PATH)
     msp = doc.modelspace()
-    bays = []
+    bays: List[Bay] = []
     for e in msp:
         # check lightweight polylines (LWPOLYLINE) and polyline types
         etype = e.dxftype()
         layer = getattr(e.dxf, "layer", "")
-        if etype in ("LWPOLYLINE", "POLYLINE") and layer in ("AUTO_BAYS", "DIESEL_BAYS"):
+        if etype in ("LWPOLYLINE", "POLYLINE") and layer in (
+            "AUTO_BAYS",
+            "DIESEL_BAYS",
+        ):
             # get points (works for lwpolyline and polyline)
             try:
-                pts = list(e.get_points()) if hasattr(e, "get_points") else list(e.points())
+                pts = (
+                    list(e.get_points())
+                    if hasattr(e, "get_points")
+                    else list(e.points())
+                )
             except AttributeError:
                 # fallback: try to read vertices
                 pts = [tuple(v) for v in e.vertices()]
@@ -55,7 +79,14 @@ def collect_bays():
             name = getattr(e.dxf, "layer", "") + "_" + f"{len(bays) + 1}"
             bays.append(
                 Bay(
-                    layer=layer, name=name, minx=minx, miny=miny, maxx=maxx, maxy=maxy, cx=cx, cy=cy
+                    layer=layer,
+                    name=name,
+                    minx=minx,
+                    miny=miny,
+                    maxx=maxx,
+                    maxy=maxy,
+                    cx=cx,
+                    cy=cy,
                 )
             )
     # sort bays left-to-right by cx, then bottom-to-top
@@ -64,7 +95,7 @@ def collect_bays():
     # find text labels near each bay
     for i, b in enumerate(bays):
         # search for TEXT or MTEXT within bay bbox
-        labels = []
+        labels: List[str] = []
         for e in msp.query("TEXT MTEXT"):
             lx = e.dxf.insert[0] if hasattr(e.dxf, "insert") else None
             ly = e.dxf.insert[1] if hasattr(e.dxf, "insert") else None
@@ -77,18 +108,20 @@ def collect_bays():
     return bays
 
 
-def expand_equipment(csv_path):
-    rows = []
+def expand_equipment(csv_path: str) -> List[MappingRow]:
+    rows: List[MappingRow] = []
     with open(csv_path, newline="", encoding="utf-8") as fh:
         reader = csv.DictReader(fh)
         for r in reader:
             qty = int(float(r.get("Quantity", 1)))
             for i in range(qty):
-                rows.append(r.copy())
+                rows.append(cast(MappingRow, r.copy()))
     return rows
 
 
-def assign_units_to_bays(bays, equipment_units):
+def assign_units_to_bays(
+    bays: list[Bay], equipment_units: list[MappingRow]
+) -> list[dict[str, Any]]:
     assignments = []
     if not bays:
         raise RuntimeError("No bays found in DXF")
@@ -100,9 +133,9 @@ def assign_units_to_bays(bays, equipment_units):
             "BayName": bay.name,
             "BayCX": bay.cx,
             "BayCY": bay.cy,
-            "Item": unit.get("Item", ""),
-            "Category": unit.get("Category", ""),
-            "UnitCost": unit.get("UnitCost", ""),
+            "Item": unit.get("Item", "") if isinstance(unit, dict) else "",
+            "Category": unit.get("Category", "") if isinstance(unit, dict) else "",
+            "UnitCost": unit.get("UnitCost", "") if isinstance(unit, dict) else "",
         }
         assignments.append(out)
     return assignments

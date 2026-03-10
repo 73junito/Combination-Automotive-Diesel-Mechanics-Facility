@@ -1,0 +1,36 @@
+DXF Audit Report
+========================================
+
+Entities by type:
+  LWPOLYLINE: 205
+  TEXT: 118
+
+Entities by layer:
+  A-DOOR: 3
+  A-GRID: 36
+  A-WALL-EXT: 1
+  A-WALL-INT: 3
+  E-DATA: 1
+  E-EMERG: 2
+  E-PANEL: 1
+  E-POWER-3PH: 6
+  E-POWER-OUT: 13
+  EQ-ALIGN: 1
+  EQ-BATT: 1
+  EQ-CHARGE: 2
+  EQ-COMP: 1
+  EQ-FLAM: 1
+  EQ-LIFT: 16
+  EQ-TOOLBOX: 12
+  EQ-WASH: 1
+  FURN-BOARD: 1
+  FURN-CHAIR: 30
+  FURN-DESK: 25
+  FURN-LOCKER: 24
+  FURN-STOR: 1
+  FURN-TABLE: 3
+  M-EXHAUST: 16
+  P-AIR: 16
+  P-DRAIN: 5
+  P-OILSEP: 1
+  ROOM-LABEL: 100

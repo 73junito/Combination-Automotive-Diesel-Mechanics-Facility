@@ -15,13 +15,14 @@ Run:
 Note: This is a best-effort draft for review; coordinates are approximated.
 """
 
-from pathlib import Path
 import sys
+from pathlib import Path
+from typing import Any
 
 try:
     import ezdxf
     from ezdxf.entities import LWPolyline
-except ImportError as e:
+except ImportError:
     print("ERROR: ezdxf is required. Install in venv:")
     print("  .\\.venv\\Scripts\\python.exe -m pip install ezdxf")
     raise
@@ -29,7 +30,13 @@ except ImportError as e:
 # Common set of exceptions that can arise when reading/parsing DXF entities.
 # ezdxf exposes DXF-specific exceptions on some versions; include them
 # when present to avoid referencing names that might not exist.
-dxf_exceptions = (AttributeError, TypeError, ValueError, IndexError, UnicodeDecodeError)
+dxf_exceptions: tuple = (
+    AttributeError,
+    TypeError,
+    ValueError,
+    IndexError,
+    UnicodeDecodeError,
+)
 if hasattr(ezdxf, "DXFStructureError"):
     dxf_exceptions = dxf_exceptions + (ezdxf.DXFStructureError,)
 if hasattr(ezdxf, "DXFValueError"):
@@ -45,7 +52,7 @@ if not INPUT_DXF.exists():
 
 print("Loading", INPUT_DXF)
 doc = ezdxf.readfile(str(INPUT_DXF))
-ms = doc.modelspace()
+ms: Any = doc.modelspace()
 
 
 # Ensure layers exist
@@ -91,7 +98,14 @@ for e in list(ms):
                 else:
                     # fallback: try vertices
                     for v in e.vertices():
-                        points.append((float(v.dxf.x), float(v.dxf.y)))
+                        vv = v  # type: Any
+                        try:
+                            points.append((float(vv.dxf.x), float(vv.dxf.y)))
+                        except Exception:
+                            try:
+                                points.append((float(vv[0]), float(vv[1])))
+                            except Exception:
+                                pass
             except dxf_exceptions:
                 # skip malformed/partial entities
                 pass
@@ -179,12 +193,17 @@ def add_title_text(ms, text, pos, height=25):
 
 
 add_title_text(
-    ms, "Project: Combination Automotive & Diesel Facility", (title_x, title_y), height=24
+    ms,
+    "Project: Combination Automotive & Diesel Facility",
+    (title_x, title_y),
+    height=24,
 )
 add_title_text(ms, "Author: Student Name", (title_x, title_y - 30), height=20)
 add_title_text(ms, "Sheet: A1 - Facility Layout", (title_x, title_y - 55), height=20)
 add_title_text(ms, "Date: 2026-01-26", (title_x, title_y - 80), height=18)
-add_title_text(ms, "Revision: Rev 0 - Issued for Review", (title_x, title_y - 100), height=18)
+add_title_text(
+    ms, "Revision: Rev 0 - Issued for Review", (title_x, title_y - 100), height=18
+)
 add_title_text(ms, 'Scale: 1/8" = 1\'-0"', (title_x, title_y - 125), height=18)
 
 # Add a simple north arrow (triangle + text) on TEXT_LABELS
@@ -204,12 +223,16 @@ except (AttributeError, TypeError, ValueError):
 # Add sample dimension texts near midpoints
 mid_x = minx + width * 0.5
 mid_y = miny - height * 0.04
-t = ms.add_text("Overall width: 120'-0\"", dxfattribs={"layer": "DIMENSIONS", "height": 18})
+t = ms.add_text(
+    "Overall width: 120'-0\"", dxfattribs={"layer": "DIMENSIONS", "height": 18}
+)
 try:
     t.dxf.insert = (float(mid_x - 60), float(mid_y))
 except (AttributeError, TypeError, ValueError):
     pass
-t = ms.add_text("Typical bay depth: 24'-0\"", dxfattribs={"layer": "DIMENSIONS", "height": 18})
+t = ms.add_text(
+    "Typical bay depth: 24'-0\"", dxfattribs={"layer": "DIMENSIONS", "height": 18}
+)
 try:
     t.dxf.insert = (float(mid_x - 60), float(mid_y - 30))
 except (AttributeError, TypeError, ValueError):
@@ -232,7 +255,9 @@ for e in ms:
                 if et == "CIRCLE":
                     x, y = e.dxf.center[0], e.dxf.center[1]
                 elif et == "LINE":
-                    x, y = (e.dxf.start[0] + e.dxf.end[0]) / 2, (e.dxf.start[1] + e.dxf.end[1]) / 2
+                    x, y = (e.dxf.start[0] + e.dxf.end[0]) / 2, (
+                        e.dxf.start[1] + e.dxf.end[1]
+                    ) / 2
                 elif et in ("LWPOLYLINE", "POLYLINE"):
                     try:
                         pts = list(e.get_points())
@@ -258,26 +283,31 @@ for e in ms:
 
 # Discipline labels (global placements)
 t = ms.add_text(
-    "Panel LP-1 — 120/208V 3PH (East wall)", dxfattribs={"layer": "ELECTRICAL", "height": 14}
+    "Panel LP-1 — 120/208V 3PH (East wall)",
+    dxfattribs={"layer": "ELECTRICAL", "height": 14},
 )
 try:
     t.dxf.insert = (float(minx + 20), float(maxy - 30))
 except (AttributeError, TypeError, ValueError):
     pass
-t = ms.add_text("Diesel exhaust hood — 1,500 CFM", dxfattribs={"layer": "HVAC", "height": 14})
+t = ms.add_text(
+    "Diesel exhaust hood — 1,500 CFM", dxfattribs={"layer": "HVAC", "height": 14}
+)
 try:
     t.dxf.insert = (float(minx + 20), float(maxy - 60))
 except (AttributeError, TypeError, ValueError):
     pass
 t = ms.add_text(
-    "Floor drain → trench drain (slope w)", dxfattribs={"layer": "PLUMBING", "height": 14}
+    "Floor drain → trench drain (slope w)",
+    dxfattribs={"layer": "PLUMBING", "height": 14},
 )
 try:
     t.dxf.insert = (float(minx + 20), float(maxy - 90))
 except (AttributeError, TypeError, ValueError):
     pass
 t = ms.add_text(
-    "Compressed air drop @ each bay — 100 PSI", dxfattribs={"layer": "AIR_GAS", "height": 14}
+    "Compressed air drop @ each bay — 100 PSI",
+    dxfattribs={"layer": "AIR_GAS", "height": 14},
 )
 try:
     t.dxf.insert = (float(minx + 20), float(maxy - 120))
@@ -291,24 +321,31 @@ try:
     t.dxf.insert = (float(title_x), float(lg_y))
 except (AttributeError, TypeError, ValueError):
     pass
-t = ms.add_text("Exhaust Hood — HVAC (HVAC)", dxfattribs={"layer": "TITLE_BLOCK", "height": 12})
+t = ms.add_text(
+    "Exhaust Hood — HVAC (HVAC)", dxfattribs={"layer": "TITLE_BLOCK", "height": 12}
+)
 try:
     t.dxf.insert = (float(title_x), float(lg_y - 22))
 except (AttributeError, TypeError, ValueError):
     pass
 t = ms.add_text(
-    "Floor Drain — Plumbing (PLUMBING)", dxfattribs={"layer": "TITLE_BLOCK", "height": 12}
+    "Floor Drain — Plumbing (PLUMBING)",
+    dxfattribs={"layer": "TITLE_BLOCK", "height": 12},
 )
 try:
     t.dxf.insert = (float(title_x), float(lg_y - 40))
 except (AttributeError, TypeError, ValueError):
     pass
-t = ms.add_text("Air Drop — Air/Gas (AIR_GAS)", dxfattribs={"layer": "TITLE_BLOCK", "height": 12})
+t = ms.add_text(
+    "Air Drop — Air/Gas (AIR_GAS)", dxfattribs={"layer": "TITLE_BLOCK", "height": 12}
+)
 try:
     t.dxf.insert = (float(title_x), float(lg_y - 58))
 except (AttributeError, TypeError, ValueError):
     pass
-t = ms.add_text("Lift — Equipment (EQUIPMENT)", dxfattribs={"layer": "TITLE_BLOCK", "height": 12})
+t = ms.add_text(
+    "Lift — Equipment (EQUIPMENT)", dxfattribs={"layer": "TITLE_BLOCK", "height": 12}
+)
 try:
     t.dxf.insert = (float(title_x), float(lg_y - 76))
 except (AttributeError, TypeError, ValueError):

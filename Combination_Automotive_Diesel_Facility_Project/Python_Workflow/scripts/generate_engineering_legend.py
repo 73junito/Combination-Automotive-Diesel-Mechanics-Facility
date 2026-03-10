@@ -13,21 +13,29 @@ Writes:
  - outputs/portfolio_final.pdf (portfolio_combined_with_legend.pdf + legend)
 """
 
-import os
 import csv
+import os
+from typing import Any, Optional
 
 try:
-    from reportlab.lib.pagesizes import letter
     from reportlab.lib import colors
-    from reportlab.pdfgen import canvas
+    from reportlab.lib.pagesizes import letter
     from reportlab.lib.units import inch
+    from reportlab.pdfgen import canvas
 except ImportError:
     REPORTLAB_AVAILABLE = False
 else:
     REPORTLAB_AVAILABLE = True
 
+# annotate PDF reader/writer types for mypy
+PdfReader: Optional[Any] = None
+PdfWriter: Optional[Any] = None
 try:
-    from pypdf import PdfReader, PdfWriter
+    from pypdf import PdfReader as _PdfReader
+    from pypdf import PdfWriter as _PdfWriter
+
+    PdfReader = _PdfReader
+    PdfWriter = _PdfWriter
 except ImportError:
     PdfReader = PdfWriter = None
 
@@ -60,7 +68,7 @@ LAYER_COLORS = {
 
 
 def read_categories(path):
-    cats = []
+    cats: list[str] = []
     if not os.path.exists(path):
         return cats
     with open(path, newline="", encoding="utf-8") as fh:
@@ -73,7 +81,7 @@ def read_categories(path):
 
 
 def read_struct(path):
-    rows = []
+    rows: list[dict[str, Any]] = []
     if not os.path.exists(path):
         return rows
     with open(path, newline="", encoding="utf-8") as fh:
@@ -84,7 +92,7 @@ def read_struct(path):
 
 
 def read_mech(path):
-    rows = []
+    rows: list[dict[str, Any]] = []
     if not os.path.exists(path):
         return rows
     with open(path, newline="", encoding="utf-8") as fh:
@@ -95,7 +103,7 @@ def read_mech(path):
 
 
 def read_elec(path):
-    rows = []
+    rows: list[dict[str, Any]] = []
     if not os.path.exists(path):
         return rows
     with open(path, newline="", encoding="utf-8") as fh:

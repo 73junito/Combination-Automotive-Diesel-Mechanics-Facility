@@ -9,12 +9,43 @@ Add engineering-ready annotation layers and export CSV/XLSX tables.
 Notes: uses conservative placeholder assumptions; each CSV contains an `Assumption` column for engineer review.
 """
 
-import os
 import csv
+import os
 from collections import defaultdict
+from types import ModuleType
+from typing import Any, Dict, List, Optional, TypedDict, cast
 
+
+class MappingRow(TypedDict, total=False):
+    BayName: str
+    BayCX: str
+    BayCY: str
+    EquipID: str
+    Item: str
+    Category: str
+    Quantity: str
+
+
+class BaySummary(TypedDict):
+    cx: float
+    cy: float
+    slab_in: float
+    total_weight: float
+
+
+class MechService(TypedDict, total=False):
+    type: str
+    value: float
+    units: str
+    assumption: str
+
+
+# annotate module variable so mypy knows this may be None when ezdxf
+ezdxf: Optional[ModuleType] = None
 try:
-    import ezdxf
+    import ezdxf as _ezdxf
+
+    ezdxf = _ezdxf
 except ImportError:
     ezdxf = None
 
@@ -54,25 +85,26 @@ MECH_AIRFLOW = {
 DEFAULT_SLAB_IN = 8.0
 
 
-def read_mapping(path):
-    rows = []
+def read_mapping(path: str) -> List[MappingRow]:
+    rows: List[MappingRow] = []
     if not os.path.exists(path):
         return rows
     with open(path, newline="", encoding="utf-8") as fh:
         r = csv.DictReader(fh)
         for row in r:
-            rows.append(row)
+            rows.append(cast(MappingRow, row))
     return rows
 
 
-def group_by_bay(rows):
-    bybay = defaultdict(list)
+def group_by_bay(rows: List[MappingRow]) -> Dict[str, List[MappingRow]]:
+    bybay: defaultdict = defaultdict(list)
     for r in rows:
-        bybay[r["BayName"]].append(r)
+        name = r.get("BayName") or ""
+        bybay[name].append(r)
     return bybay
 
 
-def write_csv_structural(path, bay_summaries):
+def write_csv_structural(path: str, bay_summaries: Dict[str, BaySummary]) -> None:
     with open(path, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(
@@ -98,24 +130,43 @@ def write_csv_structural(path, bay_summaries):
             )
 
 
-def write_csv_mech(path, bay_mech):
+def write_csv_mech(path: str, bay_mech: dict[str, List[MechService]]) -> None:
     with open(path, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow(["BayName", "ServiceType", "Value", "Units", "Assumptions"])
         for b, mech in bay_mech.items():
             for svc in mech:
-                w.writerow([b, svc["type"], svc["value"], svc["units"], svc["assumption"]])
+                w.writerow(
+                    [b, svc["type"], svc["value"], svc["units"], svc["assumption"]]
+                )
 
 
-def write_csv_elec(path, elec_rows):
+def write_csv_elec(path: str, elec_rows: list[dict[str, Any]]) -> None:
     with open(path, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
-        w.writerow(["BayName", "EquipID", "Item", "Load_kW", "CircuitID", "Assumptions"])
+        w.writerow(
+            ["BayName", "EquipID", "Item", "Load_kW", "CircuitID", "Assumptions"]
+        )
         for r in elec_rows:
-            w.writerow([r["bay"], r["equip"], r["item"], r["load_kw"], r["circuit"], r["assump"]])
+            w.writerow(
+                [
+                    r["bay"],
+                    r["equip"],
+                    r["item"],
+                    r["load_kw"],
+                    r["circuit"],
+                    r["assump"],
+                ]
+            )
 
 
-def annotate_dxf(dxf_in, dxf_out, bay_summaries, bay_mech, elec_rows):
+def annotate_dxf(
+    dxf_in: str,
+    dxf_out: str,
+    bay_summaries: Dict[str, BaySummary],
+    bay_mech: dict[str, List[MechService]],
+    elec_rows: list[dict[str, Any]],
+) -> None:
     if ezdxf is None:
         print("ezdxf not available; skipping DXF annotation")
         return
@@ -131,7 +182,9 @@ def annotate_dxf(dxf_in, dxf_out, bay_summaries, bay_mech, elec_rows):
         t = f"Slab: {s['slab_in']} in\nW: {int(s['total_weight'])} lb"
         # use simple TEXT lines (multiple lines separated)
         for i, line in enumerate(t.split("\n")):
-            tx = msp.add_text(line, dxfattribs={"height": 2.5, "layer": "STRUCTURAL_ANNOT"})
+            tx = msp.add_text(
+                line, dxfattribs={"height": 2.5, "layer": "STRUCTURAL_ANNOT"}
+            )
             try:
                 tx.set_pos((x, y - i * 3), align="LEFT")
             except AttributeError:
@@ -164,19 +217,19 @@ def annotate_dxf(dxf_in, dxf_out, bay_summaries, bay_mech, elec_rows):
     print("Wrote annotated DXF:", dxf_out)
 
 
-def main():
+def main() -> None:
     rows = read_mapping(MAPPING_CSV)
     if not rows:
         print("No mapping rows found at", MAPPING_CSV)
         return
     bybay = group_by_bay(rows)
-    bay_summaries = {}
-    bay_mech = {}
-    elec_rows = []
+    bay_summaries: Dict[str, BaySummary] = {}
+    bay_mech: Dict[str, List[MechService]] = {}
+    elec_rows: List[dict[str, Any]] = []
     for bay, items in bybay.items():
         # take bay center from first row
-        cx = items[0].get("BayCX", "0")
-        cy = items[0].get("BayCY", "0")
+        cx = float(items[0].get("BayCX", "0") or 0)
+        cy = float(items[0].get("BayCY", "0") or 0)
         slab_in = DEFAULT_SLAB_IN
         total_weight = 0.0
         for it in items:
@@ -197,26 +250,37 @@ def main():
                     "assump": "Placeholder load; verify",
                 }
             )
-        bay_summaries[bay] = {"cx": cx, "cy": cy, "slab_in": slab_in, "total_weight": total_weight}
+        bay_summaries[bay] = {
+            "cx": cx,
+            "cy": cy,
+            "slab_in": slab_in,
+            "total_weight": total_weight,
+        }
         # mechanical services: infer from bay name prefix
-        mech_list = []
+        mech_list: List[MechService] = []
         if bay.upper().startswith("DIESEL"):
             mech_list.append(
-                {
-                    "type": "Diesel exhaust",
-                    "value": MECH_AIRFLOW["DIESEL"],
-                    "units": "CFM",
-                    "assumption": "Preliminary",
-                }
+                cast(
+                    MechService,
+                    {
+                        "type": "Diesel exhaust",
+                        "value": MECH_AIRFLOW["DIESEL"],
+                        "units": "CFM",
+                        "assumption": "Preliminary",
+                    },
+                )
             )
         else:
             mech_list.append(
-                {
-                    "type": "Lift area airflow",
-                    "value": MECH_AIRFLOW["AUTO"],
-                    "units": "CFM",
-                    "assumption": "Preliminary",
-                }
+                cast(
+                    MechService,
+                    {
+                        "type": "Lift area airflow",
+                        "value": MECH_AIRFLOW["AUTO"],
+                        "units": "CFM",
+                        "assumption": "Preliminary",
+                    },
+                )
             )
         bay_mech[bay] = mech_list
 

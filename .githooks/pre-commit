@@ -1,0 +1,14 @@
+#!/bin/sh
+# Sample pre-commit hook that runs the Python pre-commit checks.
+# Copy this file to .git/hooks/pre-commit and make it executable.
+
+PYTHON=${PYTHON:-python}
+echo "Running drawing pre-commit checks..."
+"$PYTHON" "$(git rev-parse --show-toplevel)/scripts/pre_commit_checks.py"
+rc=$?
+if [ $rc -ne 0 ]; then
+  echo "Pre-commit checks failed. Aborting commit."
+  exit $rc
+fi
+echo "Pre-commit checks passed."
+exit 0

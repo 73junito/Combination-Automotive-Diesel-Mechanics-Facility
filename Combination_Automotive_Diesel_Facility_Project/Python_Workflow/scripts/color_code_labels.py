@@ -4,11 +4,17 @@ Color-code EQUIP_LABELS in DXF based on Category from equipment_bay_mapping_labe
 - Saves new DXF as facility_layout_colored.dxf
 """
 
-import os
 import csv
+import os
+from types import ModuleType
+from typing import Any, Optional
 
+# annotate module variable so mypy knows this may be None when ezdxf
+ezdxf: Optional[ModuleType] = None
 try:
-    import ezdxf
+    import ezdxf as _ezdxf
+
+    ezdxf = _ezdxf
 except ImportError:
     ezdxf = None
 

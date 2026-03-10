@@ -1,0 +1,12 @@
+DXF Audit Report
+========================================
+
+Entities by type:
+  LWPOLYLINE: 22
+  TEXT: 100
+
+Entities by layer:
+  P-AIR: 16
+  P-DRAIN: 5
+  P-OILSEP: 1
+  ROOM-LABEL: 100

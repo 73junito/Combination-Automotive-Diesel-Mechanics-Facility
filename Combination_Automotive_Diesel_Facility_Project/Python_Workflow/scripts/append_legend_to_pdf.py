@@ -7,23 +7,38 @@ Tries to use `pypdf` or `PyPDF2` for merging. Uses `reportlab` to build
 the legend page.
 """
 
-import os
 import csv
+import os
+from typing import Any, Optional
 
 try:
-    from reportlab.lib.pagesizes import letter  # type: ignore[reportMissingImports]
+    from reportlab.lib.pagesizes import \
+        letter  # type: ignore[reportMissingImports]
     from reportlab.pdfgen import canvas  # type: ignore[reportMissingImports]
 except ImportError:
     REPORTLAB_AVAILABLE = False
 else:
     REPORTLAB_AVAILABLE = True
 
+# annotate pypdf/PyPDF2 reader/writer types for mypy
+PdfReader: Optional[Any] = None
+PdfWriter: Optional[Any] = None
 try:
     # modern pypdf
-    from pypdf import PdfReader, PdfWriter  # type: ignore[reportMissingImports]
+    from pypdf import \
+        PdfReader as _PdfReader  # type: ignore[reportMissingImports]
+    from pypdf import PdfWriter as _PdfWriter
+
+    PdfReader = _PdfReader
+    PdfWriter = _PdfWriter
 except ImportError:
     try:
-        from PyPDF2 import PdfReader, PdfWriter  # type: ignore[reportMissingImports]
+        from PyPDF2 import \
+            PdfReader as _PdfReader2  # type: ignore[reportMissingImports]
+        from PyPDF2 import PdfWriter as _PdfWriter2
+
+        PdfReader = _PdfReader2
+        PdfWriter = _PdfWriter2
     except ImportError:
         PdfReader = PdfWriter = None
 
@@ -52,7 +67,7 @@ COLOR_PALETTE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 def load_categories(csv_path):
     """Load categories from CSV at ``csv_path`` and return unique list."""
-    cats = []
+    cats: list[str] = []
     if not os.path.exists(csv_path):
         return cats
     with open(csv_path, newline="", encoding="utf-8") as fh:
@@ -66,7 +81,7 @@ def load_categories(csv_path):
 
 def build_color_map(categories):
     """Return a mapping of category -> AutoCAD color index."""
-    cmap = {}
+    cmap: dict[str, int] = {}
     for i, cat in enumerate(categories):
         idx = COLOR_PALETTE[i % len(COLOR_PALETTE)]
         cmap[cat] = idx

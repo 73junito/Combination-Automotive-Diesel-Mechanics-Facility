@@ -1,6 +1,9 @@
-import zipfile, os
+import os
+import zipfile
 
-zip_path = os.path.join(os.path.dirname(__file__), "..", "outputs", "portfolio_submission.zip")
+zip_path = os.path.join(
+    os.path.dirname(__file__), "..", "outputs", "portfolio_submission.zip"
+)
 zip_path = os.path.normpath(zip_path)
 if not os.path.exists(zip_path):
     print("ZIP not found:", zip_path)

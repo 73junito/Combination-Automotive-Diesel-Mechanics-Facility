@@ -14,16 +14,18 @@ Notes:
   positions an orthographic camera to fit the drawing, sets white background, and renders.
 """
 
-import sys
+# type: ignore
 import os
+import sys
 
 # This script must be run in Blender's bundled Python (bpy available)
 try:
+    import math
+
     import bpy
     import mathutils
     from mathutils import Vector
-    import math
-except ImportError as e:
+except ImportError:
     print("This script requires Blender (run with blender --background --python)")
     raise
 
@@ -61,7 +63,11 @@ if not os.path.exists(input_svg):
 bpy.ops.import_curve.svg(filepath=input_svg)
 
 # Collect imported objects
-imported = [o for o in bpy.context.scene.objects if o.select_get() or o.type in {"CURVE", "MESH"}]
+imported = [
+    o
+    for o in bpy.context.scene.objects
+    if o.select_get() or o.type in {"CURVE", "MESH"}
+]
 if not imported:
     # fallback: take all objects
     imported = list(bpy.context.scene.objects)
@@ -163,7 +169,6 @@ cam_data.ortho_scale = max_dim * (1.0 + margin)
 cam.location = (center.x, center.y, center.z + max_dim * 2.0)
 # Point camera downwards
 cam.rotation_euler = (0.0, 0.0, 0.0)
-cam.rotation_euler[0] = 0.0
 # rotate to top-down: point -Z
 cam.rotation_mode = "XYZ"
 cam.rotation_euler = (math.radians(90.0), 0.0, 0.0)

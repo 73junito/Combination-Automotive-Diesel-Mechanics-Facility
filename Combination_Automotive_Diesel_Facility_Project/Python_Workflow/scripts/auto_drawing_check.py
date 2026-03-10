@@ -1,22 +1,29 @@
-import sys
-import re
 import argparse
 import logging
+import re
+import sys
 from pathlib import Path
+from typing import Any, Optional, cast
 
+# annotate pypdf types for mypy
+PdfReader: Optional[Any] = None
+PdfReadError: Optional[Any] = None
+PYPDF_AVAILABLE = False
 try:
-    from pypdf import PdfReader
+    from pypdf import PdfReader as _PdfReader
+
+    PdfReader = _PdfReader
     PYPDF_AVAILABLE = True
 except ImportError:
     PdfReader = None
     PYPDF_AVAILABLE = False
-    # Defer friendly error handling to runtime so script can still show usage
 
 # Try to import a specific PDF read error class if pypdf is available
-PdfReadError = None
 if PYPDF_AVAILABLE:
     try:
-        from pypdf.errors import PdfReadError
+        from pypdf.errors import PdfReadError as _PdfReadError
+
+        PdfReadError = _PdfReadError
     except ImportError:
         PdfReadError = None
 
@@ -56,8 +63,12 @@ EQUIP_KEYWORDS = {
 
 def extract_pdf_text(pdf_path: Path) -> str:
     if not PYPDF_AVAILABLE:
-        raise RuntimeError("pypdf (install with: pip install pypdf) is required to extract PDF text")
-    reader = PdfReader(str(pdf_path))
+        raise RuntimeError(
+            "pypdf (install with: pip install pypdf) is required to extract PDF text"
+        )
+    # PdfReader is Optional[Any] at module scope; narrow for mypy before calling
+    Reader = cast(Any, PdfReader)
+    reader = Reader(str(pdf_path))
     text = []
     for p in reader.pages[:6]:
         try:
@@ -128,14 +139,23 @@ def main(argv=None):
     parser.add_argument("pdf", help="Path to portfolio PDF")
     parser.add_argument("dxf", help="Path to layout DXF")
     parser.add_argument("--out", "-o", help="Write JSON result to file")
-    parser.add_argument("--format", choices=["json"], default="json", help="Output format (default: json)")
+    parser.add_argument(
+        "--format",
+        choices=["json"],
+        default="json",
+        help="Output format (default: json)",
+    )
     parser.add_argument(
         "--log-level",
         choices=["DEBUG", "INFO", "WARN", "ERROR"],
         default="WARN",
         help="Logging level for informational output (default: WARN)",
     )
-    parser.add_argument("--strict", action="store_true", help="Treat missing input files as errors (exit with EXIT_INPUT)")
+    parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="Treat missing input files as errors (exit with EXIT_INPUT)",
+    )
     args = parser.parse_args(argv)
 
     # Configure logging to stderr; keep JSON on stdout
@@ -146,7 +166,7 @@ def main(argv=None):
     pdf_path = Path(args.pdf)
     dxf_path = Path(args.dxf)
 
-    out = {}
+    out: dict[str, Any] = {}
     out["pdf_exists"] = pdf_path.exists()
     out["dxf_exists"] = dxf_path.exists()
 
@@ -171,15 +191,15 @@ def main(argv=None):
     if out["pdf_exists"]:
         # If pypdf isn't available, surface a clear exit code for missing dependency.
         if not PYPDF_AVAILABLE:
-            logger.error("pypdf is required to extract PDF text. Install with: pip install pypdf")
+            logger.error(
+                "pypdf is required to extract PDF text. Install with: pip install pypdf"
+            )
             return EXIT_DEP_MISSING
         # Extraction can fail due to file I/O or PDF read errors
         try:
             text = extract_pdf_text(pdf_path)
-        except PdfReadError as e:
-            logger.error("failed reading PDF (PdfReadError): %s", e)
-            return EXIT_VALIDATION
-        except OSError as e:
+        except Exception as e:
+            # Could be PdfReadError, OSError, or other parsing error; log and treat as validation failure
             logger.error("failed extracting PDF text: %s", e)
             return EXIT_VALIDATION
         out["pdf_text_snippet"] = text[:1200]

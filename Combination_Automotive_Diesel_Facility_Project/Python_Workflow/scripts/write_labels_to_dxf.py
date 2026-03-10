@@ -8,9 +8,15 @@ Write equipment labels into DXF based on equipment_bay_mapping.csv.
 
 import os
 from collections import defaultdict
+from types import ModuleType
+from typing import Any, List, Optional, TypedDict, cast
 
+# annotate module variable so mypy knows this may be None when ezdxf
+ezdxf: Optional[ModuleType] = None
 try:
-    import ezdxf
+    import ezdxf as _ezdxf
+
+    ezdxf = _ezdxf
 except ImportError:
     ezdxf = None
 
@@ -53,7 +59,7 @@ def bbox_from_points(points):
 
 def collect_bays_from_dxf(doc):
     msp = doc.modelspace()
-    bays = []
+    bays: List["Bay"] = []
     for e in msp:
         etype = e.dxftype()
         layer = getattr(e.dxf, "layer", "")
@@ -84,9 +90,18 @@ def collect_bays_from_dxf(doc):
     return bays
 
 
-def read_mapping(csv_path):
+def read_mapping(csv_path: str) -> "pd.DataFrame":
     df = pd.read_csv(csv_path)
     return df
+
+
+class MappingRow(TypedDict, total=False):
+    BayName: str
+    BayCX: str
+    BayCY: str
+    EquipID: str
+    Item: str
+    Category: str
 
 
 def write_updated_mapping(df, csv_out, xlsx_out):
@@ -95,7 +110,12 @@ def write_updated_mapping(df, csv_out, xlsx_out):
         df.to_excel(writer, sheet_name="Mapping", index=False)
 
 
-def place_labels(doc, bays, mapping_df, text_layer="TEXT_LABELS"):
+def place_labels(
+    doc: Any,
+    bays: List["Bay"],
+    mapping_df: "pd.DataFrame",
+    text_layer: str = "TEXT_LABELS",
+) -> Any:
     msp = doc.modelspace()
     # ensure label layer exists with chosen color
     if LABEL_LAYER not in doc.layers:
@@ -105,9 +125,10 @@ def place_labels(doc, bays, mapping_df, text_layer="TEXT_LABELS"):
             # older ezdxf/dxf versions might require different creation; ignore if fails
             pass
     # group mapping by BayName
-    groups = defaultdict(list)
+    groups: dict[str, list[MappingRow]] = defaultdict(list)
     for _, row in mapping_df.iterrows():
-        groups[row["BayName"]].append(row)
+        rowd = cast(MappingRow, row.to_dict())
+        groups[rowd.get("BayName", "")].append(rowd)
     # for each bay, compute positions across width
     for b in bays:
         items = groups.get(b.name, [])
@@ -125,7 +146,7 @@ def place_labels(doc, bays, mapping_df, text_layer="TEXT_LABELS"):
             positions.append((x, y))
         # add text for each item
         for item, row in zip(items, positions):
-            label = f"{item['EquipID']} {item['Item']}"
+            label = f"{item.get('EquipID', '')} {item.get('Item', '')}"
             # write label on dedicated equipment label layer for clarity
             txt = msp.add_text(label, dxfattribs={"layer": LABEL_LAYER, "height": 2.5})
             txt.dxf.insert = row
@@ -138,7 +159,9 @@ def main():
     # add EquipID if missing
     if "EquipID" not in df.columns:
         df["EquipID"] = [f"E{str(i + 1).zfill(3)}" for i in range(len(df))]
-    # open dxf
+    # open dxf (ezdxf module is annotated as Optional[ModuleType] above)
+    assert ezdxf is not None, "ezdxf module is required but not available"
+    # now safe to call into ezdxf
     doc = ezdxf.readfile(DXF_IN)
     bays = collect_bays_from_dxf(doc)
     # place labels
@@ -146,7 +169,9 @@ def main():
     # save new dxf
     doc.saveas(DXF_OUT)
     # write updated mapping
-    write_updated_mapping(df, os.path.join(OUT, "equipment_bay_mapping_labeled.csv"), MAPPING_XLSX)
+    write_updated_mapping(
+        df, os.path.join(OUT, "equipment_bay_mapping_labeled.csv"), MAPPING_XLSX
+    )
     print("Wrote labeled DXF:", DXF_OUT)
     print("Wrote labeled mapping CSV/XLSX")
 

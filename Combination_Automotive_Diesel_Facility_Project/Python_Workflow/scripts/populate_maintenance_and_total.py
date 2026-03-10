@@ -30,10 +30,10 @@ def sum_csv_totalcost(path):
                     break
         for row in r:
             if tc_idx is not None and tc_idx < len(row):
-                    try:
-                        total += Decimal(str(row[tc_idx]))
-                    except (InvalidOperation, ValueError):
-                        pass
+                try:
+                    total += Decimal(str(row[tc_idx]))
+                except (InvalidOperation, ValueError):
+                    pass
     return total
 
 
@@ -61,13 +61,19 @@ def extract_subtotal_from_pdf(path):
 
 
 def make_pdf_table(title, rows, subtotal, outpath):
-    from reportlab.lib.pagesizes import letter
-    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
     from reportlab.lib import colors
+    from reportlab.lib.pagesizes import letter
     from reportlab.lib.styles import getSampleStyleSheet
+    from reportlab.platypus import (Paragraph, SimpleDocTemplate, Spacer,
+                                    Table, TableStyle)
 
     doc = SimpleDocTemplate(
-        outpath, pagesize=letter, rightMargin=36, leftMargin=36, topMargin=36, bottomMargin=36
+        outpath,
+        pagesize=letter,
+        rightMargin=36,
+        leftMargin=36,
+        topMargin=36,
+        bottomMargin=36,
     )
     styles = getSampleStyleSheet()
     elems = [Paragraph(title, styles["Title"]), Spacer(1, 12)]
@@ -95,13 +101,19 @@ def make_pdf_table(title, rows, subtotal, outpath):
 
 
 def make_total_pdf(outpath, lines, grand_total):
-    from reportlab.lib.pagesizes import letter
-    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
     from reportlab.lib import colors
+    from reportlab.lib.pagesizes import letter
     from reportlab.lib.styles import getSampleStyleSheet
+    from reportlab.platypus import (Paragraph, SimpleDocTemplate, Spacer,
+                                    Table, TableStyle)
 
     doc = SimpleDocTemplate(
-        outpath, pagesize=letter, rightMargin=36, leftMargin=36, topMargin=36, bottomMargin=36
+        outpath,
+        pagesize=letter,
+        rightMargin=36,
+        leftMargin=36,
+        topMargin=36,
+        bottomMargin=36,
     )
     styles = getSampleStyleSheet()
     elems = [Paragraph("Total_Facility_Cost_Estimate", styles["Title"]), Spacer(1, 12)]

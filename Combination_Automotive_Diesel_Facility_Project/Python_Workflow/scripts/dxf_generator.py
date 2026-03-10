@@ -1,20 +1,14 @@
-"""
-Scaffold DXF generator for Combination Automotive / Diesel Facility
-- Layer definitions
-- Simple parametric bay placement
-- Equipment placeholders
-- Exports a DXF to ../outputs
-
-This is a scaffold: extend functions and data as needed.
-"""
-
-from dataclasses import dataclass
-from typing import List
 import os
+from dataclasses import dataclass
+from types import ModuleType
+from typing import TYPE_CHECKING, Any, List, Optional
 
-# Optional import; ezdxf used to write DXF files. Install via requirements.txt
+# annotate module variable so mypy knows this may be None when ezdxf
+ezdxf: Optional[ModuleType] = None
 try:
-    import ezdxf
+    import ezdxf as _ezdxf
+
+    ezdxf = _ezdxf
 except ImportError:
     ezdxf = None
 
@@ -130,7 +124,9 @@ def create_dxf_document(filename: str = "facility_layout.dxf") -> str:
     return out_path
 
 
-def add_rectangle(msp, x: float, y: float, w: float, h: float, layer: str = "0", lw: float = 0.2):
+def add_rectangle(
+    msp, x: float, y: float, w: float, h: float, layer: str = "0", lw: float = 0.2
+):
     """Add a rectangle as a lightweight polyline on `layer`."""
     points = [(x, y), (x + w, y), (x + w, y + h), (x, y + h), (x, y)]
     msp.add_lwpolyline(points, dxfattribs={"layer": layer, "closed": True})
@@ -155,7 +151,11 @@ def generate_bays(
     x = start_x
     y = start_y
     for i in range(count):
-        bays.append(Bay(x=x, y=y, width=bay_w, depth=bay_d, layer=layer, name=f"{layer}_{i + 1}"))
+        bays.append(
+            Bay(
+                x=x, y=y, width=bay_w, depth=bay_d, layer=layer, name=f"{layer}_{i + 1}"
+            )
+        )
         x += bay_w + spacing
     return bays
 

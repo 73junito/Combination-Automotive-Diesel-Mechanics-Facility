@@ -1,0 +1,13 @@
+DXF Audit Report
+========================================
+
+Entities by type:
+  LWPOLYLINE: 25
+  TEXT: 118
+
+Entities by layer:
+  A-DOOR: 3
+  A-GRID: 36
+  A-WALL-EXT: 1
+  A-WALL-INT: 3
+  ROOM-LABEL: 100

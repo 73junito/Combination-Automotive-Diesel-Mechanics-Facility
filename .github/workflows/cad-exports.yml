@@ -1,0 +1,149 @@
+name: Verify CAD Exports
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  verify-exports:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build cad-converter image (fallback)
+        run: |
+          docker build -t cad-converter docker/cad-converter
+
+      - name: Run export verification (use CAD_EXPORT_CMD or docker fallback)
+        env:
+          CAD_EXPORT_CMD: ${{ env.CAD_EXPORT_CMD }}
+        run: |
+          if [ -n "$CAD_EXPORT_CMD" ]; then
+            echo "Using CAD_EXPORT_CMD from environment"
+            python scripts/export_dxf.py --check-only
+          else
+            echo "CAD_EXPORT_CMD not set. Using docker cad-converter fallback"
+            docker run --rm -v $PWD:/workspace cad-converter --check-only
+          fi
+
+      - name: Install preview tools (poppler + imagemagick)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils imagemagick
+
+      - name: Generate preview PNGs
+        run: |
+          # Try the standard exports folder plus the Python_Workflow outputs
+          python scripts/generate_previews.py \
+            --pdf-dir Drawings/Exports/PDFs \
+            --pdf-dir Combination_Automotive_Diesel_Facility_Project/Python_Workflow \
+            --preview-dir Drawings/Previews
+
+      - name: Generate drawing catalog
+        run: |
+          python scripts/generate_catalog.py
+
+      - name: Detect export differences
+        id: diffcheck
+        run: |
+          if ! git diff --quiet; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            git diff > export_diff.txt || true
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build human-readable summary
+        if: steps.diffcheck.outputs.changed == 'true'
+        run: |
+          set -e
+          # Ensure we have origin/main to compare against
+          git fetch origin main:refs/remotes/origin/main || true
+          # List all files changed in the working tree compared to origin/main
+          CHANGED=$(git diff --name-only origin/main...HEAD || true)
+          echo "All changed files:" > export_summary.txt
+          echo "$CHANGED" >> export_summary.txt
+
+          echo "\nAffected source files:" > summary_body.txt
+          echo "" >> summary_body.txt
+          echo "$CHANGED" | grep '^Drawings/CAD/' | sed 's/^/ - /' >> summary_body.txt || true
+
+          echo "\nMissing or stale exports:" >> summary_body.txt
+          echo "" >> summary_body.txt
+          echo "$CHANGED" | grep '^Drawings/DXF/' | sed 's/^/ - /' >> summary_body.txt || true
+          echo "$CHANGED" | grep '^Drawings/Exports/PDFs/' | sed 's/^/ - /' >> summary_body.txt || true
+
+          # Include up to 3 preview thumbnails for changed CAD files if available
+          echo "\nPreviews (up to 3):" >> summary_body.txt
+          echo "" >> summary_body.txt
+          MAX_PREVIEWS=3
+          PREV_COUNT=0
+          for src in $(echo "$CHANGED" | grep '^Drawings/CAD/' || true); do
+            base=$(basename "$src")
+            stem="${base%.*}"
+            # prefer thumbnail if available
+            preview_thumb=$(find Drawings/Previews -type f -iname "${stem}*.thumb.png" | head -n 1 || true)
+            preview_full=$(find Drawings/Previews -type f -iname "${stem}*.png" | grep -vi "\.thumb\.png$" | head -n 1 || true)
+            if [ -n "$preview_thumb" ]; then
+              if [ -n "$preview_full" ]; then
+                echo " - [![${stem}](${preview_thumb})](${preview_full})" >> summary_body.txt
+              else
+                echo " - ![${stem}](${preview_thumb})" >> summary_body.txt
+              fi
+              PREV_COUNT=$((PREV_COUNT+1))
+            elif [ -n "$preview_full" ]; then
+              echo " - ![${stem}](${preview_full})" >> summary_body.txt
+              PREV_COUNT=$((PREV_COUNT+1))
+            fi
+            if [ "$PREV_COUNT" -ge "$MAX_PREVIEWS" ]; then
+              break
+            fi
+          done
+          if [ "$PREV_COUNT" -eq 0 ]; then
+            echo " - (no previews available)" >> summary_body.txt
+          fi
+
+          # If no lines found, add a placeholder
+          if ! grep -q '^ - ' summary_body.txt; then
+            echo " - (no export file changes detected)" >> summary_body.txt
+          fi
+
+          # Add run instructions
+          echo "\nRun locally to regenerate exports:" >> summary_body.txt
+          echo " - python scripts/export_dxf.py" >> summary_body.txt
+
+          # Combine summary and diff (diff will be added separately in comment)
+          cat summary_body.txt > export_summary.txt
+          echo "\n---\nDiff (trimmed) is attached below in the comment." >> export_summary.txt
+          # Keep a copy for the comment step
+          cp export_summary.txt export_summary_for_comment.txt
+
+      - name: Comment on PR if exports outdated
+        if: steps.diffcheck.outputs.changed == 'true' && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.existsSync('export_summary_for_comment.txt') ? fs.readFileSync('export_summary_for_comment.txt', 'utf8') : '';
+            const diff = fs.existsSync('export_diff.txt') ? fs.readFileSync('export_diff.txt', 'utf8').slice(0, 6000) : '(diff not available)';
+            const body = `⚠️ CAD exports appear out-of-date for this PR.\n\n${summary}\n\n<details>\n<summary>Diff details (truncated)</summary>\n\n```diff\n${diff}\n```\n</details>`;
+            github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: context.issue.number,
+              body
+            });
+
+      - name: Fail if exports changed
+        if: steps.diffcheck.outputs.changed == 'true'
+        run: |
+          git --no-pager diff || true
+          git diff --exit-code

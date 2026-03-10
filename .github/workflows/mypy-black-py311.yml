@@ -1,0 +1,42 @@
+name: Mypy and Black (py311+py312)
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main, chore/types-mypy-py311 ]
+
+jobs:
+  typecheck:
+    name: Type check + format check (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ "${{ matrix.python-version }}" = "3.12" ]; then
+            pip install -r Combination_Automotive_Diesel_Facility_Project/Python_Workflow/requirements-py312.txt || pip install mypy black
+          else
+            pip install -r Combination_Automotive_Diesel_Facility_Project/Python_Workflow/requirements-dev.txt || pip install mypy black
+          fi
+
+      - name: Run Black (check)
+        run: |
+          black --version
+          black --check .
+
+      - name: Run mypy
+        run: |
+          mypy --version
+          mypy --config-file mypy.ini Combination_Automotive_Diesel_Facility_Project/Python_Workflow

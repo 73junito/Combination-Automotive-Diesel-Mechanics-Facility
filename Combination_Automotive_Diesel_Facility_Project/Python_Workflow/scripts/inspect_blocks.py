@@ -1,7 +1,13 @@
 import os
+from types import ModuleType
+from typing import Any, Optional
 
+# annotate module variable so mypy knows this may be None when ezdxf
+ezdxf: Optional[ModuleType] = None
 try:
-    import ezdxf
+    import ezdxf as _ezdxf
+
+    ezdxf = _ezdxf
 except ImportError:
     ezdxf = None
 ROOT = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", ".."))

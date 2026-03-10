@@ -1,15 +1,17 @@
 import os
-import ezdxf
 from collections import Counter
+from typing import Any
+
+import ezdxf
 
 
-def analyze_dxf(path):
+def analyze_dxf(path: str) -> dict[str, Any]:
     try:
         doc = ezdxf.readfile(path)
-    except Exception as e:
-        return {"file": path, "error": str(e)}
-    entities = Counter()
-    layer_set = set()
+    except Exception as exc:
+        return {"file": path, "error": str(exc)}
+    entities: Counter[str] = Counter()
+    layer_set: set[str] = set()
     total = 0
     msp = doc.modelspace()
     for e in msp:

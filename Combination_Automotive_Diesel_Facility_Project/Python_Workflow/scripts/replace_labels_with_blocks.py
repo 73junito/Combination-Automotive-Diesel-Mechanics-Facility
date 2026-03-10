@@ -5,11 +5,17 @@ Replace TEXT/MTEXT labels on EQUIP_LABELS with block references.
 - Saves output as `facility_layout_blocks.dxf` in the `outputs` folder.
 """
 
-import os
 import csv
+import os
+from types import ModuleType
+from typing import Any, Optional
 
+# annotate module variable so mypy knows this may be None when ezdxf
+ezdxf: Optional[ModuleType] = None
 try:
-    import ezdxf
+    import ezdxf as _ezdxf
+
+    ezdxf = _ezdxf
 except ImportError:
     ezdxf = None
 
@@ -27,9 +33,9 @@ TEXT_HEIGHT = 3.0
 COLOR_PALETTE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
-def load_mapping(path):
-    mapping = {}
-    categories = []
+def load_mapping(path: str) -> tuple[dict[str, str], list[str]]:
+    mapping: dict[str, str] = {}
+    categories: list[str] = []
     if not os.path.exists(path):
         return mapping, categories
     with open(path, newline="", encoding="utf-8") as fh:

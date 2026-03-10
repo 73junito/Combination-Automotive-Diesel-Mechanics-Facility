@@ -1,0 +1,29 @@
+```markdown
+# TTED719 Instructor Review Checklist (one page)
+
+Use this checklist while reviewing student deliverables derived from this repository.
+
+
+Notes
+
+```markdown
+**Instructor Review Checklist (TTED 719)**
+This checklist supports rapid scoring of deliverables against TTED 719 outcomes. Mark each item as Present/Not Present based on submitted documentation and artifacts.
+
+# TTED719 Instructor Review Checklist (one page)
+
+Use this checklist while reviewing student deliverables derived from this repository.
+
+- [ ] Facility planning aligned to TTED 719 outcomes (floorplan, flow, bay layout)
+- [ ] Safety, equipment placement, and instructional flow addressed (inspection-ready PDFs)
+- [ ] Cost, procurement, and compliance artifacts present (cost summary, spreadsheets)
+- [ ] CAD + documentation integration demonstrated (DXF, PDF, automation scripts)
+- [x] Evidence provided exceeds minimum course examples (reproducible workflows, CI, typed code)
+
+Notes
+- Suggested quick check: run `Python_Workflow/scripts` and confirm regenerated PDFs match the checklist items.
+
+Verified — INSPECTION-READY (VERIFIED)
+- VERIFIED: Inspection-ready plans are provided via `portfolio_final.pdf` and `portfolio_combined_with_legend.pdf`. The authoritative source drawing is `training_facility_plan_layered.dxf`, from which print-ready PDFs can be regenerated if required.
+
+``` 

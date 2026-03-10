@@ -28,7 +28,16 @@ print("EXTRACTED TEXT SNIPPET:")
 for t in texts[:200]:
     print("-", t)
 
-keywords = ["project", "author", "sheet", "date", "revision", "scale", "north", "legend"]
+keywords = [
+    "project",
+    "author",
+    "sheet",
+    "date",
+    "revision",
+    "scale",
+    "north",
+    "legend",
+]
 found = {k: any(k in s.lower() for s in texts) for k in keywords}
 print("\nKEYWORD PRESENCE:")
 for k, v in found.items():

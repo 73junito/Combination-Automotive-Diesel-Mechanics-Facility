@@ -4,9 +4,10 @@ Usage: run from repo root with virtualenv active.
 """
 
 import os
+from textwrap import wrap
+
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-from textwrap import wrap
 
 
 def txt_to_pdf(txt_path, pdf_path, page_size=letter, margin=72):

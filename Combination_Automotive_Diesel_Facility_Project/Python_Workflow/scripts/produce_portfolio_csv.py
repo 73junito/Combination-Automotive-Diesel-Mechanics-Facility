@@ -6,10 +6,17 @@ Produce a portfolio-ready CSV combining bay geometry, assigned items, and costs.
 """
 
 import os
+from types import ModuleType
+from typing import Any, List, Optional, TypedDict, cast
+
 import pandas as pd
 
+# annotate module variable so mypy knows this may be None when ezdxf
+ezdxf: Optional[ModuleType] = None
 try:
-    import ezdxf
+    import ezdxf as _ezdxf
+
+    ezdxf = _ezdxf
 except ImportError:
     ezdxf = None
 
@@ -31,7 +38,10 @@ def collect_bays_from_dxf(path):
     for e in msp:
         etype = e.dxftype()
         layer = getattr(e.dxf, "layer", "")
-        if etype in ("LWPOLYLINE", "POLYLINE") and layer in ("AUTO_BAYS", "DIESEL_BAYS"):
+        if etype in ("LWPOLYLINE", "POLYLINE") and layer in (
+            "AUTO_BAYS",
+            "DIESEL_BAYS",
+        ):
             try:
                 pts = (
                     list(e.get_points())
@@ -59,6 +69,17 @@ def collect_bays_from_dxf(path):
                 }
             )
     return bays
+
+
+class MappingRow(TypedDict, total=False):
+    BayLayer: str
+    BayName: str
+    BayCX: str
+    BayCY: str
+    EquipID: str
+    Item: str
+    Category: str
+    UnitCost: Any
 
 
 def load_mapping():
@@ -103,7 +124,9 @@ def build_portfolio():
     # if BayName missing in mapping, attempt to set using BayLayer sequence
     if "BayName" not in mapping.columns or mapping["BayName"].isnull().all():
         mapping["BayName"] = (
-            mapping["BayLayer"] + "_" + (mapping.groupby("BayLayer").cumcount() + 1).astype(str)
+            mapping["BayLayer"]
+            + "_"
+            + (mapping.groupby("BayLayer").cumcount() + 1).astype(str)
         )
 
     # collect bay centroids from DXF for geometry reference
@@ -116,8 +139,9 @@ def build_portfolio():
 
     rows = []
     for _, row in mapping.iterrows():
-        bay_layer = row.get("BayLayer")
-        bay_name = row.get("BayName")
+        rowd = cast(MappingRow, row.to_dict())
+        bay_layer = rowd.get("BayLayer")
+        bay_name = rowd.get("BayName")
         # attempt to find bay by name; fall back to nearest cx
         bay = None
         # try exact match by BayName against mapping of bays from earlier scripts
@@ -129,7 +153,7 @@ def build_portfolio():
                 break
         # fallback match by layer and nearest center x
         try:
-            cx = float(row.get("BayCX", 0))
+            cx = float(rowd.get("BayCX", 0) or 0)
             key = (bay_layer, round(cx, 1))
             bay = bay_lookup.get(key)
         except (TypeError, ValueError):
@@ -141,22 +165,22 @@ def build_portfolio():
                     bay = b
                     break
         # assemble portfolio row
-        unit_cost = row.get("UnitCost")
+        unit_cost = rowd.get("UnitCost")
         if pd.isna(unit_cost) or unit_cost == "" or unit_cost is None:
             # try lookup by item name
             item = row.get("Item", "")
             unit_cost = costs_key.get(item, "")
         rows.append(
             {
-                "EquipID": row.get("EquipID", ""),
+                "EquipID": rowd.get("EquipID", ""),
                 "BayLayer": bay_layer,
                 "BayName": bay_name,
-                "BayCX": row.get("BayCX", "") if "BayCX" in row else (bay["BayCX"] if bay else ""),
-                "BayCY": row.get("BayCY", "") if "BayCY" in row else (bay["BayCY"] if bay else ""),
+                "BayCX": rowd.get("BayCX", (bay["BayCX"] if bay else "")),
+                "BayCY": rowd.get("BayCY", (bay["BayCY"] if bay else "")),
                 "BayWidth": bay["BayWidth"] if bay else "",
                 "BayHeight": bay["BayHeight"] if bay else "",
-                "Item": row.get("Item", ""),
-                "Category": row.get("Category", ""),
+                "Item": rowd.get("Item", ""),
+                "Category": rowd.get("Category", ""),
                 "UnitCost": unit_cost,
             }
         )

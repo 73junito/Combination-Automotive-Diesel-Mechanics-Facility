@@ -49,12 +49,18 @@ def check_pdf(name, path):
         print(line)
     # checks
     has_title = bool(
-        re.search(r"Essential|Nonessential|Furniture|Maintenance|Total", text, re.IGNORECASE)
+        re.search(
+            r"Essential|Nonessential|Furniture|Maintenance|Total", text, re.IGNORECASE
+        )
     )
-    has_columns = bool(re.search(r"Item\s+Qty|Quantity|Unit Cost|Total", text, re.IGNORECASE))
+    has_columns = bool(
+        re.search(r"Item\s+Qty|Quantity|Unit Cost|Total", text, re.IGNORECASE)
+    )
     has_currency = bool(re.search(r"\$\s*\d|\d,\d{3}", text))
     has_subtotal = bool(
-        re.search(r"Subtotal|Total Facility|Grand total|Grand Total", text, re.IGNORECASE)
+        re.search(
+            r"Subtotal|Total Facility|Grand total|Grand Total", text, re.IGNORECASE
+        )
     )
     print(
         "has_title:",
