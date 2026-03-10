@@ -24,12 +24,12 @@ def add_box(name, x, y, z, sx, sy, sz, mat=None):
 # ---------- Materials ----------
 def make_mat(name, color):
     mat = bpy.data.materials.new(name=name)
-    mat.use_nodes = True  # ensure node tree is active in headless/background mode
-    bsdf = mat.node_tree.nodes.get("Principled BSDF")
-    if bsdf:
-        bsdf.inputs["Base Color"].default_value = (*color, 1.0)
+    # Use Principled BSDF if available
+    if mat.node_tree:
+        bsdf = mat.node_tree.nodes.get("Principled BSDF")
+        if bsdf:
+            bsdf.inputs["Base Color"].default_value = (*color, 1.0)
     else:
-        mat.use_nodes = False
         mat.diffuse_color = (*color, 1.0)
     return mat
 
@@ -237,6 +237,8 @@ def render_turntable(output_dir="/tmp/renders", frames=120, res_x=1280, res_y=72
     cam = scene.camera
     if cam is None:
         print("No camera found; skipping turntable")
+        bpy.context.collection.objects.unlink(empty)
+        bpy.data.objects.remove(empty)
         return []
 
     cam_parent_orig = cam.parent
@@ -254,8 +256,10 @@ def render_turntable(output_dir="/tmp/renders", frames=120, res_x=1280, res_y=72
         bpy.ops.render.render(write_still=True)
         frame_paths.append(fname)
 
-    # restore parent
+    # restore parent and remove temporary empty
     cam.parent = cam_parent_orig
+    bpy.context.collection.objects.unlink(empty)
+    bpy.data.objects.remove(empty)
 
     print(f"Rendered {len(frame_paths)} turntable frames in {output_dir}")
     return frame_paths
