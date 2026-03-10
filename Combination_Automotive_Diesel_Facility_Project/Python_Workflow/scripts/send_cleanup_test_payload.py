@@ -117,8 +117,6 @@ def build_payload(
 
     return {"blocks": payload_blocks}
 
-    # (new Blocks returned above)
-
 
 def post_webhook(url: str, payload: dict) -> None:
     data = json.dumps(payload).encode("utf-8")
