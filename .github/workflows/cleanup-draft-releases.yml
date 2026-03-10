@@ -58,7 +58,29 @@ jobs:
                   const runMatch = rel.tag_name.match(/^mep-loadmap-pr-(\d+)-run-(\d+)/);
                   const runNum = runMatch ? runMatch[2] : '';
                   const linkText = runMatch ? `PR #${pr} – run ${runNum}` : rel.tag_name;
-                  deletedReleases.push(`<${htmlUrl}|${linkText}>${rel.name ? ' – ' + rel.name : ''} (created ${rel.created_at})`);
+                  // fetch assets for the release (if any) so we can include asset links in the notification
+                  let assetLines = [];
+                  try {
+                    const assetsResp = await github.rest.repos.listReleaseAssets({ owner: context.repo.owner, repo: context.repo.repo, release_id: rel.id, per_page: 100 });
+                    const assets = assetsResp.data || [];
+                    const maxAssets = 3;
+                    for (let a = 0; a < Math.min(assets.length, maxAssets); a++) {
+                      const as = assets[a];
+                      const adl = as.browser_download_url || as.url;
+                      assetLines.push(`<${adl}|${as.name}>`);
+                    }
+                    if (assets.length > maxAssets) {
+                      assetLines.push(`…and ${assets.length - maxAssets} more asset(s)`);
+                    }
+                  } catch (err) {
+                    core.info(`Failed to list assets for release ${rel.id}: ${err.message}`);
+                  }
+
+                  let entry = `<${htmlUrl}|${linkText}>${rel.name ? ' – ' + rel.name : ''} (created ${rel.created_at})`;
+                  if (assetLines.length > 0) {
+                    entry += `\nAssets: ${assetLines.join(' · ')}`;
+                  }
+                  deletedReleases.push(entry);
                   await github.rest.repos.deleteRelease({ owner: context.repo.owner, repo: context.repo.repo, release_id: rel.id });
                   deleted += 1;
                 }
