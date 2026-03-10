@@ -1,8 +1,5 @@
 name: Render Blender Model (GLTF + Turntable)
 
-permissions:
-  contents: read
-
 on:
   push:
     branches:
