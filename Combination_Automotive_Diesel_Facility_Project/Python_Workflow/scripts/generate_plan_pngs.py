@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import cairosvg
 from PIL import Image
 
@@ -7,13 +8,16 @@ OUT_DIR = SCRIPTS_DIR
 
 SVG_GLOB = "facility_*.svg"
 
+
 def svg_to_png(svg_path: Path, png_path: Path):
     cairosvg.svg2png(url=str(svg_path), write_to=str(png_path))
+
 
 def make_thumbnail(png_path: Path, thumb_path: Path, max_size=(420, 240)):
     with Image.open(png_path) as im:
         im.thumbnail(max_size)
         im.save(thumb_path, format="PNG")
+
 
 def main():
     svgs = sorted(SCRIPTS_DIR.glob(SVG_GLOB))
@@ -31,6 +35,7 @@ def main():
         make_thumbnail(png, thumb)
 
     print("All conversions complete.")
+
 
 if __name__ == "__main__":
     main()
