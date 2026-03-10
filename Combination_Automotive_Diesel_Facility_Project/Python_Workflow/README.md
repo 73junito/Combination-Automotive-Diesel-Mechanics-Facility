@@ -127,3 +127,21 @@ The PNG thumbnails below are produced by the automated CI job (`.github/workflow
 	![Exterior Thumb](Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/thumbs/facility_exterior_elevation.thumb.png)
 
 Note: the repository includes a CI workflow that converts these SVGs to PNGs and thumbnail images and uploads them as workflow artifacts. See `.github/workflows/render-plans-to-png.yml` — artifacts are uploaded as `facility-plan-pngs` and `facility-plan-thumbs` on each run.
+
+## Blender 3D model (programmatic)
+
+A Blender script is provided to generate a base 3D model of the facility from the programmatic dimensions. The script is:
+
+- `Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/build_facility_3d.py`
+
+Run it inside Blender (recommended) or headless on CI runners that have Blender installed. Example command (adjust Blender executable path as needed):
+
+```bash
+# Interactive (open Blender and run script from Text Editor or run via command line)
+blender --python Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/build_facility_3d.py
+
+# Headless (background) render-only run
+blender --background --python Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/build_facility_3d.py --render-output //renders/frame_ -noaudio --render-frame 1
+```
+
+The script creates a simple, parameterized building shell, service bays, parking, and basic materials. Use Blender to refine materials, add interiors, or export to FBX/GLTF/USD as needed.
