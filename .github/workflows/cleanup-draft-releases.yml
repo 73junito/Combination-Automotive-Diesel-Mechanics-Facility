@@ -44,6 +44,7 @@ jobs:
             }
 
             let deleted = 0;
+            const deletedReleases = [];
             for (const pr of Object.keys(groups)) {
               const items = groups[pr].sort((a,b)=> new Date(b.created_at) - new Date(a.created_at));
               for (let i = 0; i < items.length; i++) {
@@ -54,20 +55,39 @@ jobs:
                   core.info(`Deleting release ${rel.name||rel.tag_name} (${rel.id}) for PR ${pr}`);
                   await github.rest.repos.deleteRelease({ owner: context.repo.owner, repo: context.repo.repo, release_id: rel.id });
                   deleted += 1;
+                  deletedReleases.push(`${rel.tag_name} (${rel.name||''}) created ${rel.created_at}`);
                 }
               }
             }
 
             core.info(`Prune complete — deleted ${deleted} releases.`);
 
-            // send webhook notification if configured and deletions occurred
+            // send Slack Blocks webhook notification if configured and deletions occurred
             const webhook = process.env.CLEANUP_WEBHOOK_URL;
             if (webhook && deleted > 0) {
-              const payload = JSON.stringify({
-                text: `MEP cleanup: deleted ${deleted} draft release(s) (keepPerPr=${keepPerPr}, minAgeDays=${minAgeDays}).`
-              });
+              // prepare a Slack Blocks payload
+              const maxList = 10;
+              const listItems = deletedReleases || [];
+              let deletedSectionText = '';
+              if (listItems.length === 0) {
+                deletedSectionText = `${deleted} releases deleted.`;
+              } else if (listItems.length <= maxList) {
+                deletedSectionText = listItems.map(i => `• ${i}`).join('\n');
+              } else {
+                deletedSectionText = listItems.slice(0, maxList).map(i => `• ${i}`).join('\n') + `\n…and ${listItems.length - maxList} more.`;
+              }
+
+              const payloadObj = {
+                blocks: [
+                  { type: 'header', text: { type: 'plain_text', text: 'Draft Release Cleanup Summary' } },
+                  { type: 'section', text: { type: 'mrkdwn', text: `*Retention:* keep ${keepPerPr} per PR · delete drafts older than ${minAgeDays} days` } },
+                  { type: 'section', text: { type: 'mrkdwn', text: `*Deleted releases:*\n${deletedSectionText}` } },
+                  { type: 'context', elements: [ { type: 'mrkdwn', text: `Repository: ${process.env.GITHUB_REPOSITORY} • Workflow: cleanup-draft-releases • Run: ${process.env.GITHUB_RUN_ID}` } ] }
+                ]
+              };
+
+              const payload = JSON.stringify(payloadObj);
               try {
-                const url = new URL(webhook);
                 const options = {
                   method: 'POST',
                   headers: {
