@@ -28,7 +28,7 @@ def run_cmd(cmdarray, workingdir, captureout=False):
     proc_out, proc_err = proc.communicate()
     if proc.returncode != 0:
         raise RuntimeError("Failure to run command")
-    return stdout, stderr
+    return proc_out, proc_err
 
 
 def generate_templates(installer_version, tag_version):
@@ -58,7 +58,7 @@ def run_constructor():
 
 
 def main():
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         usage()
         return
     installer_version = sys.argv[1]
