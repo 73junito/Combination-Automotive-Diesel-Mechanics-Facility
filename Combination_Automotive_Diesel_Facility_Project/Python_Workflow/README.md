@@ -110,7 +110,20 @@ with the source scripts.
 
 	![Plumbing Plan](Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/facility_plumbing_plan.svg)
 
-Note: the repository includes a CI workflow that converts these SVGs to PNGs and
-thumbnail images and uploads them as workflow artifacts. See
-`.github/workflows/render-plans-to-png.yml` — artifacts are uploaded as
-`facility-plan-pngs` and `facility-plan-thumbs` on each run.
+### PNG thumbnails (CI-generated)
+
+The PNG thumbnails below are produced by the automated CI job (`.github/workflows/render-plans-to-png.yml`) and are stored under `Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/thumbs` when present. If they are not available in-tree you can download them from the workflow run artifacts (`facility-plan-thumbs`).
+
+- **Electrical (thumbnail)**  
+	![Electrical Thumb](Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/thumbs/facility_electrical_plan.thumb.png)
+
+- **HVAC (thumbnail)**  
+	![HVAC Thumb](Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/thumbs/facility_hvac_plan.thumb.png)
+
+- **Plumbing (thumbnail)**  
+	![Plumbing Thumb](Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/thumbs/facility_plumbing_plan.thumb.png)
+
+- **Exterior elevation (thumbnail)**  
+	![Exterior Thumb](Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/thumbs/facility_exterior_elevation.thumb.png)
+
+Note: the repository includes a CI workflow that converts these SVGs to PNGs and thumbnail images and uploads them as workflow artifacts. See `.github/workflows/render-plans-to-png.yml` — artifacts are uploaded as `facility-plan-pngs` and `facility-plan-thumbs` on each run.
