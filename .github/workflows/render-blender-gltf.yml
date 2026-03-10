@@ -1,0 +1,51 @@
+name: Render Blender Model (GLTF + Turntable)
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+      - chore/types-mypy-py311
+  workflow_dispatch:
+
+jobs:
+  render:
+    name: Render facility model with Blender (GLTF + Turntable)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Blender + FFmpeg + EGL/GL packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y blender libegl1-mesa libgl1-mesa-dri libgbm1 ffmpeg
+
+      - name: Prepare output directory
+        run: |
+          mkdir -p Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/renders
+
+      - name: Run Blender: export GLTF/FBX and render turntable
+        run: |
+          blender --version
+          blender --background --python Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/build_facility_3d.py -- --export --turntable --frames 120 --res-x 1280 --res-y 720 --output-dir Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/renders
+
+      - name: Encode turntable to MP4 + GIF
+        run: |
+          cd Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/renders
+          # create mp4
+          ffmpeg -y -framerate 24 -i frame_%04d.png -c:v libx264 -pix_fmt yuv420p turntable.mp4
+          # create smaller gif
+          ffmpeg -y -i turntable.mp4 -vf "fps=15,scale=640:-1:flags=lanczos" -loop 0 turntable.gif
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: blender-gltf-turntable
+          path: |
+            Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/renders/facility_model.glb
+            Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/renders/facility_model.fbx
+            Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/renders/turntable.mp4
+            Combination_Automotive_Diesel_Facility_Project/Python_Workflow/outputs/renders/turntable.gif

@@ -3,7 +3,12 @@ name: Cleanup draft MEP releases
 on:
   schedule:
     - cron: '0 3 * * 1'  # weekly on Monday at 03:00 UTC
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      notify_threshold:
+        description: 'Minimum number of deletions required to send Slack notification'
+        required: false
+        default: '3'
 
 jobs:
   prune:
@@ -15,6 +20,7 @@ jobs:
         uses: actions/github-script@v6
         env:
           CLEANUP_WEBHOOK_URL: ${{ secrets.CLEANUP_WEBHOOK_URL }}
+          CLEANUP_NOTIFY_THRESHOLD: ${{ github.event.inputs.notify_threshold || '3' }}
         with:
           script: |
             const core = require('@actions/core');
@@ -44,6 +50,7 @@ jobs:
             }
 
             let deleted = 0;
+            const notifyThreshold = parseInt(process.env.CLEANUP_NOTIFY_THRESHOLD || '3', 10);
             const deletedReleases = [];
             for (const pr of Object.keys(groups)) {
               const items = groups[pr].sort((a,b)=> new Date(b.created_at) - new Date(a.created_at));
@@ -89,9 +96,9 @@ jobs:
 
             core.info(`Prune complete — deleted ${deleted} releases.`);
 
-            // send Slack Blocks webhook notification if configured and deletions occurred
+            // send Slack Blocks webhook notification if configured and deletions meet threshold
             const webhook = process.env.CLEANUP_WEBHOOK_URL;
-            if (webhook && deleted > 0) {
+            if (webhook && deleted >= notifyThreshold) {
               // prepare a Slack Blocks payload
               const maxList = 10;
               const listItems = deletedReleases || [];
@@ -104,14 +111,27 @@ jobs:
                 deletedSectionText = listItems.slice(0, maxList).map(i => `• ${i}`).join('\n') + `\n…and ${listItems.length - maxList} more.`;
               }
 
-              const payloadObj = {
-                blocks: [
-                  { type: 'header', text: { type: 'plain_text', text: 'Draft Release Cleanup Summary' } },
-                  { type: 'section', text: { type: 'mrkdwn', text: `*Retention:* keep ${keepPerPr} per PR · delete drafts older than ${minAgeDays} days` } },
-                  { type: 'section', text: { type: 'mrkdwn', text: `*Deleted releases:*\n${deletedSectionText}` } },
-                  { type: 'context', elements: [ { type: 'mrkdwn', text: `Repository: ${process.env.GITHUB_REPOSITORY} • Workflow: cleanup-draft-releases • Run: ${process.env.GITHUB_RUN_ID}` } ] }
-                ]
-              };
+              // Build Blocks with a summary and divider-separated release entries for readability
+              const payloadBlocks = [];
+              payloadBlocks.push({ type: 'header', text: { type: 'plain_text', text: 'Draft Release Cleanup Summary' } });
+              payloadBlocks.push({ type: 'section', text: { type: 'mrkdwn', text: `*Retention:* keep ${keepPerPr} per PR · delete drafts older than ${minAgeDays} days · notify threshold: ${notifyThreshold}` } });
+              payloadBlocks.push({ type: 'section', text: { type: 'mrkdwn', text: "This cleanup keeps the repository tidy and prevents clutter from automated PR runs. See <https://github.com/73junito/Combination-Automotive-Diesel-Mechanics-Facility/blob/chore/types-mypy-py311/Combination_Automotive_Diesel_Facility_Project/Python_Workflow/README.md|Cleanup docs> for details." } });
+
+              // Summary line showing total deleted
+              payloadBlocks.push({ type: 'section', text: { type: 'mrkdwn', text: `*Summary:* ${deleted} draft release${deleted === 1 ? '' : 's'} deleted` } });
+
+              // Add each deleted release as its own section with a divider between entries
+              for (let idx = 0; idx < listItems.length; idx++) {
+                payloadBlocks.push({ type: 'section', text: { type: 'mrkdwn', text: listItems[idx] } });
+                if (idx !== listItems.length - 1) {
+                  payloadBlocks.push({ type: 'divider' });
+                }
+              }
+
+              // Context footer
+              payloadBlocks.push({ type: 'context', elements: [ { type: 'mrkdwn', text: `Repository: ${process.env.GITHUB_REPOSITORY} • Workflow: cleanup-draft-releases • Run: ${process.env.GITHUB_RUN_ID}` } ] });
+
+              const payloadObj = { blocks: payloadBlocks };
 
               const payload = JSON.stringify(payloadObj);
               try {
@@ -131,6 +151,8 @@ jobs:
               } catch (err) {
                 core.info(`Failed to send webhook: ${err.message}`);
               }
+            } else if (webhook) {
+              core.info(`Deleted ${deleted} releases, which is below the notify threshold (${notifyThreshold}); skipping notification.`);
             } else {
               core.info('No webhook configured or no deletions; skipping notification.');
             }

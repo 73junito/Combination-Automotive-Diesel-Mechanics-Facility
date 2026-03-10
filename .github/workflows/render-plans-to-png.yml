@@ -10,9 +10,6 @@ on:
       - 'Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/**'
   workflow_dispatch: {}
 
-permissions:
-  contents: read
-
 jobs:
   render-plans:
     name: Render SVGs to PNGs and upload

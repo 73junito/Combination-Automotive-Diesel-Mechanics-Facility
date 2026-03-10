@@ -193,3 +193,99 @@ bpy.context.collection.objects.link(light_obj)
 light_obj.location = (bld_w, bld_d, bld_h * 2)
 
 print("3D facility created.")
+
+
+def export_scene(output_dir="/tmp/renders"):
+    import os
+
+    os.makedirs(output_dir, exist_ok=True)
+    gltf_path = os.path.join(output_dir, "facility_model.glb")
+    fbx_path = os.path.join(output_dir, "facility_model.fbx")
+
+    try:
+        bpy.ops.export_scene.gltf(filepath=gltf_path, export_format="GLB")
+    except Exception as e:
+        print(f"GLTF export failed: {e}")
+
+    try:
+        bpy.ops.export_scene.fbx(filepath=fbx_path, path_mode="AUTO")
+    except Exception as e:
+        print(f"FBX export failed: {e}")
+
+    print(f"Exported GLB: {gltf_path}")
+    print(f"Exported FBX: {fbx_path}")
+    return gltf_path, fbx_path
+
+
+def render_turntable(output_dir="/tmp/renders", frames=120, res_x=1280, res_y=720):
+    import os
+    from math import radians
+
+    os.makedirs(output_dir, exist_ok=True)
+
+    scene = bpy.context.scene
+    scene.render.image_settings.file_format = "PNG"
+    scene.render.resolution_x = res_x
+    scene.render.resolution_y = res_y
+    scene.render.resolution_percentage = 100
+
+    # Create empty at origin
+    empty = bpy.data.objects.new("TurntableEmpty", None)
+    bpy.context.collection.objects.link(empty)
+
+    # Parent camera to empty and position it
+    cam = scene.camera
+    if cam is None:
+        print("No camera found; skipping turntable")
+        return []
+
+    cam_parent_orig = cam.parent
+    cam.location = (bld_w * 1.2, 0.0, bld_h * 0.8)
+    cam.rotation_euler = (1.0, 0.0, 1.57)
+    cam.parent = empty
+
+    frame_paths = []
+    for f in range(frames):
+        angle = (360.0 / frames) * f
+        empty.rotation_euler[2] = radians(angle)
+        scene.frame_set(f + 1)
+        fname = os.path.join(output_dir, f"frame_{f:04d}.png")
+        scene.render.filepath = fname
+        bpy.ops.render.render(write_still=True)
+        frame_paths.append(fname)
+
+    # restore parent
+    cam.parent = cam_parent_orig
+
+    print(f"Rendered {len(frame_paths)} turntable frames in {output_dir}")
+    return frame_paths
+
+
+if __name__ == "__main__":
+    import argparse
+    import sys
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--export", action="store_true", help="Export GLTF/FBX")
+    parser.add_argument("--turntable", action="store_true", help="Render turntable")
+    parser.add_argument("--frames", type=int, default=120, help="Turntable frames")
+    parser.add_argument("--res-x", type=int, default=1280, help="Render width")
+    parser.add_argument("--res-y", type=int, default=720, help="Render height")
+    parser.add_argument(
+        "--output-dir", type=str, default="/tmp/renders", help="Output directory"
+    )
+
+    # argparse doesn't parse after Blender's args cleanly; pull args after '--'
+    argv = sys.argv[sys.argv.index("--") + 1 :] if "--" in sys.argv else sys.argv[1:]
+    args = parser.parse_args(argv)
+
+    if args.export:
+        export_scene(args.output_dir)
+
+    if args.turntable:
+        render_turntable(
+            output_dir=args.output_dir,
+            frames=args.frames,
+            res_x=args.res_x,
+            res_y=args.res_y,
+        )
