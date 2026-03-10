@@ -1,0 +1,136 @@
+name: Cleanup draft MEP releases
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'  # weekly on Monday at 03:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Prune old draft releases
+        uses: actions/github-script@v6
+        env:
+          CLEANUP_WEBHOOK_URL: ${{ secrets.CLEANUP_WEBHOOK_URL }}
+        with:
+          script: |
+            const core = require('@actions/core');
+            const https = require('https');
+            const prefix = 'mep-loadmap-pr-';
+            const keepPerPr = 3;
+            const minAgeDays = 14;
+            const now = new Date();
+
+            // list all releases
+            const releases = await github.paginate(github.rest.repos.listReleases, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100,
+            });
+
+            // filter draft releases with our prefix
+            const drafts = releases.filter(r => r.draft && r.tag_name && r.tag_name.startsWith(prefix));
+
+            // group by PR number parsed from tag: mep-loadmap-pr-<PR>-run-<RUN>
+            const groups = {};
+            for (const r of drafts) {
+              const m = r.tag_name.match(/^mep-loadmap-pr-(\d+)-run-(\d+)/);
+              const pr = m ? m[1] : 'unknown';
+              groups[pr] = groups[pr] || [];
+              groups[pr].push(r);
+            }
+
+            let deleted = 0;
+            const deletedReleases = [];
+            for (const pr of Object.keys(groups)) {
+              const items = groups[pr].sort((a,b)=> new Date(b.created_at) - new Date(a.created_at));
+              for (let i = 0; i < items.length; i++) {
+                const rel = items[i];
+                const ageDays = (now - new Date(rel.created_at)) / (1000*60*60*24);
+                // delete if older than minAgeDays OR beyond keepPerPr
+                if (i >= keepPerPr || ageDays > minAgeDays) {
+                  core.info(`Deleting release ${rel.name||rel.tag_name} (${rel.id}) for PR ${pr}`);
+                  // capture URL and format link text as PR number + run before deletion
+                  const htmlUrl = rel.html_url || `https://github.com/${context.repo.owner}/${context.repo.repo}/releases/tag/${encodeURIComponent(rel.tag_name)}`;
+                  const runMatch = rel.tag_name.match(/^mep-loadmap-pr-(\d+)-run-(\d+)/);
+                  const runNum = runMatch ? runMatch[2] : '';
+                  const linkText = runMatch ? `PR #${pr} – run ${runNum}` : rel.tag_name;
+                  // fetch assets for the release (if any) so we can include asset links in the notification
+                  let assetLines = [];
+                  try {
+                    const assetsResp = await github.rest.repos.listReleaseAssets({ owner: context.repo.owner, repo: context.repo.repo, release_id: rel.id, per_page: 100 });
+                    const assets = assetsResp.data || [];
+                    const maxAssets = 3;
+                    for (let a = 0; a < Math.min(assets.length, maxAssets); a++) {
+                      const as = assets[a];
+                      const adl = as.browser_download_url || as.url;
+                      assetLines.push(`<${adl}|${as.name}>`);
+                    }
+                    if (assets.length > maxAssets) {
+                      assetLines.push(`…and ${assets.length - maxAssets} more asset(s)`);
+                    }
+                  } catch (err) {
+                    core.info(`Failed to list assets for release ${rel.id}: ${err.message}`);
+                  }
+
+                  let entry = `<${htmlUrl}|${linkText}>${rel.name ? ' – ' + rel.name : ''} (created ${rel.created_at})`;
+                  if (assetLines.length > 0) {
+                    entry += `\nAssets: ${assetLines.join(' · ')}`;
+                  }
+                  deletedReleases.push(entry);
+                  await github.rest.repos.deleteRelease({ owner: context.repo.owner, repo: context.repo.repo, release_id: rel.id });
+                  deleted += 1;
+                }
+              }
+            }
+
+            core.info(`Prune complete — deleted ${deleted} releases.`);
+
+            // send Slack Blocks webhook notification if configured and deletions occurred
+            const webhook = process.env.CLEANUP_WEBHOOK_URL;
+            if (webhook && deleted > 0) {
+              // prepare a Slack Blocks payload
+              const maxList = 10;
+              const listItems = deletedReleases || [];
+              let deletedSectionText = '';
+              if (listItems.length === 0) {
+                deletedSectionText = `${deleted} releases deleted.`;
+              } else if (listItems.length <= maxList) {
+                deletedSectionText = listItems.map(i => `• ${i}`).join('\n');
+              } else {
+                deletedSectionText = listItems.slice(0, maxList).map(i => `• ${i}`).join('\n') + `\n…and ${listItems.length - maxList} more.`;
+              }
+
+              const payloadObj = {
+                blocks: [
+                  { type: 'header', text: { type: 'plain_text', text: 'Draft Release Cleanup Summary' } },
+                  { type: 'section', text: { type: 'mrkdwn', text: `*Retention:* keep ${keepPerPr} per PR · delete drafts older than ${minAgeDays} days` } },
+                  { type: 'section', text: { type: 'mrkdwn', text: `*Deleted releases:*\n${deletedSectionText}` } },
+                  { type: 'context', elements: [ { type: 'mrkdwn', text: `Repository: ${process.env.GITHUB_REPOSITORY} • Workflow: cleanup-draft-releases • Run: ${process.env.GITHUB_RUN_ID}` } ] }
+                ]
+              };
+
+              const payload = JSON.stringify(payloadObj);
+              try {
+                const options = {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Content-Length': Buffer.byteLength(payload)
+                  }
+                };
+                const req = https.request(webhook, options, (res) => {
+                  core.info(`Webhook responded: ${res.statusCode}`);
+                });
+                req.on('error', (e) => core.info(`Webhook error: ${e.message}`));
+                req.write(payload);
+                req.end();
+              } catch (err) {
+                core.info(`Failed to send webhook: ${err.message}`);
+              }
+            } else {
+              core.info('No webhook configured or no deletions; skipping notification.');
+            }

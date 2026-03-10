@@ -1,0 +1,17 @@
+Bay ID,Bay Type,Equipment Name/Model,Quantity,Electrical Load (kW),Electrical Load (A),Voltage,Motor HP,Starting Method,Compressed Air (CFM@psi),Air Drops,Exhaust Capture Type,Estimated Exhaust CFM,Drainage Required (Y/N),Floor Penetration (Y/N),Location Notes,Special Requirements / Manufacturer,Future Expansion Notes
+HEAVY-1,Heavy-Duty Diesel,Lift (2-post heavy),1,4.0,18,240V,5,Direct Online,---,0,Overhead rail capture,6000,Y,Y,North bay; adjacent to waste oil room,Specify structural pad for lift anchors,Reserve overhead conduit
+HEAVY-2,Heavy-Duty Diesel,Exhaust Rail (flex capture),1,---,---,---,---,---,---,2,Overhead rail capture,6000,Y,---,South bay; wash area nearby,Correlate to diesel extraction vendor,Reserve extra feeder capacity
+LD-1,Light-Duty,2-post lift,1,3.0,13,240V,3,Direct Online,---,0,Portable arm/overhead,2000,Y,Y,East-side bay,Provide floor box option,Allow overhead power drops
+LD-2,Light-Duty,2-post lift,1,3.0,13,240V,3,Direct Online,---,0,Portable arm/overhead,2000,Y,Y,East-side bay,Same as LD-1,---
+LD-3,Light-Duty,Alignment rack,1,1.5,7,120/240V,1.5,Direct Online,---,0,Minimal,500,N,N,Alignment bay; precise floor tolerance required,Data drop for alignment tools,Space for future ADAS sensors
+LD-4,Light-Duty,Tool bench (power),1,0.5,2,120V,---,---,---,0,---,---,N,N,General bench power,Provide GFCI outlets,---
+LD-5,Light-Duty,Welding station (portable),1,6.0,25,240V,---,VFD/Soft Start,---,0,Local capture arm,1500,N,N,Designated welding area in bay,Provide filtered extraction,Provision for extra air
+LD-6,Light-Duty,Compressor (shop),1,7.5,32,480V,---,Star-Delta,---,Main drops,---,---,N,N,Central compressor in mechanical room,Isolate vibration,Space for second compressor
+EV-1,EV/Hybrid,EV Charger (Level 2),2,7.2,30,240V,---,---,---,2,Dedicated charger ventilation,---,N,N,EV bay with battery workstation,Separate metering and isolation,Conduit to future chargers
+ALIGN-1,Alignment/ADAS,Alignment lift and tools,1,2.5,11,240V,2,Direct Online,---,0,Minimal,500,N,N,Open floor plan; coordinate sensor mount,Network data connections required,Allow expansion bay
+INS-1,Inspection/Rapid,Inspection bench & lighting,1,0.5,2,120V,---,---,---,0,---,---,N,N,General inspection bay,Provide bench power and lighting,---
+INS-2,Inspection/Rapid,Oil drain station,1,0.2,1,120V,---,---,---,0,Local drain to oil separator,---,Y,Y,Near waste oil tank,Connect to oil/water separator,---
+ELEC-LAB,Electronics/Diagnostic,Workstations & racks,6,0.5,2,120V,---,---,---,0,---,---,N,N,Temperature-controlled lab,UPS and surge protection required,Provision for future racks
+MECH-ROOM,Mechanical,Compressor (spare),1,7.5,32,480V,---,Star-Delta,---,---,---,---,N,N,Mechanical room; spare compressor space,Provide maintenance clearance,Provision for larger compressor
+ELEC-ROOM,Electrical,Main distribution panel,1,---,---,---,---,---,---,---,---,---,---,N,N,Electrical room location,Allow 20-30% spare capacity,Space for future subpanels
+SUP-1,Support,Wash bay (pressure washer),1,6.0,25,240V,---,---,---,0,Trench drain to oil separator,---,Y,Y,Adjacent to Heavy bays,Provide hot water capacity,---
