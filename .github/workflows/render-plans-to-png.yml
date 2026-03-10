@@ -1,0 +1,50 @@
+name: Render facility plans to PNG
+
+on:
+  push:
+    paths:
+      - 'Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/**'
+      - '.github/workflows/render-plans-to-png.yml'
+  pull_request:
+    paths:
+      - 'Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/**'
+  workflow_dispatch: {}
+
+jobs:
+  render-plans:
+    name: Render SVGs to PNGs and upload
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install system packages (Cairo + Inkscape)
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y libcairo2 libpango-1.0-0 libgdk-pixbuf2.0-0 libffi-dev inkscape
+
+      - name: Install Python packages
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install cairosvg pillow
+
+      - name: Run SVG->PNG conversion
+        run: |
+          python Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/generate_plan_pngs.py
+
+      - name: Upload full PNGs
+        uses: actions/upload-artifact@v4
+        with:
+          name: facility-plan-pngs
+          path: Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/*.png
+
+      - name: Upload thumbnails
+        uses: actions/upload-artifact@v4
+        with:
+          name: facility-plan-thumbs
+          path: Combination_Automotive_Diesel_Facility_Project/Python_Workflow/scripts/*.thumb.png
