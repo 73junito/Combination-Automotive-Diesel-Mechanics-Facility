@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461077.110138889
+2461077.149363426
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461077.110138889
+2461077.149363426
   9
 $TDUUPDATE
  40
@@ -549,7 +549,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-98
+9A
   9
 $SURFTAB1
  70
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{31B4A523-3546-44C2-95F0-8961DEAB9AE0}
+{73FCEA0B-C768-420B-8C15-B5CEBA8A77EA}
   9
 $VERSIONGUID
   2
-{764B4E0A-4405-4377-8A02-7EE2B3FB84FB}
+{B8AE197A-78E0-4253-9E6A-B7816F5F3EBB}
   9
 $EXTNAMES
 290
@@ -1549,7 +1549,7 @@ LAYER
 100
 AcDbSymbolTable
  70
-4
+6
   0
 LAYER
   5
@@ -1635,11 +1635,59 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
+F-EQUIP
+ 70
+0
+ 62
+14
+  6
+CONTINUOUS
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+31
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+F-SUPPRESSION
+ 70
+0
+ 62
+12
+  6
+CONTINUOUS
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+32
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
 ROOM-LABEL
  70
 0
  62
-7
+2
   6
 CONTINUOUS
 370
@@ -1749,7 +1797,7 @@ ACAD
   0
 APPID
   5
-95
+97
 330
 3
 100
@@ -1763,7 +1811,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-96
+98
 330
 3
 100
@@ -2073,7 +2121,7 @@ ENTITIES
   0
 TEXT
   5
-31
+33
 330
 17
 100
@@ -2099,7 +2147,7 @@ AcDbText
   0
 TEXT
   5
-32
+34
 330
 17
 100
@@ -2125,7 +2173,7 @@ AcDbText
   0
 TEXT
   5
-33
+35
 330
 17
 100
@@ -2151,7 +2199,7 @@ AcDbText
   0
 TEXT
   5
-34
+36
 330
 17
 100
@@ -2177,7 +2225,7 @@ AcDbText
   0
 TEXT
   5
-35
+37
 330
 17
 100
@@ -2203,7 +2251,7 @@ AcDbText
   0
 TEXT
   5
-36
+38
 330
 17
 100
@@ -2229,7 +2277,7 @@ AcDbText
   0
 TEXT
   5
-37
+39
 330
 17
 100
@@ -2255,7 +2303,7 @@ AcDbText
   0
 TEXT
   5
-38
+3A
 330
 17
 100
@@ -2281,7 +2329,7 @@ AcDbText
   0
 TEXT
   5
-39
+3B
 330
 17
 100
@@ -2307,7 +2355,7 @@ AcDbText
   0
 TEXT
   5
-3A
+3C
 330
 17
 100
@@ -2333,7 +2381,7 @@ AcDbText
   0
 TEXT
   5
-3B
+3D
 330
 17
 100
@@ -2359,7 +2407,7 @@ AcDbText
   0
 TEXT
   5
-3C
+3E
 330
 17
 100
@@ -2385,7 +2433,7 @@ AcDbText
   0
 TEXT
   5
-3D
+3F
 330
 17
 100
@@ -2411,7 +2459,7 @@ AcDbText
   0
 TEXT
   5
-3E
+40
 330
 17
 100
@@ -2437,7 +2485,7 @@ AcDbText
   0
 TEXT
   5
-3F
+41
 330
 17
 100
@@ -2463,7 +2511,7 @@ AcDbText
   0
 TEXT
   5
-40
+42
 330
 17
 100
@@ -2489,7 +2537,7 @@ AcDbText
   0
 TEXT
   5
-41
+43
 330
 17
 100
@@ -2515,7 +2563,7 @@ AcDbText
   0
 TEXT
   5
-42
+44
 330
 17
 100
@@ -2541,7 +2589,7 @@ AcDbText
   0
 TEXT
   5
-43
+45
 330
 17
 100
@@ -2567,7 +2615,7 @@ AcDbText
   0
 TEXT
   5
-44
+46
 330
 17
 100
@@ -2593,7 +2641,7 @@ AcDbText
   0
 TEXT
   5
-45
+47
 330
 17
 100
@@ -2619,7 +2667,7 @@ AcDbText
   0
 TEXT
   5
-46
+48
 330
 17
 100
@@ -2645,7 +2693,7 @@ AcDbText
   0
 TEXT
   5
-47
+49
 330
 17
 100
@@ -2671,7 +2719,7 @@ AcDbText
   0
 TEXT
   5
-48
+4A
 330
 17
 100
@@ -2697,7 +2745,7 @@ AcDbText
   0
 TEXT
   5
-49
+4B
 330
 17
 100
@@ -2723,7 +2771,7 @@ AcDbText
   0
 TEXT
   5
-4A
+4C
 330
 17
 100
@@ -2749,7 +2797,7 @@ AcDbText
   0
 TEXT
   5
-4B
+4D
 330
 17
 100
@@ -2775,7 +2823,7 @@ AcDbText
   0
 TEXT
   5
-4C
+4E
 330
 17
 100
@@ -2801,7 +2849,7 @@ AcDbText
   0
 TEXT
   5
-4D
+4F
 330
 17
 100
@@ -2827,7 +2875,7 @@ AcDbText
   0
 TEXT
   5
-4E
+50
 330
 17
 100
@@ -2853,7 +2901,7 @@ AcDbText
   0
 TEXT
   5
-4F
+51
 330
 17
 100
@@ -2879,7 +2927,7 @@ AcDbText
   0
 TEXT
   5
-50
+52
 330
 17
 100
@@ -2905,7 +2953,7 @@ AcDbText
   0
 TEXT
   5
-51
+53
 330
 17
 100
@@ -2931,7 +2979,7 @@ AcDbText
   0
 TEXT
   5
-52
+54
 330
 17
 100
@@ -2957,7 +3005,7 @@ AcDbText
   0
 TEXT
   5
-53
+55
 330
 17
 100
@@ -2983,7 +3031,7 @@ AcDbText
   0
 TEXT
   5
-54
+56
 330
 17
 100
@@ -3009,7 +3057,7 @@ AcDbText
   0
 TEXT
   5
-55
+57
 330
 17
 100
@@ -3035,7 +3083,7 @@ AcDbText
   0
 TEXT
   5
-56
+58
 330
 17
 100
@@ -3061,7 +3109,7 @@ AcDbText
   0
 TEXT
   5
-57
+59
 330
 17
 100
@@ -3087,7 +3135,7 @@ AcDbText
   0
 TEXT
   5
-58
+5A
 330
 17
 100
@@ -3113,7 +3161,7 @@ AcDbText
   0
 TEXT
   5
-59
+5B
 330
 17
 100
@@ -3139,7 +3187,7 @@ AcDbText
   0
 TEXT
   5
-5A
+5C
 330
 17
 100
@@ -3165,7 +3213,7 @@ AcDbText
   0
 TEXT
   5
-5B
+5D
 330
 17
 100
@@ -3191,7 +3239,7 @@ AcDbText
   0
 TEXT
   5
-5C
+5E
 330
 17
 100
@@ -3217,7 +3265,7 @@ AcDbText
   0
 TEXT
   5
-5D
+5F
 330
 17
 100
@@ -3243,7 +3291,7 @@ AcDbText
   0
 TEXT
   5
-5E
+60
 330
 17
 100
@@ -3269,7 +3317,7 @@ AcDbText
   0
 TEXT
   5
-5F
+61
 330
 17
 100
@@ -3295,7 +3343,7 @@ AcDbText
   0
 TEXT
   5
-60
+62
 330
 17
 100
@@ -3321,7 +3369,7 @@ AcDbText
   0
 TEXT
   5
-61
+63
 330
 17
 100
@@ -3347,7 +3395,7 @@ AcDbText
   0
 TEXT
   5
-62
+64
 330
 17
 100
@@ -3373,7 +3421,7 @@ AcDbText
   0
 TEXT
   5
-63
+65
 330
 17
 100
@@ -3399,7 +3447,7 @@ AcDbText
   0
 TEXT
   5
-64
+66
 330
 17
 100
@@ -3425,7 +3473,7 @@ AcDbText
   0
 TEXT
   5
-65
+67
 330
 17
 100
@@ -3451,7 +3499,7 @@ AcDbText
   0
 TEXT
   5
-66
+68
 330
 17
 100
@@ -3477,7 +3525,7 @@ AcDbText
   0
 TEXT
   5
-67
+69
 330
 17
 100
@@ -3503,7 +3551,7 @@ AcDbText
   0
 TEXT
   5
-68
+6A
 330
 17
 100
@@ -3529,7 +3577,7 @@ AcDbText
   0
 TEXT
   5
-69
+6B
 330
 17
 100
@@ -3555,7 +3603,7 @@ AcDbText
   0
 TEXT
   5
-6A
+6C
 330
 17
 100
@@ -3581,7 +3629,7 @@ AcDbText
   0
 TEXT
   5
-6B
+6D
 330
 17
 100
@@ -3607,7 +3655,7 @@ AcDbText
   0
 TEXT
   5
-6C
+6E
 330
 17
 100
@@ -3633,7 +3681,7 @@ AcDbText
   0
 TEXT
   5
-6D
+6F
 330
 17
 100
@@ -3659,7 +3707,7 @@ AcDbText
   0
 TEXT
   5
-6E
+70
 330
 17
 100
@@ -3685,7 +3733,7 @@ AcDbText
   0
 TEXT
   5
-6F
+71
 330
 17
 100
@@ -3711,7 +3759,7 @@ AcDbText
   0
 TEXT
   5
-70
+72
 330
 17
 100
@@ -3737,7 +3785,7 @@ AcDbText
   0
 TEXT
   5
-71
+73
 330
 17
 100
@@ -3763,7 +3811,7 @@ AcDbText
   0
 TEXT
   5
-72
+74
 330
 17
 100
@@ -3789,7 +3837,7 @@ AcDbText
   0
 TEXT
   5
-73
+75
 330
 17
 100
@@ -3815,7 +3863,7 @@ AcDbText
   0
 TEXT
   5
-74
+76
 330
 17
 100
@@ -3841,7 +3889,7 @@ AcDbText
   0
 TEXT
   5
-75
+77
 330
 17
 100
@@ -3867,7 +3915,7 @@ AcDbText
   0
 TEXT
   5
-76
+78
 330
 17
 100
@@ -3893,7 +3941,7 @@ AcDbText
   0
 TEXT
   5
-77
+79
 330
 17
 100
@@ -3919,7 +3967,7 @@ AcDbText
   0
 TEXT
   5
-78
+7A
 330
 17
 100
@@ -3945,7 +3993,7 @@ AcDbText
   0
 TEXT
   5
-79
+7B
 330
 17
 100
@@ -3971,7 +4019,7 @@ AcDbText
   0
 TEXT
   5
-7A
+7C
 330
 17
 100
@@ -3997,7 +4045,7 @@ AcDbText
   0
 TEXT
   5
-7B
+7D
 330
 17
 100
@@ -4023,7 +4071,7 @@ AcDbText
   0
 TEXT
   5
-7C
+7E
 330
 17
 100
@@ -4049,7 +4097,7 @@ AcDbText
   0
 TEXT
   5
-7D
+7F
 330
 17
 100
@@ -4075,7 +4123,7 @@ AcDbText
   0
 TEXT
   5
-7E
+80
 330
 17
 100
@@ -4101,7 +4149,7 @@ AcDbText
   0
 TEXT
   5
-7F
+81
 330
 17
 100
@@ -4127,7 +4175,7 @@ AcDbText
   0
 TEXT
   5
-80
+82
 330
 17
 100
@@ -4153,7 +4201,7 @@ AcDbText
   0
 TEXT
   5
-81
+83
 330
 17
 100
@@ -4179,7 +4227,7 @@ AcDbText
   0
 TEXT
   5
-82
+84
 330
 17
 100
@@ -4205,7 +4253,7 @@ AcDbText
   0
 TEXT
   5
-83
+85
 330
 17
 100
@@ -4231,7 +4279,7 @@ AcDbText
   0
 TEXT
   5
-84
+86
 330
 17
 100
@@ -4257,7 +4305,7 @@ AcDbText
   0
 TEXT
   5
-85
+87
 330
 17
 100
@@ -4283,7 +4331,7 @@ AcDbText
   0
 TEXT
   5
-86
+88
 330
 17
 100
@@ -4309,7 +4357,7 @@ AcDbText
   0
 TEXT
   5
-87
+89
 330
 17
 100
@@ -4335,7 +4383,7 @@ AcDbText
   0
 TEXT
   5
-88
+8A
 330
 17
 100
@@ -4361,7 +4409,7 @@ AcDbText
   0
 TEXT
   5
-89
+8B
 330
 17
 100
@@ -4387,7 +4435,7 @@ AcDbText
   0
 TEXT
   5
-8A
+8C
 330
 17
 100
@@ -4413,7 +4461,7 @@ AcDbText
   0
 TEXT
   5
-8B
+8D
 330
 17
 100
@@ -4439,7 +4487,7 @@ AcDbText
   0
 TEXT
   5
-8C
+8E
 330
 17
 100
@@ -4465,7 +4513,7 @@ AcDbText
   0
 TEXT
   5
-8D
+8F
 330
 17
 100
@@ -4491,7 +4539,7 @@ AcDbText
   0
 TEXT
   5
-8E
+90
 330
 17
 100
@@ -4517,7 +4565,7 @@ AcDbText
   0
 TEXT
   5
-8F
+91
 330
 17
 100
@@ -4543,7 +4591,7 @@ AcDbText
   0
 TEXT
   5
-90
+92
 330
 17
 100
@@ -4569,7 +4617,7 @@ AcDbText
   0
 TEXT
   5
-91
+93
 330
 17
 100
@@ -4595,7 +4643,7 @@ AcDbText
   0
 TEXT
   5
-92
+94
 330
 17
 100
@@ -4621,7 +4669,7 @@ AcDbText
   0
 TEXT
   5
-93
+95
 330
 17
 100
@@ -4647,7 +4695,7 @@ AcDbText
   0
 TEXT
   5
-94
+96
 330
 17
 100
@@ -5687,7 +5735,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-97
+99
   0
 DICTIONARYVAR
   5
@@ -5699,11 +5747,11 @@ DictionaryVariables
 280
 0
   1
-1.1.4 @ 2026-02-05T08:38:16.846131+00:00
+1.1.4 @ 2026-02-05T09:35:05.039760+00:00
   0
 DICTIONARYVAR
   5
-97
+99
 330
 2D
 100
@@ -5711,7 +5759,7 @@ DictionaryVariables
 280
 0
   1
-1.1.4 @ 2026-02-05T08:38:36.175630+00:00
+1.1.4 @ 2026-02-05T09:35:05.041605+00:00
   0
 ENDSEC
   0

@@ -17,4 +17,12 @@ Notes for reviewers:
 - The discipline DXFs are filtered copies (views) created from the master DXF; they are intended for convenience and not as the coordination source.
 - Labels and full coordination remain in the master DXF. If you require equipment labels to appear in `equip_only.dxf`, request the label-copy pass and I will run it and update the archive.
 
+Quick note for reviewers: SVG previews are provided for browser inspection at `viewer/assets/cad_svg/*.svg` and are embedded interactively in `viewer/index.html` (pan/zoom enabled).
+
+**Mechanical Scope Note:**
+The mechanical drawing set is intentionally limited to exhaust ventilation systems supporting automotive instruction bays (Layer: `M-EXHAUST`). General HVAC distribution (supply, return, RTU, ductwork) is not detailed in this facility plan and is assumed to be provided by the base building system. Plumbing utilities (compressed air, drains, oil separation) are shown under `P-AIR`, `P-DRAIN`, and `P-OILSEP` layers.
+
+**Instructor Justification (2 sentences):**
+Mechanical scope is intentionally limited to exhaust systems (Layer: M-EXHAUST) to align with automotive instructional safety requirements; full HVAC design is outside the scope of this course project.
+This approach prioritizes student health, code-relevant ventilation, and instructional clarity while maintaining realistic facility planning standards.
 Signed-off-by: automation script

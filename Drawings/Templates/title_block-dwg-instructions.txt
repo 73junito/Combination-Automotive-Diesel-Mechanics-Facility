@@ -1,0 +1,7 @@
+This repository includes a simple SVG title block template which can be imported into CAD tools.
+
+Recommended next steps for a DWG title block:
+- Create a native DWG title block with locked title-block viewport.
+- Include fields: Project, Sheet Title, Sheet Number, Revision, Date, Author, Checker, Approver.
+- Place title block in a template file and save as Drawings/Templates/title_block.dwg (replace the placeholder file).
+- Keep the title block editable only in templates; for released sheets, export flattened PDFs.

@@ -2,8 +2,6 @@
   "recommendations": [
     "ms-python.python",
     "ms-python.vscode-pylance",
-    "ms-toolsai.jupyter",
-    "ocp.ocp-viewer",
-    "njpwerner.autodocstring"
+    "ms-toolsai.jupyter"
   ]
 }

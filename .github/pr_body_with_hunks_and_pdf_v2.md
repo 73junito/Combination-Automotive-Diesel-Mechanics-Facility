@@ -47,3 +47,10 @@ Audit summaries (written files included):
 * `disciplines/fire_only.dxf` (+ audit)
 * `disciplines/equip_only.dxf` (+ audit)
 * Master: `training_facility_plan_layered_mep.dxf` (+ audit)
+
+**Mechanical Scope Note:**
+The mechanical drawing set is intentionally limited to exhaust ventilation systems supporting automotive instruction bays (Layer: `M-EXHAUST`). General HVAC distribution (supply, return, RTU, ductwork) is not detailed in this facility plan and is assumed to be provided by the base building system. Plumbing utilities (compressed air, drains, oil separation) are shown under `P-AIR`, `P-DRAIN`, and `P-OILSEP` layers.
+
+**Instructor Justification (2 sentences):**
+Mechanical scope is intentionally limited to exhaust systems (Layer: M-EXHAUST) to align with automotive instructional safety requirements; full HVAC design is outside the scope of this course project.
+This approach prioritizes student health, code-relevant ventilation, and instructional clarity while maintaining realistic facility planning standards.
