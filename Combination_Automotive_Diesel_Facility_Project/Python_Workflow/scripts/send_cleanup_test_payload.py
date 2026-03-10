@@ -95,13 +95,25 @@ def build_payload(
         }
     )
 
-    # Per-release sections with dividers
-    for idx, item in enumerate(listItems):
+    # Per-release sections with dividers (capped at max_list to mirror the workflow)
+    displayItems = listItems[:max_list]
+    for idx, item in enumerate(displayItems):
         payload_blocks.append(
             {"type": "section", "text": {"type": "mrkdwn", "text": item}}
         )
-        if idx != len(listItems) - 1:
+        if idx != len(displayItems) - 1:
             payload_blocks.append({"type": "divider"})
+    if len(listItems) > max_list:
+        overflow = len(listItems) - max_list
+        payload_blocks.append(
+            {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": f"…and {overflow} more.",
+                },
+            }
+        )
 
     payload_blocks.append(
         {
@@ -116,6 +128,8 @@ def build_payload(
     )
 
     return {"blocks": payload_blocks}
+
+    # (new Blocks returned above)
 
 
 def post_webhook(url: str, payload: dict) -> None:
