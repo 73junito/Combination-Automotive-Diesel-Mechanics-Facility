@@ -6,9 +6,9 @@ This file is an auto-generated index of drawings with clickable previews.
 
 - Preview images are stored in the `Drawings/Previews/` folder.
 
-Generated: 2026-03-10T03:04:09.033236 UTC
+Generated: 2026-03-10T03:13:38.102002 UTC
 
-Summary: 29 drawings
+Summary: 30 drawings
 
 ## Arch Plan Only (1 drawing)
 
@@ -153,6 +153,14 @@ Summary: 29 drawings
 | Drawing | Revision | Preview |
 |---|---:|---|
 | legend_page_v1.1_2026-02-02 |  | [![](Previews/legend_page_v1.1_2026-02-02.thumb.png)](Previews/legend_page_v1.1_2026-02-02.png) |
+
+## Make Simple Pdf Test (1 drawing)
+
+### General (1 drawing)
+
+| Drawing | Revision | Preview |
+|---|---:|---|
+| make_simple_pdf_test |  | [![](Previews/make_simple_pdf_test.thumb.png)](Previews/make_simple_pdf_test.png) |
 
 ## Master Plan (1 drawing)
 
