@@ -1,5 +1,9 @@
 name: Verify CAD Exports
 
+permissions:
+  contents: read
+  pull-requests: write
+
 on:
   pull_request:
   push:
